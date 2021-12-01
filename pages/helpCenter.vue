@@ -9,7 +9,6 @@
       </div> -->
           <ToggleNav
             @update:activeNav="toggle"
-            :activeAns="activeAns"
           ></ToggleNav>
         </div>
         <div class="help-right">
@@ -328,6 +327,7 @@ export default {
         white-space: nowrap;
         font-size: 58px;
         padding: 60px;
+        color: #333;
       }
     }
   }

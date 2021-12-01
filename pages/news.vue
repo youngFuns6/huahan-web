@@ -21,7 +21,7 @@
           <p
             class="right-title"
             v-for="item in notice"
-            :key="item.title"
+            :key="item.id"
             @click="getDet(item.id)"
           >
             <span>{{ item.title }}</span>
@@ -62,7 +62,7 @@
       <ul>
         <li
           v-for="(item, index) in course"
-          :key="item.title"
+          :key="item.id"
           data-aos="zoom-in-up"
           :data-aos-duration="500 * index"
           @click="getDet(item.content)"
