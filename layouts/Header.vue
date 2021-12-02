@@ -54,7 +54,7 @@ export default {
   components: {},
   data() {
     return {
-      page: ["首页", "资讯", "帮助中心", "手机客户端下载", "关于我们"],
+      page: ["首页", "资讯" /* ,"帮助中心" */, "手机客户端下载", "关于我们"],
       active: 0,
       isShowIcon: true,
       isShowDrop: false,
@@ -81,21 +81,21 @@ export default {
         case 1:
           this.$router.push("/news");
           break;
+        // case 2:
+        //   this.$router.push({
+        //     path: `/helpCenter/questionList?type=8&page=1&pageSize=5`,
+        //     // query: {
+        //     //   type: window.sessionStorage.getItem('activeNav') ? parseInt(window.sessionStorage.getItem('activeNav')) + 4 : 4,
+        //     //   pageSize: 5
+        //     // }
+        //   });
+        //   break;
         case 2:
-          this.$router.push({
-            path: `/helpCenter/questionList?type=8&page=1&pageSize=5`,
-            // query: {
-            //   type: window.sessionStorage.getItem('activeNav') ? parseInt(window.sessionStorage.getItem('activeNav')) + 4 : 4,
-            //   pageSize: 5
-            // }
-          });
-          break;
-        case 3:
           // this.$router.push("/download");
           window.open(`${Congfig.link}`)
           // window.location.href = Congfig.link
           break;
-        case 4:
+        case 3:
           this.$router.push("/about");
           break;
       }

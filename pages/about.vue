@@ -281,8 +281,11 @@ export default {
       li {
         margin: 50px 350px;
         div {
-          width: 240px;
-          height: 240px;
+          width: 250px;
+          height: 250px;
+        }
+        p {
+          font-size: 48px;
         }
       }
     }
