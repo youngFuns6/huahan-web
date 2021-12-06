@@ -2,7 +2,7 @@
   <div>
       <section class="banner" data-aos="zoom-in-up"
         data-aos-duration='200'>
-    <img src="../assets/images/编组@2x.png" alt="" />
+    <img src="../../assets/images/编组@2x.png" alt="" />
     <div class="text">
       <p class="top">
         <span>关于我们</span>
@@ -24,11 +24,11 @@
       </div>
       <div class="right">
         <div class="top">
-          <img src="../assets/images/公司简介2.png" alt="">
+          <img src="../../assets/images/公司简介2.png" alt="">
         </div>
         <div class="bot">
-          <div><img src="../assets/images/公司简介1.png" alt=""></div>
-          <div><img src="../assets/images/公司简介3.png" alt=""></div>
+          <div><img src="../../assets/images/公司简介1.png" alt=""></div>
+          <div><img src="../../assets/images/公司简介3.png" alt=""></div>
         </div>
       </div>
     </div>
@@ -39,19 +39,19 @@
     <p class="title">核心价值</p>
     <ul>
       <li>
-        <div><img src="../assets/images/诚信2@2x.png" alt=""></div>
+        <div><img src="../../assets/images/诚信2@2x.png" alt=""></div>
         <p>诚信</p>
       </li>
       <li>
-        <div><img src="../assets/images/创意@2x.png" alt=""></div>
+        <div><img src="../../assets/images/创意@2x.png" alt=""></div>
         <p>创新</p>
       </li>
       <li>
-        <div><img src="../assets/images/专注2@2x.png" alt=""></div>
+        <div><img src="../../assets/images/专注2@2x.png" alt=""></div>
         <p>专注</p>
       </li>
       <li>
-        <div><img src="../assets/images/用心服务@2x.png" alt=""></div>
+        <div><img src="../../assets/images/用心服务@2x.png" alt=""></div>
         <p>用心服务</p>
       </li>
     </ul>
@@ -62,10 +62,10 @@
     <p class="title">服务范围</p>
     <p class="content"></p>
     <ul>
-      <li><img src="../assets/images/诚信@2x.png" alt=""></li>
-      <li><img src="../assets/images/创新@2x.png" alt=""></li>
-      <li><img src="../assets/images/专注@2x.png" alt=""></li>
-      <li><img src="../assets/images/服务@2x.png" alt=""></li>
+      <li><img src="../../assets/images/诚信@2x.png" alt=""></li>
+      <li><img src="../../assets/images/创新@2x.png" alt=""></li>
+      <li><img src="../../assets/images/专注@2x.png" alt=""></li>
+      <li><img src="../../assets/images/服务@2x.png" alt=""></li>
       
     </ul>
   </section>
@@ -74,7 +74,7 @@
 
 <script>
 export default {
-  name: "about",
+  name: "inner",
   components: {},
   data() {
     return {};
@@ -160,7 +160,7 @@ export default {
   height: 452px;
   box-sizing: border-box;
   margin-bottom: 80px;
-  background: url(../assets/images/编组3@2x.png) 100% 100%;
+  background: url(../../assets/images/编组3@2x.png) 100% 100%;
   img {
     width: 100%;
     height: 100%;

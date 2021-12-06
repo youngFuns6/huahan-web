@@ -13,7 +13,12 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+    script: [{
+      src: '/flexible.js',
+      type: 'text/javascript',
+      charset: 'utf-8'
+    }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -28,7 +33,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    {src: '~plugins/lib-flexible.js', ssr: false},
+    // {src: '~plugins/lib-flexible.js', ssr: false},
     {src: '~/plugins/vant.js', ssr: true},
     {src: '~/plugins/aos.js', ssr: false},
     {src: '~/plugins/router.js', ssr: true},
@@ -68,6 +73,17 @@ export default {
   //     }
   //   }
   // },
+
+  // 自定义路由
+  router: {
+    extendRoutes(routes, resolve){
+      routes.push({
+        path: '/index/inner',
+        name: 'inner',
+        component: resolve(__dirname, 'pages/index/inner.vue')
+      })
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

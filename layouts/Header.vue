@@ -2,9 +2,12 @@
   <div class="wrop">
     <div class="left" @click="toIndex">
       <span class="img"><img src="../assets/images/logo.png" alt="" /></span>
-      <span>游点电</span>
+      <p>游点电</p>
     </div>
     <div class="right">
+      <div class="download-img">
+        <img src="../assets/images/downloads.png" alt="">
+      </div>
       <ul>
         <li
           @click="toPage(index)"
@@ -54,7 +57,7 @@ export default {
   components: {},
   data() {
     return {
-      page: ["首页", "资讯" /* ,"帮助中心" */, "手机客户端下载", "关于我们"],
+      page: ["首页", "资讯", "帮助中心", "客户端下载", "关于我们"],
       active: 0,
       isShowIcon: true,
       isShowDrop: false,
@@ -81,22 +84,22 @@ export default {
         case 1:
           this.$router.push("/news");
           break;
-        // case 2:
-        //   this.$router.push({
-        //     path: `/helpCenter/questionList?type=8&page=1&pageSize=5`,
-        //     // query: {
-        //     //   type: window.sessionStorage.getItem('activeNav') ? parseInt(window.sessionStorage.getItem('activeNav')) + 4 : 4,
-        //     //   pageSize: 5
-        //     // }
-        //   });
-        //   break;
         case 2:
+          this.$router.push({
+            path: `/helpCenter/questionList?type=8&page=1&pageSize=5`,
+            // query: {
+            //   type: window.sessionStorage.getItem('activeNav') ? parseInt(window.sessionStorage.getItem('activeNav')) + 4 : 4,
+            //   pageSize: 5
+            // }
+          });
+          break;
+        case 3:
           // this.$router.push("/download");
           window.open(`${Congfig.link}`)
           // window.location.href = Congfig.link
           break;
-        case 3:
-          this.$router.push("/about");
+        case 4:
+          this.$router.push("/index/inner");
           break;
       }
       this.isShowIcon = true
@@ -123,7 +126,7 @@ export default {
   .left {
     display: flex;
     align-items: center;
-    margin-left: 95px;
+    margin-left: 500px;
     cursor: pointer;
     span {
       font-size: 28px;
@@ -142,12 +145,13 @@ export default {
   .right {
     display: flex;
     align-items: center;
-    margin-right: 248px;
+    margin-right: 500px;
     ul {
       display: flex;
       li {
         margin: 0 40px;
         font-size: 22px;
+        font-weight: 500;
         color: #333333;
         cursor: pointer;
       }
@@ -183,8 +187,28 @@ export default {
   }
 }
 
+@media (min-width: 992) {
+  .wrop {
+    .left {
+      p {
+        display: none;
+      }
+    }
+    .right {
+      .download-img {
+        display: none;
+      }
+    }
+  }
+}
+
 @media (max-width: 992px) {
   .wrop .left {
+    margin-left: 150px;
+    p {
+        display: block;
+        font-size: 56px;
+      }
     .img {
       width: 251px;
       height: 168px;
@@ -192,6 +216,19 @@ export default {
     }
     span {
       font-size: 84px;
+    }
+  }
+  .wrop .right {
+    margin-right: 150px;
+    .download-img {
+      display: block;
+      width: 88px;
+      height: 60px;
+      margin-right: 112px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
   .wrop .right ul {
