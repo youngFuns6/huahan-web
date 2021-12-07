@@ -38,7 +38,7 @@
         <div class="wrop">
           <ul>
             <li
-              @click="getDet(item1.id)"
+              @click="getDet(item1.content)"
               v-for="item1 in item.answer"
               :key="item1.id"
             >
@@ -75,11 +75,14 @@ export default {
       // total: null,
       page: parseInt(this.$route.query.page),
       mobileData: [
-        { name: "产品解答", type: 4, answer: [] },
-        { name: "新手引导", type: 5, answer: [] },
-        { name: "购买指南", type: 6, answer: [] },
+        { name: "账户相关", type: 4, answer: [] },
+        { name: "购买问题", type: 5, answer: [] },
+        { name: "订单相关", type: 6, answer: [] },
+        { name: "产品解答", type: 8, answer: [] },
+        { name: "新手引导", type: 9, answer: [] },
+        { name: "购买指南", type: 10, answer: [] },
         { name: "云手机问题", type: 7, answer: [] },
-        { name: "云服务问题", type: 8, answer: [] },
+        { name: "云服务问题", type: 11, answer: [] },
       ],
       // activeAns: 0,
     };
@@ -117,10 +120,10 @@ export default {
   // },
   created() {
     let getMobileInfo = async (index, type) => {
-      let answer = await axios.get(`${Config.BASE_URL}/qunkong/condition`, {
+      let answer = await axios.get(`${Config.BASE_URL}/notice`, {
         params: { type, page: 1, pageSize: 4 },
       });
-      this.mobileData[index].answer = answer.data.data;
+      this.mobileData[index].answer = answer.data.data.list;
     };
     this.mobileData.forEach((item, index) => {
       getMobileInfo(index, item.type);
@@ -140,11 +143,11 @@ export default {
     error,
   }) {
     const answerData = await $axios.get(
-      `${Config.BASE_URL}/qunkong/condition`,
+      `${Config.BASE_URL}/notice`,
       { params: query }
     );
-    let answer = answerData.data.data;
-    let total = answerData.data.total;
+    let answer = answerData.data.data.list;
+    let total = answerData.data.data.total;
     // console.log(total)
     answer.forEach((item) => {
       if (item.created) {
@@ -259,11 +262,11 @@ export default {
     //   }
     // },
 
-    getDet(id) {
+    getDet(content) {
       // console.log(this.emitter);
       // this.emitter.emit('getContent', content)
-      // window.sessionStorage.setItem("content", JSON.stringify(content));
-      this.$router.push({ path: "/details", query: { id } });
+      window.sessionStorage.setItem("content", JSON.stringify(content));
+      this.$router.push({ path: "/details" });
     },
   },
   computed: {},

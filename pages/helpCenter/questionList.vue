@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li v-for="(item, index) in answer" :key="index" data-aos="zoom-in-up"
-        :data-aos-duration='300 * index' @click="getDet(item.id)">
+        :data-aos-duration='300 * index' @click="getDet(item.content)">
       <p cl class="title">{{ item.title }}</p>
       <p class="content">{{ item.content }}</p>
       <span>
@@ -39,11 +39,11 @@ export default {
   //   this.getNoticeRef()
   // },
   methods: {
-    getDet(id){
+    getDet(content){
       // console.log(this.emitter)
       // this.emitter.emit('getContent', content)
-      // window.sessionStorage.setItem('content', JSON.stringify(content))
-      this.$router.push({path: '/details', query: {id}})
+      window.sessionStorage.setItem('content', JSON.stringify(content))
+      this.$router.push({path: '/details'})
     },
     // async getNoticeRef(query){
     //   const res = await this.$request({url: '/notice', params: query})

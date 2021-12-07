@@ -60,7 +60,11 @@
   <section class="server" data-aos="zoom-in-up"
         data-aos-duration='700'>
     <p class="title">服务范围</p>
-    <p class="content"></p>
+    <p class="content">
+      针对游戏行业，游点电云手机可以实现游戏免下载测试和云手游等应用。
+针对政企金融行业，游点电云手机致力于提供安全、高效的移动办公解决方案。
+针对个人用户，云手机提供“真·云玩家”的服务体验。
+    </p>
     <ul>
       <li><img src="../../assets/images/诚信@2x.png" alt=""></li>
       <li><img src="../../assets/images/创新@2x.png" alt=""></li>
@@ -211,8 +215,11 @@ export default {
   }
   .content {
     font-size: 24px;
-    text-align: center;
+    // text-align: center;
+    margin: 0 auto;
     margin-bottom: 44px;
+    line-height: 2;
+    width: 80%;
   }
   ul {
     display: flex;
@@ -293,6 +300,9 @@ export default {
   .server {
     .title {
       font-size: 60px;
+    }
+    .content {
+      font-size: 48px;
     }
     ul {
       flex-wrap: wrap;

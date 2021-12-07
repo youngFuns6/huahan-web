@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "PORT=3501 nuxt start",
+    "build": "nuxt build && npm start",
     "generate": "nuxt generate"
   },
   "dependencies": {

@@ -1,5 +1,27 @@
 <template>
-  <div class="wrop">
+<div>
+  <ul>
+      <li @click="toPush(1)">
+        <a href="/news">
+          <span>资讯</span>
+          <i>></i>
+        </a>
+      </li>
+      <li @click="toPush(2)">
+        <a href="/helpCenter/questionList?type=8&page=1&pageSize=5">
+          <span>帮助中心</span>
+          <i>></i>
+        </a>
+      </li>
+      <li @click="toPush(3)">
+        <a href="/index/inner">
+          <span>关于我们</span>
+          <i>></i>
+        </a>
+      </li>
+    </ul>
+    <div class="wrop">
+    
     <div class="footer-img-pc">
       <p>
         <span>公司名称：常州群翔网络科技有限公司</span>
@@ -15,15 +37,9 @@
 
       <p>
         <span class="QQqun"
-          ><a
-            target="_blank"
-            href="https://qm.qq.com/cgi-bin/qm/qr?k=-UQELMcUoG4RmRrUvq9m7SboccYYhbzu&jump_from=webapi"
-            ><img
-              border="0"
-              src="//pub.idqqimg.com/wpa/images/group.png"
-              alt="游点电云手机"
-              title="游点电云手机" /></a
-        ></span>
+          >
+          QQ群：<span v-html="contactInfo.QQqun"></span>
+         </span>
       </p>
       <div class="link">
         <a
@@ -41,6 +57,8 @@
       </div>
     </div>
   </div>
+</div>
+  
 </template>
 
 <script>
@@ -55,6 +73,11 @@ export default {
         return {};
       },
     },
+  },
+  methods: {
+    toPush(i){
+       window.sessionStorage.setItem("active", i);
+    }
   },
   computed: {},
   
@@ -103,16 +126,59 @@ export default {
     margin: 5px 20px;
   }
 }
-.QQqun:hover {
-  cursor: pointer;
-  text-decoration: underline;
+.QQqun {
+  display: flex !important;
+  align-items: center;
 }
+
+
+
+
+// 手机端
+
+  ul {
+    padding: 50px 120px;
+    border-top: 100px solid #F3F4F8;
+    li {
+      font-size: 64px;
+      // margin: 0 120px;
+      padding: 60px 0;
+      border-bottom: 1px solid #a7a7a7;
+     a {
+        color: #333;
+      display: flex;
+      justify-content: space-between;
+     }
+    }
+  }
+
+
+@media (min-width: 992px) {
+
+    ul {
+      display: none;
+    }
+  }
+
 
 @media (max-width: 992px) {
   .wrop {
+    ul {
+      display: block;
+    }
+  }
+
+  .wrop {
     height: auto;
     font-size: 48px !important;
+    background: #fff;
+    color: #333;
     .footer-img-pc {
+      .link {
+        a {
+          color: #333;
+        }
+      }
       p {
         span {
           display: block;

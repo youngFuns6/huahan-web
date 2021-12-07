@@ -6,14 +6,14 @@
         :key="item.title"
         data-aos="zoom-in-up"
         :data-aos-duration="300 * index"
-        @click="getDet(item.id)"
+        @click="getDet(item.content)"
       >
         <p class="info-title">{{ item.title }}</p>
-        <p class="info-content" v-html="item.content"></p>
+        <p class="info-content">{{item.content | filterContent}}</p>
       </li>
     </ul>
     <van-pagination
-      v-model="queryInfo.page"
+      v-model="page"
       :page-count="Math.ceil(total / 8)"
       :show-page-size="5"
       force-ellipses
@@ -30,6 +30,12 @@ import Config from "../assets/js/settings";
 export default {
   name: "MoreList",
   components: {},
+  filters: {
+    filterContent(content) {
+      return toText(content)
+      // return content
+    }
+  },
   data() {
     return {
       // queryInfo: {
@@ -60,18 +66,18 @@ export default {
     error,
   }) {
     // console.log(query);
-    const moreData = await $axios.get(`${Config.BASE_URL}/qunkong/condition`, {
+    const moreData = await $axios.get(`${Config.BASE_URL}/notice`, {
       params: query,
     });
-    let information = moreData.data.data;
-    let total = moreData.data.total;
+    let information = moreData.data.data.list;
+    let total = moreData.data.data.total;
     information.forEach((item) => {
       if (item.created) {
         item.created = item.created.slice(0, 10);
       }
-      if (item.content) {
-        item.content = toText(item.content);
-      }
+      // if (item.content) {
+      //   item.content = toText(item.content);
+      // }
     });
     return {
       information,
@@ -98,11 +104,11 @@ export default {
     //     // }
     //   });
     // },
-    getDet(id) {
+    getDet(content) {
       // console.log(this.emitter)
       // this.emitter.emit('getContent', content)
-      // window.sessionStorage.setItem('content', JSON.stringify(content))
-      this.$router.push({ path: "/details", query: { id } });
+      window.sessionStorage.setItem('content', JSON.stringify(content))
+      this.$router.push({ path: "/details"});
     },
     changePage() {
       this.$router.push({

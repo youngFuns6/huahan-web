@@ -1,12 +1,14 @@
 <template>
   <div class="wrop">
     <div class="left" @click="toIndex">
-      <span class="img"><img src="../assets/images/logo.png" alt="" /></span>
+        <span class="img"><img src="../assets/images/logo.png" alt="" /></span>
       <p>游点电</p>
     </div>
     <div class="right">
       <div class="download-img">
-        <img src="../assets/images/downloads.png" alt="">
+        <a :href="downloadLink" target="_blank">
+          <img src="../assets/images/downloads.png" alt="" />
+        </a>
       </div>
       <ul>
         <li
@@ -25,18 +27,20 @@
           name="wap-nav"
           @click="isShowIcon = !isShowIcon"
         />
-        <van-icon
-          v-else
-          size="42"
-          name="cross"
-          @click="isShowIcon = !isShowIcon"
-        />
       </div>
     </div>
 
     <!-- 弹框 -->
-    <div class="drop" v-if="!isShowIcon">
-        <ul>
+    <div class="mask" v-if="!isShowIcon">
+      <div class="drop" >
+      <ul>
+        <div class="close-icon">
+        <van-icon
+          size="30"
+          name="cross"
+          @click="isShowIcon = !isShowIcon"
+        />
+      </div>
         <li
           @click="toPage(index)"
           v-for="(item, index) in page"
@@ -46,6 +50,7 @@
           {{ item }}
         </li>
       </ul>
+    </div>
     </div>
   </div>
 </template>
@@ -61,6 +66,7 @@ export default {
       active: 0,
       isShowIcon: true,
       isShowDrop: false,
+      downloadLink: Congfig.link
     };
   },
   beforeMount() {
@@ -69,9 +75,10 @@ export default {
     }
   },
   methods: {
-    toIndex(){
-      window.sessionStorage.setItem('active', 0)
-      this.$router.push('/')
+    toIndex() {
+      window.sessionStorage.setItem("active", 0);
+      this.active = 0
+      this.$router.push("/");
     },
     toPage(i) {
       this.active = i;
@@ -95,14 +102,14 @@ export default {
           break;
         case 3:
           // this.$router.push("/download");
-          window.open(`${Congfig.link}`)
+          window.open(`${Congfig.link}`);
           // window.location.href = Congfig.link
           break;
         case 4:
           this.$router.push("/index/inner");
           break;
       }
-      this.isShowIcon = true
+      this.isShowIcon = true;
     },
   },
   computed: {},
@@ -160,21 +167,32 @@ export default {
 }
 
 // 手机端适配
-
+.mask {
+      position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.7);
+}
 .drop-icon {
   // padding: 30px 95px;
   display: none;
 }
 .drop {
   position: absolute;
-  left: 0;
-  bottom: -945px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50px;
+  top: 270px;
   z-index: 888;
-  width: 100%;
-  // height: 300px;
+  width: 80%;
+  // height: 100%;
   background: #ffffff;
   box-shadow: 0px 10px 20px 0px rgba(167, 167, 167, 0.5);
   ul {
+    position: relative;
     li {
       padding: 30px 120px;
       margin: 60px 0;
@@ -187,7 +205,7 @@ export default {
   }
 }
 
-@media (min-width: 992) {
+@media (min-width: 992px) {
   .wrop {
     .left {
       p {
@@ -206,9 +224,9 @@ export default {
   .wrop .left {
     margin-left: 150px;
     p {
-        display: block;
-        font-size: 56px;
-      }
+      display: block;
+      font-size: 56px;
+    }
     .img {
       width: 251px;
       height: 168px;
@@ -239,6 +257,13 @@ export default {
     i {
       font-size: 120px !important;
     }
+  }
+  .close-icon {
+    position: absolute;
+    right: -130px;
+    top: -300px;
+    height: 200px;
+    color: #fff;
   }
 }
 </style>

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Config from '../assets/js/settings'
+// import Config from '../assets/js/settings'
   export default {
     name: 'Details',
     components: {
@@ -13,15 +13,21 @@ import Config from '../assets/js/settings'
     },
     data(){
       return {
-        // content: ''
+        content: ''
       }
     },
-    async asyncData({$axios, route, store, env, params, query, req, res, redirect, error}) {
-       const detail = await $axios.get(`${Config.BASE_URL}/qunkong/condition`, {params: {id: query.id}})
-       return {
-        content: detail.data.data.content
+    beforeMount(){
+      if(window.sessionStorage.getItem('content')){
+        this.content = JSON.parse(window.sessionStorage.getItem('content'))
       }
     },
+
+    // async asyncData({$axios, route, store, env, params, query, req, res, redirect, error}) {
+    //    const detail = await $axios.get(`${Config.BASE_URL}/notice`, {params: {id: query.id}})
+    //    return {
+    //     content: detail.data.data.content
+    //   }
+    // },
     // mounted(){
     //   this.emitter.on('getContent', content => {
     //     console.log(content)
@@ -52,10 +58,15 @@ import Config from '../assets/js/settings'
   font-size: 24px;
   line-height: 2;
   min-height: 80vh;
+
   // color: #fff;
   /deep/ .ql-video {
     width: 100%;
     height: 80vh;
+  }
+  /deep/ img {
+    text-align: center;
+    max-width: 100%;
   }
 }
 

@@ -73,10 +73,10 @@ export default {
     height: 128px;
   }
   .contatiner h3 {
-    font-size: 56px;
+    font-size: 72px;
   }
   .contatiner .more {
-    font-size: 48px;
+    font-size: 68px;
   }
 }
 </style>

@@ -23,11 +23,14 @@ export default {
   data() {
     return {
       nav: [
-        { name: "产品解答", type: 4 },
-        { name: "新手引导", type: 5 },
-        { name: "购买指南", type: 6 },
-        { name: "云手机问题", type: 7 },
-        { name: "云服务问题", type: 8 },
+        { name: "账户相关", type: 4 },
+        { name: "购买问题", type: 5 },
+        { name: "订单相关", type: 6 },
+        { name: "产品解答", type: 8 },
+        { name: "新手引导", type: 9 },
+        { name: "购买指南", type: 10},
+        { name: "云手机问题", type: 7},
+        { name: "云服务问题", type: 11 },
       ],
       activeNav: 0,
     };
@@ -56,7 +59,7 @@ export default {
 }
 .nav {
   margin-top: 24px;
-  height: 704px;
+  // height: 704px;
   border: 1px solid #ededed;
   .title {
     padding: 26px 0;

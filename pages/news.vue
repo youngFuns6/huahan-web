@@ -6,12 +6,12 @@
   <div class="container">
     <!-- 公告 -->
     <section class="notice" data-aos="fade-up">
-      <div class="left" @click="getDet(noticeIndex.id)">
+      <div class="left" @click="getDet(noticeIndex.content)">
         <div class="img">
           <img :src="noticeIndex.banner" alt="" />
         </div>
         <p class="title">{{ noticeIndex.title }}</p>
-        <p class="content" v-html="noticeIndex.content"></p>
+        <p class="content">{{noticeIndex.content | filterContent}}</p>
       </div>
       <div class="right">
         <Explain @showMore="showMoreNotice">
@@ -22,7 +22,7 @@
             class="right-title"
             v-for="item in notice"
             :key="item.id"
-            @click="getDet(item.id)"
+            @click="getDet(item.content)"
           >
             <span>{{ item.title }}</span>
             <span>{{ item.created }}</span>
@@ -41,14 +41,14 @@
           :key="item.title"
           data-aos="zoom-in-up"
           :data-aos-duration="500 * index"
-          @click="getDet(item.id)"
+          @click="getDet(item.content)"
         >
           <div class="info-img">
             <img :src="item.banner" alt="" />
           </div>
           <div class="info-text">
             <p class="info-title">{{ item.title }}</p>
-            <p class="info-content" v-html="item.content"></p>
+            <p class="info-content">{{item.content | filterContent}}</p>
           </div>
         </li>
       </ul>
@@ -72,7 +72,7 @@
           </div>
           <div class="course-text">
             <p class="course-title">{{ item.title }}</p>
-            <p class="course-content" v-html="item.content"></p>
+            <p class="course-content">{{item.content | filterContent}}</p>
           </div>
         </li>
       </ul>
@@ -92,6 +92,12 @@ export default {
   name: "news",
   components: {
     Explain,
+  },
+  filters: {
+    filterContent(content) {
+      return toText(content)
+      // return content
+    }
   },
   data() {
     return {
@@ -140,45 +146,62 @@ export default {
   }) {
     // 获取公告
     const noticeData = await $axios.get(
-      `${Config.BASE_URL}/qunkong/condition`,
+      `${Config.BASE_URL}/notice`,
       {
         params: { type: 1, page: 1, pageSize: 10 },
       }
     );
-    let notice = noticeData.data.data;
+    // console.log(noticeData)
+    let notice = noticeData.data.data.list;
     // console.log(noticeData)
     notice.forEach((item) => {
       if (item.created) {
         item.created = item.created.slice(0, 10);
       }
-      if (item.content) {
-        item.content = toText(item.content);
-      }
+      // if (item.content) {
+      //   item.content = toText(item.content);
+      // }
     });
     let noticeIndex = {}
     if(notice.length){
       noticeIndex = notice[0];
-      if(noticeIndex.content){
-      noticeIndex.content = toText(noticeIndex.content);
-    }
+    //   if(noticeIndex.content){
+    //   noticeIndex.content = toText(noticeIndex.content);
+    // }
     }
     // console.log(noticeIndex)
     // console.log(noticeIndex)
 
     // 获取资讯
-    const infoData = await $axios.get(`${Config.BASE_URL}/qunkong/condition`, {
+    const infoData = await $axios.get(`${Config.BASE_URL}/notice`, {
       params: { type: 2, page: 1, pageSize: 4 },
     });
-    let information = infoData.data.data;
+    let information = infoData.data.data.list;
+    information.forEach((item) => {
+      if (item.created) {
+        item.created = item.created.slice(0, 10);
+      }
+      // if (item.content) {
+      //   item.content = toText(item.content);
+      // }
+    });
 
     // 获取教程
     const courseData = await $axios.get(
-      `${Config.BASE_URL}/qunkong/condition`,
+      `${Config.BASE_URL}/notice`,
       {
         params: { type: 3, page: 1, pageSize: 6 },
       }
     );
-    let course = courseData.data.data;
+    let course = courseData.data.data.list;
+    course.forEach((item) => {
+      if (item.created) {
+        item.created = item.created.slice(0, 10);
+      }
+      // if (item.content) {
+      //   item.content = toText(item.content);
+      // }
+    });
     return {
       notice,
       noticeIndex,
@@ -225,15 +248,15 @@ export default {
     //   // });
     //   // console.log(this.information);
     // },
-    getDet(id) {
+    getDet(content) {
       // console.log(this.emitter);
       // this.emitter.emit('getContent', content)
-      // window.sessionStorage.setItem("content", JSON.stringify(content));
+      window.sessionStorage.setItem("content", JSON.stringify(content));
       this.$router.push({
         path: "/details",
-        query: {
-          id,
-        },
+        // query: {
+        //   id,
+        // },
       });
     },
 
@@ -282,6 +305,7 @@ export default {
 }
 .container {
   padding: 75px 210px;
+  line-height: 1.2;
   // color: #fff;
   .notice {
     display: flex;
@@ -451,11 +475,16 @@ export default {
     .notice {
       .left {
         display: none;
+        .title {
+          font-size: 78px;
+          line-height: 2;
+        }
       }
       .right {
         width: 100%;
         .right-title span {
-          font-size: 48px;
+          font-size: 64px;
+          line-height: 2;
           &:nth-child(1) {
             width: 840px;
           }

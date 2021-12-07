@@ -21,6 +21,8 @@ export default {
     return {
       contactInfo: this.$store.state.contactInfo,
       title: this.$store.state.contactInfo.webTitle,
+      description: this.$store.state.contactInfo.webDesc,
+      keywords: this.$store.state.contactInfo.webKeywords,
     };
   },
   // beforeCreate(){
@@ -34,7 +36,12 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: "My custom description",
+          content: this.description,
+        },
+        {
+          hid: "keywords",
+          name: "keywords",
+          content: this.keywords,
         },
       ],
     };
