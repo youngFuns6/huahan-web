@@ -5,28 +5,32 @@
       <p>What we can do for you</p>
     </div>
     <ul>
-      <li>
+      <li data-aos="zoom-in-up"
+          :data-aos-duration="100">
         <div>
           <img src="../../assets/images/service-one.png" alt="" />
         </div>
         <h3>营销推广</h3>
         <p>APP引流推广，微信营销</p>
       </li>
-      <li>
+      <li data-aos="zoom-in-up"
+          :data-aos-duration="200">
         <div>
           <img src="../../assets/images/service-two.png" alt="" />
         </div>
         <h3>手游助手</h3>
         <p>游戏托管，游戏脚本定制</p>
       </li>
-      <li>
+      <li data-aos="zoom-in-up"
+          :data-aos-duration="300">
         <div>
           <img src="../../assets/images/service-three.png" alt="" />
         </div>
         <h3>智能办公</h3>
         <p>管理设备，修改IP定位</p>
       </li>
-      <li>
+      <li data-aos="zoom-in-up"
+          :data-aos-duration="400">
         <div>
           <img src="../../assets/images/service-four.png" alt="" />
         </div>
@@ -87,7 +91,8 @@ export default {
   }
 }
 ul {
-  padding: 120px 150px;
+  padding: 0 150px;
+  padding-bottom: 120px;
   margin-top: 80px;
   display: flex;
   justify-content: space-between;
@@ -119,6 +124,56 @@ ul {
     p {
       font-size: 24px;
       color: #a7a7a7;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .title {
+    margin-bottom: 104px;
+    p {
+      display: none;
+    }
+    h3 {
+      font-size: 72px;
+      padding-bottom: 64px;
+
+      &::before {
+        display: none;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 128px;
+        height: 20px;
+        background: linear-gradient(90deg, #5ad4ff 0%, #008bf7 100%);
+        border-radius: 10px;
+        opacity: 0.5;
+        bottom: 0;
+        left: calc(50%);
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  ul {
+    flex-wrap: wrap;
+    li {
+      width: 672px;
+      border-radius: 40px;
+      margin: 30px;
+      line-height: 1.5;
+      div {
+        width: 640px;
+        height: 480px;
+      }
+      h3 {
+        font-size: 52px;
+      }
+      p {
+        font-size: 48px;
+      }
     }
   }
 }

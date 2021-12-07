@@ -28,13 +28,19 @@
         </div>
       </div>
       <div class="download">
-        <a :href="downloadLink" target="_blank" class="btn">
+        <a :href="downloadLink" target="_blank" class="btn" @mousemove="qrShow1 = true" @mouseleave="qrShow1 = false">
           <img src="../../assets/images/andriod.png" alt="" />
           <p>安卓版下载</p>
+          <div class="qr" v-show="qrShow1">
+            <img src="../../assets/images/downloadQr.png" alt="">
+          </div>
         </a>
-        <a :href="downloadLink" target="_blank" class="btn">
+        <a :href="downloadLink" target="_blank" class="btn" @mousemove="qrShow2 = true" @mouseleave="qrShow2 = false">
           <img src="../../assets/images/ios.png" alt="" />
           <p>苹果版下载</p>
+          <div class="qr" v-show="qrShow2">
+            <img src="../../assets/images/downloadQr.png" alt="">
+          </div>
         </a>
         <a :href="qunkongLink" target="_blank" class="btn">
           <img src="../../assets/images/web.png" alt="" />
@@ -42,7 +48,7 @@
         </a>
       </div>
     </div>
-    <div class="mobile">
+    <div class="mobile" data-aos="fade-up">
       <div class="mobile-wrop">
         <div class="title" data-aos="fade-up" data-aos-delay="200">
           <h2>你的智能云端手机</h2>
@@ -84,6 +90,8 @@ export default {
     return {
       downloadLink: Config.link,
       qunkongLink: Config.qunKong,
+      qrShow1: false,
+      qrShow2: false
     };
   },
 };
@@ -97,6 +105,9 @@ export default {
   to {
     transform: translateY(30px);
   }
+}
+.pc {
+  margin-bottom: 150px;
 }
 .bgc {
   display: flex;
@@ -167,6 +178,20 @@ export default {
     flex-direction: column;
     align-items: center;
     margin: 0 100px;
+    position: relative;
+    .qr {
+        position: absolute;
+        left: 50%;
+        top: 150px;
+        z-index: 11;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 100px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
     &:hover {
       img {
         filter: none;
@@ -202,7 +227,7 @@ export default {
         color: #029ffc;
         letter-spacing: 32px;
         font-size: 48px;
-        margin-top: 60px;
+        margin: 60px 0;
       }
     }
     .mobile-img {
@@ -220,13 +245,13 @@ export default {
     a {
       display: block;
       text-align: center;
-      width: 520px;
+      width: 80%;
       height: 144px;
       background: #029ffc;
       font-size: 48px;
       line-height: 144px;
       color:#fff;
-      border-radius: 8px;
+      border-radius: 16px;
     }
   }
   .mobile-btn-wrop {
