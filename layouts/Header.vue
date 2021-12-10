@@ -25,20 +25,20 @@
           v-if="isShowIcon"
           size="42"
           name="wap-nav"
-          @click="isShowIcon = !isShowIcon"
+          @click="isShowIcon = false; isShowDrop = true"
         />
       </div>
     </div>
 
     <!-- 弹框 -->
-    <div class="mask" v-if="!isShowIcon">
+    <div class="mask" v-if="!isShowIcon"  @click="isShowIcon = true; isShowDrop = false">
       <div class="drop" >
       <ul>
         <div class="close-icon">
         <van-icon
           size="30"
           name="cross"
-          @click="isShowIcon = !isShowIcon"
+          @click="isShowIcon = true; isShowDrop = false"
         />
       </div>
         <li
