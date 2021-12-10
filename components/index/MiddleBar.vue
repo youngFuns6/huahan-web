@@ -171,7 +171,7 @@ export default {
         font-size: 48px;
         line-height: 2;
         position: absolute;
-        bottom: 0;
+        bottom: 5%;
         left: 50%;
         transform: translateX(-50%);
       }

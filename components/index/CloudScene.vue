@@ -5,32 +5,28 @@
       <p>What we can do for you</p>
     </div>
     <ul>
-      <li data-aos="zoom-in-up"
-          :data-aos-duration="100">
+      <li data-aos="fade-up" :data-aos-duration="100">
         <div>
           <img src="../../assets/images/service-one.png" alt="" />
         </div>
         <h3>营销推广</h3>
         <p>APP引流推广，微信营销</p>
       </li>
-      <li data-aos="zoom-in-up"
-          :data-aos-duration="200">
+      <li data-aos="zoom-in-up" :data-aos-duration="200">
         <div>
           <img src="../../assets/images/service-two.png" alt="" />
         </div>
         <h3>手游助手</h3>
         <p>游戏托管，游戏脚本定制</p>
       </li>
-      <li data-aos="zoom-in-up"
-          :data-aos-duration="300">
+      <li data-aos="zoom-in-up" :data-aos-duration="300">
         <div>
           <img src="../../assets/images/service-three.png" alt="" />
         </div>
         <h3>智能办公</h3>
         <p>管理设备，修改IP定位</p>
       </li>
-      <li data-aos="zoom-in-up"
-          :data-aos-duration="400">
+      <li data-aos="zoom-in-up" :data-aos-duration="400">
         <div>
           <img src="../../assets/images/service-four.png" alt="" />
         </div>
@@ -105,7 +101,7 @@ ul {
     transition: all ease-in-out 0.4s;
     background: #fff;
     &:hover {
-      transform: translateY(-10px);
+      transform: translateY(-10px) !important;
     }
     div {
       width: 320px;
@@ -164,6 +160,10 @@ ul {
       border-radius: 40px;
       margin: 30px;
       line-height: 1.5;
+      transition: all ease-in-out 0.4s;
+      &:hover {
+        transform: translateY(-15px);
+      }
       div {
         width: 640px;
         height: 480px;

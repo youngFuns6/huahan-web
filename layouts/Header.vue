@@ -225,23 +225,23 @@ export default {
     margin-left: 150px;
     p {
       display: block;
-      font-size: 56px;
+      font-size: 72px;
     }
     .img {
       width: 251px;
-      height: 168px;
+      height: 158px;
       margin-right: 70px;
     }
-    span {
-      font-size: 84px;
-    }
+    // span {
+    //   font-size: 96px !important;
+    // }
   }
   .wrop .right {
     margin-right: 150px;
     .download-img {
       display: block;
-      width: 88px;
-      height: 60px;
+      width: 130px;
+      height: 90px;
       margin-right: 112px;
       img {
         width: 100%;
@@ -255,7 +255,7 @@ export default {
   .drop-icon {
     display: block;
     i {
-      font-size: 120px !important;
+      font-size: 150px !important;
     }
   }
   .close-icon {

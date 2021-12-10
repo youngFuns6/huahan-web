@@ -1,4 +1,5 @@
 export default {
+  telemetry:false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'qunkong.com',
@@ -77,11 +78,18 @@ export default {
   // 自定义路由
   router: {
     extendRoutes(routes, resolve){
-      routes.push({
+      routes.push(
+        {
         path: '/index/inner',
         name: 'inner',
         component: resolve(__dirname, 'pages/index/inner.vue')
-      })
+      },
+      {
+        path: '/index.html',
+        // name: 'inner',
+        component: resolve(__dirname, 'pages/index.vue')
+      }
+      )
     }
   },
 
