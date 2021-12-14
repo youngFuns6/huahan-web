@@ -37,9 +37,16 @@
         </a>
         <a :href="downloadLink" target="_blank" class="btn" @mousemove="qrShow2 = true" @mouseleave="qrShow2 = false">
           <img src="../../assets/images/ios.png" alt="" />
-          <p>苹果版下载</p>
+          <p>TestFlight下载</p>
           <div class="qr" v-show="qrShow2">
             <img src="../../assets/images/downloadQr.png" alt="">
+          </div>
+        </a>
+        <a :href="appStoreLink" target="_blank" class="btn" @mousemove="qrShow3 = true" @mouseleave="qrShow3 = false">
+          <img src="../../assets/images/ios.png" alt="" />
+          <p>App Store下载</p>
+          <div class="qr" v-show="qrShow3">
+            <img src="../../assets/images/appStoreQr.png" alt="">
           </div>
         </a>
         <a :href="qunkongLink" target="_blank" class="btn">
@@ -60,10 +67,10 @@
       </div>
 
       <div class="mobile-btn-wrop">
-        <a :href="downloadLink" target="_blank">
+        <a :href="appStoreLink" target="_blank">
           <div class="mobile-btn">
             <img src="../../assets/images/苹果@2x.png" alt="" /><span
-              >ios下载</span
+              >App Store下载</span
             >
           </div>
         </a>
@@ -75,8 +82,21 @@
           </div>
         </a>
       </div>
-      <div class="mobile-btn-qunkong">
-        <a :href="qunkongLink" target="_blank"> 群控专业版（pc端） </a>
+      <div class="mobile-btn-wrop">
+        <a :href="downloadLink" target="_blank">
+          <div class="mobile-btn">
+            <img src="../../assets/images/苹果@2x.png" alt="" /><span
+              >TestFlight下载</span
+            >
+          </div>
+        </a>
+        <a :href="qunkongLink" target="_blank">
+          <div class="mobile-btn">
+            <span
+              >群控下载</span
+            >
+          </div>
+        </a>
       </div>
     </div>
   </div>
@@ -90,8 +110,10 @@ export default {
     return {
       downloadLink: Config.link,
       qunkongLink: Config.qunKong,
+      appStoreLink: Config.appStoreLink,
       qrShow1: false,
-      qrShow2: false
+      qrShow2: false,
+      qrShow3: false
     };
   },
 };
@@ -239,21 +261,21 @@ export default {
       }
     }
   }
-  .mobile-btn-qunkong {
-    display: flex;
-    justify-content: center;
-    a {
-      display: block;
-      text-align: center;
-      width: 80%;
-      height: 144px;
-      background: #029ffc;
-      font-size: 48px;
-      line-height: 144px;
-      color:#fff;
-      border-radius: 16px;
-    }
-  }
+  // .mobile-btn-qunkong {
+  //   display: flex;
+  //   justify-content: center;
+  //   a {
+  //     display: block;
+  //     text-align: center;
+  //     width: 80%;
+  //     height: 144px;
+  //     background: #029ffc;
+  //     font-size: 48px;
+  //     line-height: 144px;
+  //     color:#fff;
+  //     border-radius: 16px;
+  //   }
+  // }
   .mobile-btn-wrop {
     padding: 102px 198px;
     display: flex;
@@ -272,9 +294,10 @@ export default {
         img {
           width: 52px;
           height: 54px;
+          margin: 0 20px;
         }
         span {
-          margin-left: 84px;
+          margin: 20px;
           font-size: 48px;
           color: #fff;
         }

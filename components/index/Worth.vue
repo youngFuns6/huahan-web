@@ -171,6 +171,7 @@ export default {
         align-items: center;
         margin: 50px 105px;
         transition: all ease-in-out 0.4s;
+        width: 30%;
         &:hover {
           transform: translateY(-10px);
         }

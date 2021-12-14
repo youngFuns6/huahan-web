@@ -101,8 +101,8 @@ export default {
           });
           break;
         case 3:
-          // this.$router.push("/download");
-          window.open(`${Congfig.link}`);
+          this.$router.push("/download");
+          // window.open(`${Congfig.link}`);
           // window.location.href = Congfig.link
           break;
         case 4:
