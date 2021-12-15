@@ -35,13 +35,6 @@
             <img src="../../assets/images/downloadQr.png" alt="">
           </div>
         </a>
-        <a :href="downloadLink" target="_blank" class="btn" @mousemove="qrShow2 = true" @mouseleave="qrShow2 = false">
-          <img src="../../assets/images/ios.png" alt="" />
-          <p>TestFlight下载</p>
-          <div class="qr" v-show="qrShow2">
-            <img src="../../assets/images/downloadQr.png" alt="">
-          </div>
-        </a>
         <a :href="appStoreLink" target="_blank" class="btn" @mousemove="qrShow3 = true" @mouseleave="qrShow3 = false">
           <img src="../../assets/images/ios.png" alt="" />
           <p>App Store下载</p>
@@ -49,9 +42,16 @@
             <img src="../../assets/images/appStoreQr.png" alt="">
           </div>
         </a>
+        <a :href="downloadLink" target="_blank" class="btn" @mousemove="qrShow2 = true" @mouseleave="qrShow2 = false">
+          <img src="../../assets/images/ios.png" alt="" />
+          <p>TestFlight下载</p>
+          <div class="qr" v-show="qrShow2">
+            <img src="../../assets/images/downloadQr.png" alt="">
+          </div>
+        </a>
         <a :href="qunkongLink" target="_blank" class="btn">
           <img src="../../assets/images/web.png" alt="" />
-          <p>群控专业版</p>
+          <p>PC专业版</p>
         </a>
       </div>
     </div>
@@ -67,10 +67,10 @@
       </div>
 
       <div class="mobile-btn-wrop">
-        <a :href="appStoreLink" target="_blank">
+        <a :href="downloadLink" target="_blank">
           <div class="mobile-btn">
             <img src="../../assets/images/苹果@2x.png" alt="" /><span
-              >App Store下载</span
+              >TestFlight下载</span
             >
           </div>
         </a>
@@ -83,17 +83,17 @@
         </a>
       </div>
       <div class="mobile-btn-wrop">
-        <a :href="downloadLink" target="_blank">
+        <a :href="appStoreLink" target="_blank">
           <div class="mobile-btn">
             <img src="../../assets/images/苹果@2x.png" alt="" /><span
-              >TestFlight下载</span
+              >App Store下载</span
             >
           </div>
         </a>
         <a :href="qunkongLink" target="_blank">
           <div class="mobile-btn">
             <span
-              >群控专业版</span
+              >PC专业版</span
             >
           </div>
         </a>
