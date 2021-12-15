@@ -93,7 +93,7 @@
         <a :href="qunkongLink" target="_blank">
           <div class="mobile-btn">
             <span
-              >群控下载</span
+              >群控专业版</span
             >
           </div>
         </a>
