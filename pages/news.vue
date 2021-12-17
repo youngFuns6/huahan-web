@@ -296,8 +296,8 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.banner {
-  height: 400px;
+  .banner {
+  // height: 400px;
   img {
     width: 100%;
     height: 100%;

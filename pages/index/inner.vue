@@ -91,7 +91,7 @@ export default {
 <style lang='less' scoped>
 .banner {
   position: relative;
-  height: 480px;
+  // height: 480px;
   background: #333333;
 
   img {
@@ -240,18 +240,20 @@ export default {
 
 // 手机端适配
 @media (max-width: 992px) {
-  .banner {
-    height: 960px;
-  }
+  // .banner {
+  //   height: 960px;
+  // }
   .text {
-    top: 300px;
+    // top: 300px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     .top {
       font-size: 72px;
-      margin-bottom: 40px;
+      margin-bottom: 0;
     }
     .bot {
-      width: 1220px;
-      font-size: 64px;
+     display: none;
     }
   }
   .about {

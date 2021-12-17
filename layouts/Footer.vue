@@ -38,7 +38,7 @@
       <p>
         <span class="QQqun"
           >
-          QQ群：<span v-html="contactInfo.QQqun"></span>
+          QQ群：<i v-html="contactInfo.QQqun"></i>
          </span>
       </p>
       <div class="link">
@@ -92,8 +92,8 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 230px;
-  padding: 35px;
+  // height: 230px;
+  padding: 25px;
   box-sizing: border-box;
   background: linear-gradient(360deg, #019dfc 0%, #17b8e0 100%);
   // position: fixed;
@@ -175,6 +175,7 @@ export default {
     color: #333;
     .footer-img-pc {
       .link {
+        line-height: 2;
         a {
           color: #333;
         }
@@ -185,7 +186,7 @@ export default {
          text-align: center;
          line-height: 2;
         }
-        margin: 20px;
+        // margin: 20px;
       }
       // .qqQun {
       //   display: inline-block;
