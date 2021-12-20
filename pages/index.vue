@@ -1,35 +1,34 @@
 <template>
   <div>
-    <Bgc></Bgc>
-    <MiddleBar></MiddleBar>
-    <CloudScene></CloudScene>
-    <Worth></Worth>
+    <Product></Product>
+    <Indroduce></Indroduce>
+    <Condition></Condition>
   </div>
 </template>
 
 <script>
-import Bgc from '../components/index/Bgc.vue'
-import MiddleBar from '../components/index/MiddleBar.vue'
-import CloudScene from '../components/index/CloudScene.vue'
-import Worth from '../components/index/Worth.vue'
-export default {
-  components: {
-    Bgc,
-    MiddleBar,
-    CloudScene,
-    Worth
-  },
-  data() {
-    return {
-      moreData: [],
-      applicationData: [],
-      endData: [],
-    };
-  },
+import Product from '../components/index/product.vue'
+import Indroduce from '../components/index/indroduce.vue'
+import Condition from '../components/index/condition.vue'
 
-  methods: {},
-  computed: {},
-};
+  export default {
+    name: 'Home',
+    components: {
+      Product,
+      Indroduce,
+      Condition
+    },
+    data(){
+      return {
+
+      }
+    },
+    methods: {
+
+    },
+    computed: {}
+
+}
 </script>
 
 <style lang='less' scoped>

@@ -15,20 +15,25 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
-    script: [{
-      src: '/flexible.js',
-      type: 'text/javascript',
-      charset: 'utf-8'
-    }]
+    script: [
+    //   {
+    //   src: '/flexible.js',
+    //   type: 'text/javascript',
+    //   charset: 'utf-8'
+    // },
+    {src: '//unpkg.com/@triggerjs/trigger',
+    type: 'text/javascript',
+    charset: 'utf-8'},
+  ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'assets/css/reset.css',
-    // 'element-ui/lib/theme-chalk/index.css',
+    'element-ui/lib/theme-chalk/index.css',
     'assets/css/style.css',
     'aos/dist/aos.css',
-    'vant/lib/pagination/style',
+    // 'vant/lib/pagination/style',
     'vant/lib/icon/style',
   ],
 
@@ -39,7 +44,7 @@ export default {
     {src: '~/plugins/aos.js', ssr: false},
     {src: '~/plugins/router.js', ssr: true},
     {src: '~/plugins/axios.js', ssr: true},
-    // {src: '~/plugins/element-ui', ssr: true},
+    {src: '~/plugins/element-ui', ssr: true},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -79,16 +84,16 @@ export default {
   router: {
     extendRoutes(routes, resolve){
       routes.push(
-        {
-        path: '/index/inner',
-        name: 'inner',
-        component: resolve(__dirname, 'pages/index/inner.vue')
-      },
-      {
-        path: '/index.html',
-        // name: 'inner',
-        component: resolve(__dirname, 'pages/index.vue')
-      }
+      //   {
+      //   path: '/index/inner',
+      //   name: 'inner',
+      //   component: resolve(__dirname, 'pages/index/inner.vue')
+      // },
+      // {
+      //   path: '/index.html',
+      //   // name: 'inner',
+      //   component: resolve(__dirname, 'pages/index.vue')
+      // }
       )
     }
   },
@@ -96,11 +101,11 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     // transpile: [/^element-ui/],
-    postcss: [
-      require('postcss-px2rem')({
-        remUnit: 192  // 之所以写192是因为设了pc最大宽度1920px
-      })
-    ],
+    // postcss: [
+    //   require('postcss-px2rem')({
+    //     remUnit: 192  // 之所以写192是因为设了pc最大宽度1920px
+    //   })
+    // ],
     // analyze: true, // 使用webpack-bundle-analyzer来可视化包以及如何优化它们
 
     // vendor: ['element-ui'],

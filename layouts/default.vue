@@ -4,7 +4,7 @@
 
     <Nuxt />
 
-    <Footer :contactInfo="contactInfo"></Footer>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -19,15 +19,11 @@ export default {
   },
   data() {
     return {
-      contactInfo: this.$store.state.contactInfo,
-      title: this.$store.state.contactInfo.webTitle,
-      description: this.$store.state.contactInfo.webDesc,
-      keywords: this.$store.state.contactInfo.webKeywords,
+      title: 'kkk',
+      description: 'kkk',
+      keywords: 'kkkk',
     };
   },
-  // beforeCreate(){
-  //   console.log(this.$store.state.contactInfo.webTitle)
-  // },
 
   head() {
     return {
@@ -50,11 +46,5 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.el-main,
-.el-header,
-.el-footer {
-  padding: 0;
-  overflow: hidden;
-  height: 100% !important;
-}
+  
 </style>
