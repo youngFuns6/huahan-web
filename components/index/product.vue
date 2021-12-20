@@ -1,7 +1,7 @@
 <template>
   <div class="wrop">
     <div class="title">
-      <h3>Product display</h3>
+      <h3>PRODUCT DISPLAY</h3>
       <p>产品展示</p>
     </div>
     <div class="wrop-content">
@@ -21,7 +21,7 @@
           >
             <span>{{ item.cateName }}</span>
           </li>
-          <div class="more">更多产品</div>
+          <slot name='moreBtn'></slot>
         </ul>
       </div>
       <div class="wrop-right">
@@ -106,7 +106,7 @@ export default {
   }
   .wrop-left {
     width: 296px;
-    height: 620px;
+    min-height: 620px;
     background-color: #fafafa;
     h3 {
       font-size: 28px;
@@ -127,6 +127,9 @@ export default {
       li {
         cursor: pointer;
         transition: all 0.3s linear;
+        &:hover {
+          background-color: #eeeeef;
+        }
         span {
           .line-text;
           display: block;
@@ -152,7 +155,7 @@ export default {
   }
 
   .wrop-right {
-    height: 620px;
+    min-height: 620px;
     margin-left: 32px;
     background: #fafafa;
     ul {
@@ -163,6 +166,7 @@ export default {
       li {
         margin-top: 26px;
         background: #f6f6f6;
+        cursor: pointer;
         img {
           width: 236px;
           height: 174px;

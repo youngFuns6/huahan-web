@@ -2,8 +2,8 @@
   <div class="wrop">
     <div class="wrop-left">
       <h3>
-        <p>GROUP TO INTRODUCE</p>
-        <p>公司介绍</p>
+        <p>ENTERPRISE DYNAMIC</p>
+        <p>企业动态</p>
       </h3>
       <ul>
         <li v-for="(item, index) in condition" :key="index">
@@ -75,7 +75,7 @@ export default {
         }
         .title {
           .line-text;
-          width: 380px;
+          width: 60%;
           padding-left: 16px;
           position: relative;
           &::before {

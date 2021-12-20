@@ -23,7 +23,9 @@ export default {
     // },
     {src: '//unpkg.com/@triggerjs/trigger',
     type: 'text/javascript',
-    charset: 'utf-8'},
+        charset: 'utf-8'
+      },
+     
   ]
   },
 
@@ -118,16 +120,16 @@ export default {
 
     // productionGzipExtensions: ['js', 'css', 'svg'],
 
-    // babel: { // 按需加载
-    //   plugins: [
-    //     [
-    //       'component',
-    //       {
-    //         'libraryName': 'element-ui',
-    //         'styleLibraryName': 'theme-chalk'
-    //       }
-    //     ]
-    //   ]
-    // }
+    babel: { // 按需加载
+      plugins: [
+        [
+          'component',
+          {
+            'libraryName': 'element-ui',
+            'styleLibraryName': 'theme-chalk'
+          }
+        ]
+      ]
+    }
   }
 }

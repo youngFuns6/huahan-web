@@ -1,6 +1,6 @@
 <template>
   <div class="wrop">
-    <div class="wrop-left">
+    <div class="wrop-left" ref="leftRef">
       <img
         src="../../assets/img/222.jpeg"
         alt=""
@@ -30,6 +30,24 @@ export default {
   data() {
     return {};
   },
+  mounted(){
+    // this.$nextTick(() => {
+    //    window.addEventListener('resize', (e) => {
+    //   let BrowserWidth = document.body.clientWidth
+    //   // console.log(BrowserWidth)
+    //   if(BrowserWidth < 1600){
+        
+    //     console.log(document.querySelector('.wrop-left').style.top)
+    //     document.querySelector('.wrop-left').style.top = parseInt(document.querySelector('.wrop-left').style.top) - BrowserWidth + 1600 + 'px'
+    //     // document.querySelector('.wrop-left').style.left + BrowserWidth - 1600 + 'px'
+    //   }
+    // })
+    // })
+    
+     
+    
+    
+  },
   methods: {},
   computed: {},
 };
@@ -45,7 +63,7 @@ export default {
     height: 337px;
     position: absolute;
     top: 50%;
-    left: 15vw;
+    left: 8vw;
     transform: translateY(-50%);
     transition: all 1s ease-in-out;
   }
@@ -56,7 +74,7 @@ export default {
     background: #333333;
     position: absolute;
     top: 50%;
-    right: 15vw;
+    right: 8vw;
     transform: translateY(-50%);
     transition: all 1s ease-in-out;
     .content {

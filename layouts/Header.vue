@@ -9,28 +9,40 @@
       </div>
     </div>
     <div class="wrop">
-        <ul>
-          <li @click="toPage(index)" v-for="(item, index) in page" :key="item">
-            <span class="text-span" :class="active === index ? 'active-class' : ''">{{
-              item
-            }}</span>
-            <i>{{ index === page.length - 1 || index === active || index + 1 === active ? "" : "|" }}</i>
-          </li>
-        </ul>
-        <div class="banner">
-          <img src="../assets/img/banner.png" alt="">
-        </div>
-        <div class="drop-icon">
-          <van-icon
-            v-if="isShowIcon"
-            size="42"
-            name="wap-nav"
-            @click="
-              isShowIcon = false;
-              isShowDrop = true;
-            "
-          />
-        </div>
+      <ul>
+        <li
+          @click="$router.push(`${item.path}`)"
+          v-for="(item, index) in page"
+          :key="index"
+        >
+          <span
+            class="text-span"
+            :class="active === index ? 'active-class' : ''"
+            >{{ item.name }}</span
+          >
+          <i>{{
+            index === page.length - 1 ||
+            index === active ||
+            index + 1 === active
+              ? ""
+              : "|"
+          }}</i>
+        </li>
+      </ul>
+      <div class="banner">
+        <img src="../assets/img/banner.png" alt="" />
+      </div>
+      <div class="drop-icon">
+        <van-icon
+          v-if="isShowIcon"
+          size="42"
+          name="wap-nav"
+          @click="
+            isShowIcon = false;
+            isShowDrop = true;
+          "
+        />
+      </div>
 
       <!-- 手机弹框 -->
       <div
@@ -54,12 +66,11 @@
               />
             </div>
             <li
-              @click="toPage(index)"
               v-for="(item, index) in page"
-              :key="item"
+              :key="index"
               :class="active === index ? 'active-class' : ''"
             >
-              {{ item }}
+              {{ item.name }}
             </li>
           </ul>
         </div>
@@ -69,46 +80,67 @@
 </template>
 
 <script>
-
 export default {
   name: "Header",
   components: {},
   data() {
     return {
-      page: ["首页", "产品展示", "新闻资讯", "关于华瀚", "联系我们"],
+      page: [
+        {
+          name: "首页",
+          path: "/",
+        },
+        {
+          name: "产品展示",
+          path: "/prodShow",
+        },
+        {
+          name: "新闻资讯",
+          path: "/news",
+        },
+        {
+          name: "关于华翰",
+          path: "/about",
+        },
+        {
+          name: "联系我们",
+          path: "/contact",
+        },
+      ],
       active: 0,
       isShowIcon: true,
       isShowDrop: false,
     };
   },
-  beforeMount() {
-    if (window.sessionStorage.getItem("active")) {
-      this.active = parseInt(window.sessionStorage.getItem("active"));
-    }
-  },
-  mounted(){
-    $('.parallax-window').parallax({imageSrc: '/path/to/image.jpg'});
-  },
-  methods: {
-    toIndex() {
-      window.sessionStorage.setItem("active", 0);
-      this.active = 0;
-      this.$router.push("/");
+  
+  watch: {
+    $route: {
+      immediate: true,
+      handler(newValue, oldValue) {
+        // console.log(newValue);
+        let flag = true;
+
+        this.page.forEach((item, index) => {
+          if (flag) {
+            if (newValue.path == item.path) {
+              // console.log(index);
+              this.active = index;
+              flag = false;
+            }
+             
+          }
+        });
+      },
     },
-    toPage(i) {
-      this.active = i;
-      window.sessionStorage.setItem("active", i);
-      this.isShowIcon = true;
-    },
   },
+  methods: {},
   computed: {},
 };
 </script>
 
 <style lang='less' scoped>
-
 .active-class {
-  background: #D63025 !important;
+  background: #d63025 !important;
 }
 .top {
   margin: 0 5vw;
@@ -130,31 +162,30 @@ export default {
   z-index: 9999;
   background: #133b80;
 
-    ul {
-      height: 60px;
+  ul {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    li {
+      line-height: 60px;
+      font-size: 22px;
+      font-weight: 500;
+      text-align: center;
+      color: #fff;
+      cursor: pointer;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      li {
-        line-height: 60px;
-        font-size: 22px;
-        font-weight: 500;
+      span {
+        display: block;
+        padding: 0 50px;
         text-align: center;
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        span {
-          display: block;
-          padding: 0 50px;
-          text-align: center;
-           transition: all .3s ease-in-out;
-        }
-        i {
-          color: #BEBEBE;
-        }
+        transition: all 0.3s ease-in-out;
       }
-
+      i {
+        color: #bebebe;
+      }
     }
+  }
 }
 
 // 手机端适配
