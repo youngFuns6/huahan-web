@@ -4,7 +4,8 @@
       <h3>COMPANY INTRODUCTION</h3>
       <p>公司介绍</p>
     </div>
-    <div class="content">
+    <div class="content" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
       <p>
         江苏华翰环保科技有限公司是专业从事研制、开发和采用高新技术材料制造各种耐腐蚀泵和耐腐蚀阀系列产品的专业制造公司，近有三十年历史．公司拥有一支高科技创新团队和与国际接轨的先进生产设备及自动化检测设备。
       </p>
@@ -14,8 +15,9 @@
       <p>
         三十年来，公司以科技创新为导向，以质量为生命，以优质服务客户为宗旨，你的满意就是我们的追求为目标。．不断吸收国际先进技术，创新研发新材料＂礼花＂牌防腐产品，为发展我国的防腐事业与时俱进，创领新潮流。
       </p>
-      <div class="banner">
-        <img src="../assets/img/222.jpeg" alt="">
+      <div class="banner" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
+        <img :src="$store.state.contactInfo.compImg" alt="">
     </div>
     </div>
     <div class="honor">
@@ -23,9 +25,13 @@
       <h3>HONORARY QUALIFICATION</h3>
       <p>荣誉资质</p>
     </div>
-    <ul>
+    <ul data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
         <li>
-            <img src="" alt="">
+            <img src="../assets/img/honor-1.png" alt="">
+        </li>
+        <li>
+            <img src="../assets/img/honor-2.png" alt="">
         </li>
     </ul>
     </div>

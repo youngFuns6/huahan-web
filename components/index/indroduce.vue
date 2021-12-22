@@ -1,12 +1,12 @@
 <template>
   <div class="wrop">
-    <div class="wrop-left" ref="leftRef">
+    <div class="wrop-left" ref="leftRef" data-aos="zoom-in-right">
       <img
-        src="../../assets/img/222.jpeg"
+        :src="$store.state.contactInfo.compImg"
         alt=""
       />
     </div>
-    <div class="wrop-right">
+    <div class="wrop-right" data-aos="zoom-in-left">
       <div class="content">
         <h3>
           <p>GROUP TO INTRODUCE</p>
@@ -17,7 +17,7 @@
           公司＂礼花＂牌产品：广泛应用于石油化工、冶金、化纤、化肥、造纸、制药、环保、机械、电镀、纺织、水处理和蓄电池隔板等行业性工矿企业，适用于各种工况环境条件下正常使用。其耐腐蚀性、机械稳定性、密封可靠性，使用寿命长等优点得到了市场与客户的认可和好评。产品遍销全国并走向国际市场，在国内市场上享有较高的声誉。
           三十年来，公司以科技创新为导向，以质量为生命，以优质服务客户为宗旨，你的满意就是我们的追求为目标，不断吸收国际先进技术，创新研发新材料＂礼花＂牌防腐产品，为发展我国的防腐事业与时俱进，创领新潮流。
         </p>
-        <div class="more">了解更多</div>
+        <div class="more" @click="$router.push('/about')">了解更多</div>
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@
 
     <Nuxt />
 
+    <Aside></Aside>
     <Footer></Footer>
   </div>
 </template>
@@ -11,17 +12,19 @@
 <script>
 import Header from "./Header.vue";
 import Footer from "./Footer.vue";
+import Aside from "./Aside.vue"
 export default {
   name: "default",
   components: {
     Header,
     Footer,
+    Aside
   },
   data() {
     return {
-      title: 'kkk',
-      description: 'kkk',
-      keywords: 'kkkk',
+      title: this.$store.state.contactInfo.webTitle,
+      description: this.$store.state.contactInfo.webDesc,
+      keywords: this.$store.state.contactInfo.webKeyWords,
     };
   },
 

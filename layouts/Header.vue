@@ -4,12 +4,12 @@
       <div class="top-left">
         <img src="../assets/img/logo.png" alt="" />
       </div>
-      <div class="top-right">
+      <div class="top-right hidden-sm-and-down">
         <img src="../assets/img/phone.png" alt="" />
       </div>
     </div>
-    <div class="wrop">
-      <ul>
+    <div class="wrop" >
+      <ul class="hidden-sm-and-down">
         <li
           @click="$router.push(`${item.path}`)"
           v-for="(item, index) in page"
@@ -29,7 +29,7 @@
           }}</i>
         </li>
       </ul>
-      <div class="banner">
+      <div class="banner" v-if="isShow">
         <img src="../assets/img/banner.png" alt="" />
       </div>
       <div class="drop-icon">
@@ -110,6 +110,7 @@ export default {
       active: 0,
       isShowIcon: true,
       isShowDrop: false,
+      isShow: true
     };
   },
   
@@ -132,6 +133,11 @@ export default {
         });
       },
     },
+  },
+  created(){
+    if(this.$route.path === '/detail'){
+      this.isShow = false
+    }
   },
   methods: {},
   computed: {},

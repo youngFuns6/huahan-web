@@ -1,6 +1,10 @@
 <template>
   <div class="wrop">
-    <div class="wrop-title">
+    <div
+      class="wrop-title"
+      data-aos="fade-up"
+      data-aos-anchor-placement="top-bottom"
+    >
       <h3>
         <p>Honorary</p>
         <p>QUALIFICATION</p>
@@ -8,12 +12,20 @@
       </h3>
     </div>
     <ul>
-        <li>
-            <img src="../../assets/img/honor-1.png" alt="">
-        </li>
-        <li>
-            <img src="../../assets/img/honor-2.png" alt="">
-        </li>
+      <li
+        data-aos="fade-left"
+       
+        data-aos-duration="2000"
+      >
+        <img src="../../assets/img/honor-1.png" alt="" />
+      </li>
+      <li
+        data-aos="fade-left"
+        
+        data-aos-duration="3000"
+      >
+        <img src="../../assets/img/honor-2.png" alt="" />
+      </li>
     </ul>
   </div>
 </template>
@@ -62,17 +74,17 @@ export default {
     }
   }
   ul {
-      display: flex;
-      position: absolute;
-      top: 50%;
-      left: calc(8vw + 500px);
-      transform: translateY(-50%);
-      li {
-          width: 188px;
-height: 141px;
-margin: 0 10px;
-background: #FFFFFF;
-      }
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: calc(8vw + 500px);
+    transform: translateY(-50%);
+    li {
+      width: 188px;
+      height: 141px;
+      margin: 0 10px;
+      background: #ffffff;
+    }
   }
 }
 </style>

@@ -7,11 +7,11 @@
       </div>
       <div class="content">
         <div class="left">
-          <p>公司地址：is大家大家大胶带</p>
-          <p>联系方式：is大家大家大胶带</p>
-          <p>电子邮箱：is大家大家大胶带</p>
-          <p>传真：is大家大家大胶带</p>
-          <p>邮编：is大家大家大胶带</p>
+          <p>公司地址：{{$store.state.contactInfo.address}}</p>
+          <p>联系方式：{{$store.state.contactInfo.phone}}</p>
+          <p>电子邮箱：{{$store.state.contactInfo.email}}</p>
+          <p>传真：{{$store.state.contactInfo.fax}}</p>
+          <p>邮编：{{$store.state.contactInfo.emailNum}}</p>
         </div>
         <div class="right">
           <img src="../assets/img/map.png" alt="" />
@@ -82,7 +82,7 @@ export default {
     sendFeedback() {
       if (this.form.phone !== undefined && this.form.service !== undefined) {
         axios
-          .post(Config.BASE_URL, this.form)
+          .post(Config.BASE_URL + '/feedback', this.form)
           .then((res) => {
             alert("提交成功！");
           })

@@ -7,113 +7,87 @@
     <div class="content">
       <div class="toggle">
         <span
-          @click="toToggle(index)"
+          @click="toToggle(index, item.type)"
           :class="active === index ? 'active' : ''"
           v-for="(item, index) in toggle"
-          :key="item.id"
+          :key="item.type"
           >{{ item.name }}</span
         >
       </div>
       <ul>
-        <li v-for="item in newsList" :key="item.id">
+        <li v-for="(item, index) in condition" :key="item.id" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom" :data-aos-duration="300 * index">
           <div class="left">
             <img :src="item.banner" alt="" />
           </div>
           <div class="right">
             <h3>{{ item.title }}</h3>
-            <p>{{ item.content }}</p>
+            <p>{{ item.content | filterContent }}</p>
             <span>{{ item.created }}</span>
           </div>
         </li>
       </ul>
     </div>
     <div class="page">
-      <el-pagination background layout="prev, pager, next" :total="1000">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="total"
+        :current-change="changePage"
+      >
       </el-pagination>
     </div>
   </div>
 </template>
     
 <script>
+import axios from "axios";
+import Config from "../assets/js/settings";
+import toText from '../assets/js/toText'
+
 export default {
   data() {
     return {
       toggle: [
-        { id: 0, name: "企业动态" },
-        { id: 1, name: "新闻资讯" },
+        { type: 1, name: "企业动态" },
+        { type: 2, name: "新闻资讯" },
       ],
       active: 0,
-      newsList: [
-        {
-          id: 1,
-          banner: "",
-          title: "哈迪哈UHD啊好的等哈等哈",
-          content:
-            "哈护短厚度爱活动点击按键带哦按季度收结案按季度将的敬爱的旧爱开电风扇宽松收到开发商的看法SDK佛山店",
-          created: "2021.10.09",
-        },
-        {
-          id: 2,
-          banner: "",
-          title: "哈迪哈UHD啊好的等哈等哈",
-          content:
-            "哈护短厚度爱活动点击按键带哦按季度收结案按季度将的敬爱的旧爱开电风扇宽松收到开发商的看法SDK佛山店",
-          created: "2021.10.09",
-        },
-        {
-          id: 3,
-          banner: "",
-          title: "哈迪哈UHD啊好的等哈等哈",
-          content:
-            "哈护短厚度爱活动点击按键带哦按季度收结案按季度将的敬爱的旧爱开电风扇宽松收到开发商的看法SDK佛山店",
-          created: "2021.10.09",
-        },
-        {
-          id: 4,
-          banner: "",
-          title: "哈迪哈UHD啊好的等哈等哈",
-          content:
-            "哈护短厚度爱活动点击按键带哦按季度收结案按季度将的敬爱的旧爱开电风扇宽松收到开发商的看法SDK佛山店",
-          created: "2021.10.09",
-        },
-        {
-          id: 5,
-          banner: "",
-          title: "哈迪哈UHD啊好的等哈等哈",
-          content:
-            "哈护短厚度爱活动点击按键带哦按季度收结案按季度将的敬爱的旧爱开电风扇宽松收到开发商的看法SDK佛山店",
-          created: "2021.10.09",
-        },
-        {
-          id: 6,
-          banner: "",
-          title: "哈迪哈UHD啊好的等哈等哈",
-          content:
-            "哈护短厚度爱活动点击按键带哦按季度收结案按季度将的敬爱的旧爱开电风扇宽松收到开发商的看法SDK佛山店",
-          created: "2021.10.09",
-        },
-        {
-          id: 7,
-          banner: "",
-          title: "哈迪哈UHD啊好的等哈等哈",
-          content:
-            "哈护短厚度爱活动点击按键带哦按季度收结案按季度将的敬爱的旧爱开电风扇宽松收到开发商的看法SDK佛山店",
-          created: "2021.10.09",
-        },
-        {
-          id: 8,
-          banner: "",
-          title: "哈迪哈UHD啊好的等哈等哈",
-          content:
-            "哈护短厚度爱活动点击按键带哦按季度收结案按季度将的敬爱的旧爱开电风扇宽松收到开发商的看法SDK佛山店",
-          created: "2021.10.09",
-        },
-      ],
+      queryInfo: {
+        type: 1,
+        page: 1,
+        pageSize: 5,
+      },
+      total: null,
+      condition: [],
     };
   },
+  filters:  {
+    filterContent(val){
+      return toText(val)
+    }
+  },
+
+  created() {
+    this.getCondition();
+  },
+
   methods: {
-    toToggle(i) {
+    toToggle(i, type) {
       this.active = i;
+      this.queryInfo.type = type;
+      this.getCondition();
+    },
+    async getCondition() {
+      const res = await axios.get(`${Config.BASE_URL}/condition`, {
+        params: this.queryInfo,
+      });
+      this.condition = res.data.data;
+      this.total = res.data.total;
+    },
+    changePage(page) {
+      this.queryInfo.page = page;
+      this.getCondition();
     },
   },
 };
@@ -128,6 +102,7 @@ export default {
   .title {
     text-align: center;
     font-weight: 500;
+    margin-bottom: 100px;
     h3 {
       font-size: 40px;
       color: #133b80;
@@ -157,6 +132,12 @@ ul {
     display: flex;
     align-items: center;
     margin: 16px 0;
+    cursor: pointer;
+    &:hover {
+      .right h3 {
+        color: #133b80;
+      }
+    }
   }
   .left {
     width: 195px;
@@ -164,9 +145,10 @@ ul {
     margin-right: 32px;
   }
   .right {
+    width: 879px;
     h3 {
       .line-text;
-      font-weight: 500;
+      font-weight: 600;
     }
     p {
       .line2-text;

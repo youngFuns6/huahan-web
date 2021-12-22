@@ -1,19 +1,19 @@
 <template>
   <div class="wrop">
-    <div class="wrop-left">
+    <div class="wrop-left" data-aos="zoom-in-right">
       <h3>
         <p>ENTERPRISE DYNAMIC</p>
         <p>企业动态</p>
       </h3>
       <ul>
-        <li v-for="(item, index) in condition" :key="index">
+        <li v-for="(item, index) in condition" :key="index" @click="$router.push({path: '/detail', query: {type: 'condition', id:item.id}})">
           <p class="title">{{ item.title }}</p>
           <p class="created">{{ item.created }}</p>
         </li>
       </ul>
-      <div class="btn">更多动态</div>
+      <div class="btn" @click="$router.push('/news')">更多动态</div>
     </div>
-    <div class="wrop-right">
+    <div class="wrop-right" data-aos="zoom-in-left">
       <img src="../../assets/img/1.png" alt="" />
     </div>
   </div>
@@ -22,18 +22,25 @@
 <script>
 export default {
   name: "condition",
+  props: {
+    condition: {
+      type: Array,
+      default(){
+        return []
+      }
+    }
+  },
   components: {},
   data() {
     return {
-      condition: [
-        { title: "多久啊看了几大数据多久多久", created: "2021-12-01" },
-        { title: "多久啊看了几大数据多久多久", created: "2021-12-01" },
-        { title: "多久啊看了几大数据多久多久", created: "2021-12-01" },
-        { title: "多久啊看了几大数据多久多久", created: "2021-12-01" },
-      ],
+      
     };
   },
-  methods: {},
+  methods: {
+    // getDet(id){
+    //   this.$router.push({path: '/detail', query: {type: 'condition', id}})
+    // }
+  },
   computed: {},
 };
 </script>
@@ -44,9 +51,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: content-box;
   .wrop-left {
     width: 840px;
-    height: 509px;
+    // height: 509px;
     h3 {
       margin-bottom: 10px;
       font-weight: 500;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bgc">
+    <div class="bgc" v-if="isShow">
       <img src="../assets/img/map.png" alt="" />
       <div class="box">
         <p>
@@ -27,8 +27,8 @@
       </div>
     </div>
     <div class="footer">
-      Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有 &nbsp;&nbsp; 电话：0519-86231154 &nbsp;&nbsp;
-      传真：0519-86230933 &nbsp;&nbsp; Email：czhhhb_2013@163.com &nbsp;&nbsp;
+      Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有 &nbsp;&nbsp; 电话：{{info.phone}} &nbsp;&nbsp;
+      传真：{{info.fax}} &nbsp;&nbsp; Email：{{info.email}} &nbsp;&nbsp;
       <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"
         >苏ICP备13011262号-1</a
       >
@@ -43,14 +43,25 @@ export default {
   // inject: ['contactInfo'],
   props: {
     contactInfo: {
-      // type: Object,
+      type: Object,
       default() {
         return {};
       },
     },
   },
-  methods: {},
-  computed: {},
+ 
+  data(){
+    return {
+      info: {},
+      isShow: true
+    }
+  },
+  created(){
+    this.info = this.$store.state.contactInfo
+    if(this.$route.path === '/detail' || this.$route.path === '/contact' ){
+      this.isShow = false
+    }
+  }
 };
 </script>
 
@@ -59,6 +70,9 @@ export default {
   position: relative;
   // height: 516px;
   // object-fit: cover !important;
+  img {
+    vertical-align: middle;
+  }
 }
 .box {
   position: absolute;
