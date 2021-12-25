@@ -1,5 +1,7 @@
 <template>
-  <div class="wrop">
+  
+ 
+    <div class="wrop" v-if="!isMobile">
     <ul>
       <li
         v-for="(item, index) in list"
@@ -19,6 +21,9 @@
       </li>
     </ul>
   </div>
+
+  <div class="mobile" v-else></div>
+ 
 </template>
     
 <script>
@@ -36,6 +41,7 @@ import icon_edit from "../assets/img/icon_edit.png";
 export default {
   data() {
     return {
+      isMobile: this.$store.state.isMobile,
       list: [
         // { icon_active: icon_phone_active, icon: icon_phone, isShow: true },
         // { icon_active: icon_email_active, icon: icon_email, isShow: true },

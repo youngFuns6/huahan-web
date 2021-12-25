@@ -1,5 +1,5 @@
 <template>
-  <div class="wrop">
+  <div class="wrop" v-if="!isMobile">
     <div class="title">
       <h3>NEWS INFORMATION</h3>
       <p>新闻资讯</p>
@@ -38,6 +38,8 @@
       </el-pagination>
     </div>
   </div>
+
+  <div class="mobile" v-else></div>
 </template>
     
 <script>
@@ -48,6 +50,7 @@ import toText from '../assets/js/toText'
 export default {
   data() {
     return {
+      isMobile: this.$store.state.isMobile,
       toggle: [
         { type: 1, name: "企业动态" },
         { type: 2, name: "新闻资讯" },

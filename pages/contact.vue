@@ -1,5 +1,5 @@
 <template>
-  <div class="wrop">
+  <div class="wrop" v-if="!isMobile">
     <div class="contact-1">
       <div class="title">
         <h3>NEWS INFORMATION</h3>
@@ -66,6 +66,8 @@
       </div>
     </div>
   </div>
+
+  <div class="mobile" v-else></div>
 </template>
     
 <script>
@@ -75,6 +77,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      isMobile: this.$store.state.isMobile,
       form: {},
     };
   },

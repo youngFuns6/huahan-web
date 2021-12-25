@@ -1,5 +1,5 @@
 <template>
-  <div class="wrop">
+  <div class="wrop" v-if="!isMobile">
     <div class="title">
       <h3>COMPANY INTRODUCTION</h3>
       <p>公司介绍</p>
@@ -37,12 +37,14 @@
     </div>
     
   </div>
+
+  <div class="mobile" v-else></div>
 </template>
     
 <script>
 export default {
   data() {
-    return {};
+    return {isMobile: this.$store.state.isMobile,};
   },
   methods: {},
 };

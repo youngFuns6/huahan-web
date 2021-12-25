@@ -38,6 +38,14 @@ export default {
     'aos/dist/aos.css',
     // 'vant/lib/pagination/style',
     'vant/lib/icon/style',
+    'vant/lib/dialog/style',
+    'vant/lib/dropdown-item/style',
+    'vant/lib/dropdown-menu/style',
+    'vant/lib/dialog/style',
+    'vant/lib/list/style',
+    'vant/lib/cell/style',
+    // 'vant/lib/lazyload/style',
+    'assets/font/iconfont.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -85,6 +93,7 @@ export default {
 
   // 自定义路由
   router: {
+    middleware: 'middl',
     extendRoutes(routes, resolve){
       routes.push(
       //   {

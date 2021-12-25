@@ -1,10 +1,16 @@
 <template>
   <div>
+    <div class="img" v-if="isMobile">
+      <img src="../assets/img/mobile_banner.png" alt="">
+    </div>
     <Product :cateList="cateList" :goodsList="goodsList" :totalO="total">
       <template #moreBtn>
         <div class="more">
           <div @click="$router.push('/prodShow')">更多产品</div>
         </div>
+      </template>
+      <template #btn>
+         <a href="/prodShow" class="btn">更多产品</a>
       </template>
     </Product>
     <Indroduce></Indroduce>
@@ -30,7 +36,7 @@ export default {
     Honor,
   },
   data() {
-    return {};
+    return {isMobile: this.$store.state.isMobile,};
   },
   async asyncData({
     $axios,
@@ -50,6 +56,9 @@ export default {
     });
     let cateList = cate.data.data;
     cateList.reverse();
+    cateList.unshift(
+      {cateName:'全部商品', type: null}
+    )
     let goodsData = {};
     if (cateList.length) {
       const goods = await $axios.get(`${Config.BASE_URL}/goods`, {
@@ -89,4 +98,21 @@ export default {
   line-height: 50px;
   cursor: pointer;
 }
+
+.img {
+  width: 100%;
+}
+
+ .btn {
+   display: block;
+    margin: 0 auto /* 12/16 */;
+    margin-top: .75rem /* 12/16 */;
+    width: 90%;
+    height: 3rem /* 48/16 */;
+    color: #fff;
+    text-align: center;
+    line-height: 3rem /* 48/16 */;
+    background-color: #133B80;
+    text-decoration: none;
+  }
 </style>

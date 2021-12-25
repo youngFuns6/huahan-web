@@ -1,5 +1,6 @@
 export const state = () => ({
-  contactInfo: ''
+  contactInfo: '',
+  isMobile: false
 })
 
 export const mutations = {

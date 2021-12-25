@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <div class="top">
-      <div class="top-left">
-        <img src="../assets/img/logo.png" alt="" />
+ 
+    <div v-if="!isMobile">
+      <div class="top">
+        <div class="top-left">
+          <img src="../assets/img/logo.png" alt="" />
+        </div>
+        <div class="top-right">
+          <img src="../assets/img/phone.png" alt="" />
+        </div>
       </div>
-      <div class="top-right hidden-sm-and-down">
-        <img src="../assets/img/phone.png" alt="" />
-      </div>
-    </div>
-    <div class="wrop" >
-      <ul class="hidden-sm-and-down">
+     
+      <div class="wrop">
+      <ul>
         <li
           @click="$router.push(`${item.path}`)"
           v-for="(item, index) in page"
@@ -29,54 +31,41 @@
           }}</i>
         </li>
       </ul>
-      <div class="banner" v-if="isShow">
+      <div class="banner">
         <img src="../assets/img/banner.png" alt="" />
       </div>
-      <div class="drop-icon">
-        <van-icon
-          v-if="isShowIcon"
-          size="42"
-          name="wap-nav"
-          @click="
-            isShowIcon = false;
-            isShowDrop = true;
-          "
-        />
-      </div>
+    
+    </div>
+    </div>
 
-      <!-- 手机弹框 -->
-      <div
-        class="mask"
-        v-if="!isShowIcon"
-        @click="
-          isShowIcon = true;
-          isShowDrop = false;
-        "
-      >
-        <div class="drop">
-          <ul>
-            <div class="close-icon">
-              <van-icon
-                size="30"
-                name="cross"
-                @click="
-                  isShowIcon = true;
-                  isShowDrop = false;
-                "
-              />
+    <div class="mobile" v-else>
+      <div class="top" type="flex" justify="space-between" align="middle">
+        <div class="top-left">
+          <img src="../assets/img/logo.png" alt="" />
+        </div>
+        <div class="top-right">
+          <div :class="showNav ? 'active' : ''" class="hamburger">
+            <div @click="toggle_M">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
             </div>
-            <li
-              v-for="(item, index) in page"
-              :key="index"
-              :class="active === index ? 'active-class' : ''"
-            >
-              {{ item.name }}
-            </li>
-          </ul>
+          </div>
         </div>
       </div>
+      <div
+        @click="showNav = false"
+        class="mask"
+        :class="showNav ? 'active' : ''"
+      >
+        <ul class="nav-menu">
+          <li class="nav-item" v-for="(item, index) in page" :key="index">
+            <a :href="item.path" class="nav-link">{{ item.name }}</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
+  
 </template>
 
 <script>
@@ -85,6 +74,7 @@ export default {
   components: {},
   data() {
     return {
+      isMobile: this.$store.state.isMobile,
       page: [
         {
           name: "首页",
@@ -108,19 +98,20 @@ export default {
         },
       ],
       active: 0,
-      isShowIcon: true,
-      isShowDrop: false,
-      isShow: true
+      isShow: true,
+      showNav: false,
     };
   },
-  
+
   watch: {
     $route: {
       immediate: true,
       handler(newValue, oldValue) {
+        if (newValue.path === "/detail") {
+          this.isShow = false;
+        }
         // console.log(newValue);
         let flag = true;
-
         this.page.forEach((item, index) => {
           if (flag) {
             if (newValue.path == item.path) {
@@ -128,18 +119,22 @@ export default {
               this.active = index;
               flag = false;
             }
-             
           }
         });
       },
     },
   },
-  created(){
-    if(this.$route.path === '/detail'){
-      this.isShow = false
+  created() {
+    if (this.$route.path === "/detail") {
+      this.isShow = false;
     }
   },
-  methods: {},
+  methods: {
+    toggle_M() {
+      this.showNav = !this.showNav;
+      // console.log("kkk");
+    },
+  },
   computed: {},
 };
 </script>
@@ -154,7 +149,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  z-index: 9999;
+  z-index: 999;
   .top-left {
     width: 480px;
   }
@@ -195,103 +190,76 @@ export default {
 }
 
 // 手机端适配
+.mobile {
+  .top {
+    padding: .625rem /* 10/16 */ 1rem /* 16/16 */;
+    justify-content: space-between !important;
+    .top-left {
+      width: 12.5rem /* 200/16 */;
+    }
+    .top-right {
+      // justify-content: right !important;
+      width: auto;
+    }
+  }
+}
+
 .mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99;
+  position: absolute;
+  left: -120%;
+  top: 3.4375rem /* 55/16 */;
+  z-index: 9999;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-.drop-icon {
-  // padding: 30px 95px;
-  display: none;
-}
-.drop {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 50px;
-  top: 270px;
-  z-index: 888;
-  width: 80%;
-  // height: 100%;
-  background: #ffffff;
-  box-shadow: 0px 10px 20px 0px rgba(167, 167, 167, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+  // overflow: hidden;
   ul {
-    position: relative;
-    li {
-      padding: 30px 120px;
-      margin: 60px 0;
-      border-bottom: 1px solid #a7a7a7;
-      font-size: 56px;
-      &:last-child {
-        border-bottom: none;
-      }
-    }
+    width: 100vw;
+    box-shadow: 0 .625rem /* 10/16 */ 1.6875rem /* 27/16 */ rgba(0, 0, 0, 0.05);
+    border-radius: .625rem /* 10/16 */;
+    text-align: center;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0px 10px 20px 0px rgba(167, 167, 167, 0.5);
+    overflow: hidden;
   }
-}
-
-@media (min-width: 992px) {
-  .wrop {
-    .left {
-      p {
-        display: none;
-      }
-    }
-    .right {
-      .download-img {
-        display: none;
-      }
-    }
+  .nav-item {
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid #f3f4f6;
   }
-}
-
-@media (max-width: 992px) {
-  .wrop .left {
-    margin-left: 150px;
-    p {
-      display: block;
-      font-size: 72px;
-    }
-    .img {
-      width: 251px;
-      height: 158px;
-      margin-right: 70px;
-    }
-    // span {
-    //   font-size: 96px !important;
-    // }
-  }
-  .wrop .right {
-    margin-right: 150px;
-    .download-img {
-      display: block;
-      width: 130px;
-      height: 90px;
-      margin-right: 112px;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-  .wrop .right ul {
-    display: none;
-  }
-  .drop-icon {
+  .nav-link {
     display: block;
-    i {
-      font-size: 150px !important;
-    }
+    padding: 2.5rem 0;
+    color: #333;
   }
-  .close-icon {
-    position: absolute;
-    right: -130px;
-    top: -300px;
-    height: 200px;
-    color: #fff;
+}
+
+.hamburger {
+  .bar {
+    display: block;
+    width: 1.5625rem /* 25/16 */;
+    height: .1875rem /* 3/16 */;
+    margin: .3125rem /* 5/16 */ auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #333;
   }
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active .bar:nth-child(1) {
+  -webkit-transform: translateY(.5rem /* 8/16 */) rotate(45deg);
+  transform: translateY(.5rem /* 8/16 */) rotate(45deg);
+}
+.hamburger.active .bar:nth-child(3) {
+  -webkit-transform: translateY(-.5rem /* 8/16 */) rotate(-45deg);
+  transform: translateY(-.5rem /* 8/16 */) rotate(-45deg);
+}
+.mask.active {
+  left: 0;
 }
 </style>
