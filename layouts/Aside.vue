@@ -64,7 +64,7 @@ export default {
   // background-size: contain;
   background-image: linear-gradient(to bottom right, #00b4db, #0083b0);
   position: fixed;
-  z-index: 111;
+  z-index: 99999;
   bottom: 15%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
