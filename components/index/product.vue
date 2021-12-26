@@ -24,7 +24,7 @@
           <slot name="moreBtn"></slot>
         </ul>
       </div>
-      <div class="wrop-right">
+      <div class="wrop-right" :class="$route.path === '/' ? 'active-i' : 'active-p' " >
         <ul>
           <li
             @click="
@@ -43,7 +43,7 @@
           </li>
         </ul>
         <div class="page">
-          <el-pagination background layout="prev, pager, next" :total="total">
+          <el-pagination background layout="prev, pager, next" :total="total" @current-change='changePage'>
           </el-pagination>
         </div>
       </div>
@@ -51,7 +51,7 @@
   </div>
 
   <div class="mobile" v-else>
-    <van-dropdown-menu>
+    <van-dropdown-menu v-if="$route.path === '/' ? false : true">
       <van-dropdown-item
         @change="change(value)"
         v-model="value"
@@ -148,24 +148,30 @@ export default {
     this.cateListM = this.cate.map((item) => {
       return { text: item.cateName, value: item.type };
     });
-    this.cateListM.unshift({ text: "全部商品", value: null });
+    // this.cateListM.unshift({ text: "全部商品", value: null });
   },
 
   methods: {
     async toggleCate(index, type) {
       this.queryInfo.type = type;
+      this.queryInfo.page = 1
       this.active = index;
-      let res = await axios.get(Config.BASE_URL + `/goods`, {
-        params: this.queryInfo,
-      });
-      this.goods = res.data.data;
-      this.total = res.data.total;
+      this.getGoods()
+      
       // console.log(this.goods);
     },
 
     changePage(page) {
       this.queryInfo.page = page;
-      this.toggleCate();
+      this.getGoods();
+    },
+
+    async getGoods(){
+      let res = await axios.get(Config.BASE_URL + `/goods`, {
+        params: this.queryInfo,
+      });
+      this.goods = res.data.data;
+      this.total = res.data.total;
     },
 
     // getDet(id) {
@@ -210,6 +216,14 @@ export default {
 </script>
 
 <style lang='less' scoped>
+.active-p{
+  min-height: 1182px;
+}
+
+.active-i{
+  min-height: 620px;
+}
+
 .active {
   background-color: #eeeeef;
 }
@@ -288,7 +302,6 @@ export default {
   }
 
   .wrop-right {
-    min-height: 620px;
     margin-left: 32px;
     background: #fafafa;
     ul {

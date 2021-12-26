@@ -60,7 +60,7 @@
       >
         <ul class="nav-menu">
           <li class="nav-item" v-for="(item, index) in page" :key="index">
-            <a :href="item.path" class="nav-link">{{ item.name }}</a>
+            <a :href="item.path" :class="index === active ? 'm-active' : ''" class="nav-link">{{ item.name }}</a>
           </li>
         </ul>
       </div>
@@ -261,5 +261,9 @@ export default {
 }
 .mask.active {
   left: 0;
+}
+
+.m-active {
+  color: blue !important;
 }
 </style>

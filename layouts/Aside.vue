@@ -1,142 +1,133 @@
 <template>
-  
- 
-    <div class="wrop" v-if="!isMobile">
-    <ul>
-      <li
-        v-for="(item, index) in list"
-        :key="index"
-        @mouseenter="mouse(index)"
-        @mouseleave="
-          active = -1;
-          item.isShow = true;
-        "
-        :class="index === active ? 'active' : ''"
-        @click="toTop(index)"
-      >
-        <div class="img">
-          <img :src="item.icon_active" alt="" v-show="item.isShow" />
-          <img :src="item.icon" alt="" v-show="!item.isShow" />
+  <div class="wrop">
+    <div class="qr-wrop">
+      <div id="qr" ref="qrRef">
+        <img :src="$store.state.contactInfo.qrCode" alt="" />
+      </div>
+      <div class="logo">
+        <img src="../assets/img/logo_mobile.png" alt="" />
+      </div>
+    </div>
+
+    <div class="qrTitle">
+      扫描二维码添加微信
+      <div class="qq">
+        <div class="qq-wrop" v-for="(item, index) in phone" :key="index">
+          <p>联系电话：</p>
+          <i>{{ item }}</i>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
-
-  <div class="mobile" v-else></div>
- 
 </template>
-    
-<script>
-import icon_phone_active from "../assets/img/icon_phone_active.png";
-import icon_phone from "../assets/img/icon_phone.png";
-import icon_email_active from "../assets/img/icon_email_active.png";
-import icon_email from "../assets/img/icon_email.png";
-import icon_top_active from "../assets/img/icon_top_active.png";
-import icon_top from "../assets/img/icon_top.png";
-import icon_vx_active from "../assets/img/icon_vx_active.png";
-import icon_vx from "../assets/img/icon_vx.png";
-import icon_edit_active from "../assets/img/icon_edit_active.png";
-import icon_edit from "../assets/img/icon_edit.png";
 
+<script>
 export default {
+  name: "floatSlide",
+  components: {},
   data() {
     return {
-      isMobile: this.$store.state.isMobile,
-      list: [
-        // { icon_active: icon_phone_active, icon: icon_phone, isShow: true },
-        // { icon_active: icon_email_active, icon: icon_email, isShow: true },
-        { icon_active: icon_vx_active, icon: icon_vx, isShow: true },
-        // { icon_active: icon_edit_active, icon: icon_edit, isShow: true },
-        { icon_active: icon_top_active, icon: icon_top, isShow: true },
-      ],
-      active: -1,
+      // qrcodeObj: {}, // 二维码配置
+      phone: [],
     };
   },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll, true);
+  created() {
+    this.phone = this.$store.state.contactInfo.phone
+      .replace(" ", "")
+      .split("/");
   },
+  // beforeMount() {
+  //   this.$nextTick(() => {
+  //     this.qrcodeObj = new QRCode(this.$refs.qrRef, {
+  //       text: this.$store.state.contactInfo.QrCode,
+  //       width: 110,
+  //       height: 110,
+  //       colorDark: "#333",
+  //       colorLight: "#fff",
+  //       correctLevel: QRCode.CorrectLevel.H,
+  //     });
+  //   });
+  //   // this.updateQr();
+  // },
   methods: {
-    mouse(i) {
-      this.active = i;
-      this.list.forEach((item, index) => {
-        if (index === i) {
-          item.isShow = false;
-        } else {
-          item.isShow = true;
-        }
-      });
-    },
-    handleScroll() {
-      let scrolltop =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      scrolltop > 30 ? (this.gotop = true) : (this.gotop = false);
-    },
-    toTop(i) {
-      if (i === this.list.length - 1) {
-        let top = document.documentElement.scrollTop || document.body.scrollTop;
-        // 实现滚动效果
-        const timeTop = setInterval(() => {
-          document.body.scrollTop =
-            document.documentElement.scrollTop =
-            top -=
-              50;
-          if (top <= 0) {
-            clearInterval(timeTop);
-          }
-        }, 10);
-      }
-    },
+    // updateQr() {
+    //   this.qrcodeObj.makeCode(this.$store.state.contactInfo.QrCode);
+    // },
   },
+  computed: {},
 };
 </script>
-    
-<style lang='less' scoped>
-.active {
-  background-color: #d63025;
-}
-.wrop {
-  ul {
-    background: #ffffff;
-    box-shadow: 0px 0px 8px 0px #dddddd;
-    position: fixed;
-    bottom: 20%;
-    right: 40px;
-    z-index: 99999;
-    li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 64px;
-      height: 64px;
-      border-bottom: 1px solid #a7a7a7;
-      cursor: pointer;
-      position: relative;
-      &:last-child {
-        border-bottom: none;
-      }
-      &:nth-child(1).active::after {
-        display: block;
-        content: "微信号：15995073668";
-        user-select: text;
-        text-align: center;
-        line-height: 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: -160px;
-        width: 160px;
-        height: 160px;
-        background: #ffffff;
-        box-shadow: 1px 1px 8px 0px #dddddd;
-      }
 
-      .img {
-        width: 25px;
-        height: 25px;
-      }
+<style lang='less' scoped>
+.wrop {
+  // background: url(../assets/images/float-code-bg.png) 0 0 no-repeat;
+  // background-size: contain;
+  background-image: linear-gradient(to bottom right, #00b4db, #0083b0);
+  position: fixed;
+  z-index: 111;
+  bottom: 15%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 150px;
+  min-height: 300px;
+  right: 10px;
+  #qr {
+    width: 110px;
+    height: 110px;
+  }
+  .qr-wrop {
+    background-color: #fff;
+    padding: 15px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 333;
+    top: 0.3125rem /* 5/16 */;
+    // height: 100%;
+    .logo {
+      background-color: #fff;
+      width: 25%;
+      // height: 50%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .qrTitle {
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    // max-width: 160px;
+    text-align: center;
+    line-height: 1.5;
+    border-bottom: 1px dashed #fff;
+    box-sizing: border-box;
+    top: 140px;
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+  }
+  .qq {
+    color: #fff;
+    text-align: center;
+    line-height: 1.5;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 35px;
+    div {
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+    p {
+      margin: 0;
+    }
+    p,
+    i {
+      color: #ffff00;
+      font-weight: bold !important;
     }
   }
 }

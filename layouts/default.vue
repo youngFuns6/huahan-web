@@ -4,7 +4,7 @@
 
     <Nuxt />
 
-    <Aside></Aside>
+    <Aside v-if="isMobile ? false : true"></Aside>
     <Footer></Footer>
   </div>
 </template>

@@ -15,8 +15,19 @@
         >
       </div>
       <ul>
-        <li v-for="(item, index) in condition" :key="item.id" data-aos="fade-up"
-     data-aos-anchor-placement="center-bottom" :data-aos-duration="300 * index">
+        <li
+         @click="
+            $router.push({
+              path: '/detail',
+              query: { type: 'condition', id: item.id },
+            })
+          "
+          v-for="(item, index) in condition"
+          :key="item.id"
+          data-aos="fade-up"
+          data-aos-anchor-placement="center-bottom"
+          :data-aos-duration="300 * index"
+        >
           <div class="left">
             <img :src="item.banner" alt="" />
           </div>
@@ -39,13 +50,56 @@
     </div>
   </div>
 
-  <div class="mobile" v-else></div>
+  <div class="mobile" v-else>
+    <div class="content">
+      <div class="toggle">
+        <span
+          @click="toToggle(index, item.type)"
+          :class="active === index ? 'active' : ''"
+          v-for="(item, index) in toggle"
+          :key="item.type"
+          >{{ item.name }}</span
+        >
+      </div>
+      <van-list
+        class="n-ul"
+        v-model="loading"
+        :error.sync="error"
+        :finished="finished"
+        finished-text='没有更多了'
+        error-text="请求失败，点击重新加载"
+        @load="onLoad"
+        :offset="0"
+      >
+        <van-cell
+          class="n-li"
+          v-for="item in condition"
+          :key="item.id"
+          data-aos="fade-up"
+           @click="
+            $router.push({
+              path: '/detail',
+              query: { type: 'condition', id: item.id },
+            })
+          "
+        >
+          <div class="left">
+            <img :src="item.banner" alt="" />
+          </div>
+          <div class="right">
+            <h3>{{ item.title }}</h3>
+            <span>{{ item.created }}</span>
+          </div>
+        </van-cell>
+      </van-list>
+    </div>
+  </div>
 </template>
     
 <script>
 import axios from "axios";
 import Config from "../assets/js/settings";
-import toText from '../assets/js/toText'
+import toText from "../assets/js/toText";
 
 export default {
   data() {
@@ -59,16 +113,20 @@ export default {
       queryInfo: {
         type: 1,
         page: 1,
-        pageSize: 5,
+        pageSize: this.$store.state.isMobile ? 12 : 5,
       },
       total: null,
       condition: [],
+      error: false,
+      loading: false,
+      error: false,
+      finished: true
     };
   },
-  filters:  {
-    filterContent(val){
-      return toText(val)
-    }
+  filters: {
+    filterContent(val) {
+      return toText(val);
+    },
   },
 
   created() {
@@ -92,6 +150,29 @@ export default {
       this.queryInfo.page = page;
       this.getCondition();
     },
+
+    onLoad() {
+     
+        
+        // console.log(this.queryInfo.page);
+        // console.log(this.goods.length, this.total);
+        if (this.condition.length < this.total) {
+          this.queryInfo.page += 1;
+          axios
+            .get(Config.BASE_URL + `/condition`, {
+              params: this.queryInfo,
+            })
+            .then((res) => {
+              // console.log(res.data.data);
+              this.condition.push(...res.data.data);
+              this.total = res.data.total;
+              this.loading = false;
+            })
+            .catch(() => (this.error = true));
+        } else {
+          this.finished = true;
+      }
+    },
   },
 };
 </script>
@@ -99,6 +180,7 @@ export default {
 <style lang='less' scoped>
 .active {
   border-bottom: 4px solid #133b80;
+  color: #133b80;
 }
 .wrop {
   margin: 64px 20vw;
@@ -167,5 +249,45 @@ ul {
 .page {
   text-align: center;
   margin-top: 20px;
+}
+
+// 手机端
+.mobile {
+  padding: 1.25rem /* 20/16 */ 1rem /* 16/16 */;
+  padding-bottom: 3.125rem /* 50/16 */;
+  .content {
+    .toggle {
+      span {
+        font-size: 0.875rem /* 14/16 */;
+        margin-right: 2rem /* 32/16 */;
+        padding: 0.3125rem /* 5/16 */ 0 /* 5/16 */;
+      }
+    }
+    .n-ul {
+      margin-top: .875rem /* 14/16 */;
+      .n-li {
+        padding: 0;
+      }
+      /deep/ .n-li .van-cell__value{
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        flex-wrap: nowrap;
+        .left {
+          width: 6.203125rem /* 99.25/16 */;
+          height: 4.0625rem /* 65/16 */;
+        }
+        .right{
+          margin-left: 1rem /* 30/16 */;
+          h3 {
+            .line-text;
+            font-size: 1rem /* 16/16 */;
+            font-weight: normal;
+            width: 16.25rem /* 260/16 */;
+          }
+        }
+      } 
+    }
+  }
 }
 </style>
