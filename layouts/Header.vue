@@ -31,7 +31,7 @@
           }}</i>
         </li>
       </ul>
-      <div class="banner">
+      <div class="banner" v-if="$route.path === '/detail' ? false : true ">
         <img src="../assets/img/banner.png" alt="" />
       </div>
     

@@ -23,7 +23,7 @@
             <span>155555</span>
           </p>
           <div class="qr">
-            <img src="../assets/img/qr_wx.png" alt="" />
+            <img :src="$store.state.contactInfo.qrCode" alt="" />
           </div>
         </div>
       </div>
@@ -104,6 +104,8 @@ export default {
       handler(val) {
         if (val.path === "/detail" || val.path === "/contact") {
           this.isShow = false;
+        }else {
+          this.isShow = true
         }
       },
     },

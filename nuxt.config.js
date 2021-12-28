@@ -1,3 +1,8 @@
+const productPlugins = []
+if (process.env.NODE_ENV === 'production') {
+  productPlugins.push('transform-remove-console')
+}
+
 export default {
   telemetry:false,
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -138,7 +143,8 @@ export default {
             'libraryName': 'element-ui',
             'styleLibraryName': 'theme-chalk'
           }
-        ]
+        ],
+        ...productPlugins
       ]
     }
   }
