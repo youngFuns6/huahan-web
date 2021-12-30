@@ -16,7 +16,7 @@
       </div>
       <ul>
         <li
-         @click="
+          @click="
             $router.push({
               path: '/detail',
               query: { type: 'condition', id: item.id },
@@ -66,17 +66,17 @@
         v-model="loading"
         :error.sync="error"
         :finished="finished"
-        finished-text='没有更多了'
+        finished-text="没有更多了"
         error-text="请求失败，点击重新加载"
         @load="onLoad"
         :offset="0"
       >
         <van-cell
           class="n-li"
-          v-for="item in condition"
+          v-for="item in mobileCondition"
           :key="item.id"
           data-aos="fade-up"
-           @click="
+          @click="
             $router.push({
               path: '/detail',
               query: { type: 'condition', id: item.id },
@@ -120,7 +120,8 @@ export default {
       error: false,
       loading: false,
       error: false,
-      finished: true
+      finished: false,
+      mobileCondition: [],
     };
   },
   filters: {
@@ -130,14 +131,24 @@ export default {
   },
 
   created() {
-    this.getCondition();
+    if(!this.isMobile){
+      this.getCondition();
+    }
   },
 
   methods: {
     toToggle(i, type) {
       this.active = i;
       this.queryInfo.type = type;
-      this.getCondition();
+      this.queryInfo.page = 1
+      if(!this.isMobile){
+        this.getCondition();
+      }else {
+        this.mobileCondition = []
+        this.loading = true;
+        this.finished = false
+        this.onLoad()
+      }
     },
     async getCondition() {
       const res = await axios.get(`${Config.BASE_URL}/condition`, {
@@ -152,26 +163,47 @@ export default {
     },
 
     onLoad() {
-     
-        
-        // console.log(this.queryInfo.page);
-        // console.log(this.goods.length, this.total);
-        if (this.condition.length < this.total) {
-          this.queryInfo.page += 1;
-          axios
-            .get(Config.BASE_URL + `/condition`, {
-              params: this.queryInfo,
-            })
-            .then((res) => {
-              // console.log(res.data.data);
-              this.condition.push(...res.data.data);
-              this.total = res.data.total;
-              this.loading = false;
-            })
-            .catch(() => (this.error = true));
-        } else {
-          this.finished = true;
-      }
+      axios
+        .get(`${Config.BASE_URL}/condition`, {
+          params: this.queryInfo,
+        })
+        .then((res) => {
+          this.mobileCondition.push(...res.data.data);
+           this.mobileCondition.forEach((item) => {
+            if (item.created !== undefined) {
+              item.created =
+                item.created
+                  .slice(0, 10)
+                  .replace("-", "年")
+                  .replace("-", "月") + "日";
+            }
+          });
+          this.queryInfo.page++;
+          this.loading = false;
+          if (this.mobileCondition.length >= res.data.total) {
+            this.finished = true;
+          }
+        }).catch(() => (this.error = true));
+      
+
+      // console.log(this.queryInfo.page);
+      // console.log(this.goods.length, this.total);
+      // if (this.condition.length < this.total) {
+      //   this.queryInfo.page += 1;
+      //   axios
+      //     .get(Config.BASE_URL + `/condition`, {
+      //       params: this.queryInfo,
+      //     })
+      //     .then((res) => {
+      //       // console.log(res.data.data);
+            
+      //       this.total = res.data.total;
+      //       this.loading = false;
+      //     })
+      //     .catch(() => (this.error = true));
+      // } else {
+      //   this.finished = true;
+      // }
     },
   },
 };
@@ -264,11 +296,11 @@ ul {
       }
     }
     .n-ul {
-      margin-top: .875rem /* 14/16 */;
+      margin-top: 0.875rem /* 14/16 */;
       .n-li {
         padding: 0;
       }
-      /deep/ .n-li .van-cell__value{
+      /deep/ .n-li .van-cell__value {
         display: flex;
         justify-content: left;
         align-items: center;
@@ -277,7 +309,7 @@ ul {
           width: 6.203125rem /* 99.25/16 */;
           height: 4.0625rem /* 65/16 */;
         }
-        .right{
+        .right {
           margin-left: 1rem /* 30/16 */;
           h3 {
             .line-text;
@@ -285,8 +317,11 @@ ul {
             font-weight: normal;
             width: 16.25rem /* 260/16 */;
           }
+          span {
+            color: #a7a7a7;
+          }
         }
-      } 
+      }
     }
   }
 }

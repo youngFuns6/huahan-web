@@ -24,7 +24,10 @@
           <slot name="moreBtn"></slot>
         </ul>
       </div>
-      <div class="wrop-right" :class="$route.path === '/' ? 'active-i' : 'active-p' " >
+      <div
+        class="wrop-right"
+        :class="$route.path === '/' ? 'active-i' : 'active-p'"
+      >
         <ul>
           <li
             @click="
@@ -43,7 +46,12 @@
           </li>
         </ul>
         <div class="page">
-          <el-pagination background layout="prev, pager, next" :total="total" @current-change='changePage'>
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="total"
+            @current-change="changePage"
+          >
           </el-pagination>
         </div>
       </div>
@@ -81,7 +89,7 @@
             query: { type: 'goods', id: item.id },
           })
         "
-        v-for="(item, index) in goods"
+        v-for="(item, index) in mobileGoods"
         :key="index"
       >
         <div class="bgc">
@@ -137,14 +145,14 @@ export default {
       loading: this.$route.path === "/prodShow" ? false : true,
       finished: this.$route.path === "/prodShow" ? false : true,
       error: false,
+      mobileGoods: [],
     };
   },
 
   created() {
-    // console.log('m',this.cateList)
-    // let arr = this.cate;
-    // arr.splice(0, 1)
-    console.log(this.cate)
+    if(this.$route.path === '/'){
+      this.mobileGoods = this.goodsList
+    }
     this.cateListM = this.cate.map((item) => {
       return { text: item.cateName, value: item.type };
     });
@@ -154,10 +162,10 @@ export default {
   methods: {
     async toggleCate(index, type) {
       this.queryInfo.type = type;
-      this.queryInfo.page = 1
+      this.queryInfo.page = 1;
       this.active = index;
-      this.getGoods()
-      
+      this.getGoods();
+
       // console.log(this.goods);
     },
 
@@ -166,7 +174,7 @@ export default {
       this.getGoods();
     },
 
-    async getGoods(){
+    async getGoods() {
       let res = await axios.get(Config.BASE_URL + `/goods`, {
         params: this.queryInfo,
       });
@@ -179,35 +187,33 @@ export default {
     // },
 
     async change(value) {
+      
       this.queryInfo.type = value;
-      let res = await axios.get(Config.BASE_URL + `/goods`, {
-        params: this.queryInfo,
-      });
-      this.goods = res.data.data;
-      this.total = res.data.total;
+      this.queryInfo.page = 1;
+       this.loading = true;
+        this.finished = false
+      this.mobileGoods = [];
+      this.onLoad();
     },
 
     // 上滑加载事件
     onLoad() {
+      console.log('999')
       if (this.$route.path === "/prodShow") {
-        this.queryInfo.page += 1;
-        console.log(this.queryInfo.page);
-        console.log(this.goods.length, this.total);
-        if (this.goods.length < this.total) {
-          axios
-            .get(Config.BASE_URL + `/goods`, {
-              params: this.queryInfo,
-            })
-            .then((res) => {
-              console.log(res.data.data);
-              this.goods.push(...res.data.data);
-              this.total = res.data.total;
-              this.loading = false;
-            })
-            .catch(() => (this.error = true));
-        } else {
-          this.finished = true;
-        }
+        axios
+          .get(`${Config.BASE_URL}/goods`, {
+            params: this.queryInfo,
+          })
+          .then((res) => {
+            this.total = res.data.total
+            this.mobileGoods.push(...res.data.data);
+            this.queryInfo.page++;
+            this.loading = false;
+            if (this.mobileGoods.length >= res.data.total) {
+              this.finished = true;
+            }
+          })
+          .catch(() => (this.error = true));
       }
     },
   },
@@ -216,11 +222,11 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.active-p{
+.active-p {
   min-height: 1182px;
 }
 
-.active-i{
+.active-i {
   min-height: 620px;
 }
 
@@ -390,10 +396,11 @@ export default {
       }
       .title {
         .line-text;
-        width: 100%;
+        width: 95%;
         text-align: center;
+        margin: 0 auto;
         // margin-left: 26px;
-        margin: 0 0.625rem /* 10/16 */;
+        // margin: 0 0.625rem /* 10/16 */;
         line-height: 1.2;
         padding-bottom: 1.5rem /* 24/16 */;
       }
