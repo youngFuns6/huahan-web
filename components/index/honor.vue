@@ -11,14 +11,22 @@
         <p>荣誉资质</p>
       </h3>
     </div>
-    <ul>
+    <!-- <ul>
       <li data-aos="fade-left" data-aos-duration="2000">
         <img src="../../assets/img/honor-1.png" alt="" />
       </li>
       <li data-aos="fade-left" data-aos-duration="3000">
         <img src="../../assets/img/honor-2.png" alt="" />
       </li>
-    </ul>
+    </ul> -->
+
+    <el-carousel :autoplay='false' type="card" height="12rem">
+      <el-carousel-item v-for="item in 6" :key="item">
+      
+          <img src="../../assets/img/honor-1.png" alt="" />
+       
+      </el-carousel-item>
+    </el-carousel>
   </div>
   <div class="mobile" v-else>
     <h3>
@@ -33,24 +41,18 @@
         <img src="../../assets/img/honor-2.png" alt="" />
       </li>
     </ul>
-     <div class="footer">
-        Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有
-        <div>
-          电话：{{ $store.state.contactInfo.phone }}
-        </div>
-        <div>
-          传真：{{
-          $store.state.contactInfo.fax
-        }}
-        </div>
-        
-       <div>Email：{{ $store.state.contactInfo.email }}</div>
-       <div>
-          <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"
+    <div class="footer">
+      Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有
+      <div>电话：{{ $store.state.contactInfo.phone }}</div>
+      <div>传真：{{ $store.state.contactInfo.fax }}</div>
+
+      <div>Email：{{ $store.state.contactInfo.email }}</div>
+      <div>
+        <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"
           >苏ICP备13011262号-1</a
         >
-       </div>
       </div>
+    </div>
   </div>
 </template>
     
@@ -123,11 +125,11 @@ export default {
   box-sizing: border-box;
   h3 {
     margin-bottom: 2rem /* 5/16 */;
-  box-sizing: border-box;
+    box-sizing: border-box;
     text-align: center;
     p {
       font-size: 1.125rem /* 18/16 */;
-      margin-bottom: .75rem /* 12/16 */;
+      margin-bottom: 0.75rem /* 12/16 */;
     }
     p:first-child {
       font-weight: 600;
@@ -138,39 +140,58 @@ export default {
       color: #333;
     }
   }
-  ul {
-    display: flex;
-    justify-content: center;
-    margin: 0 .375rem /* 6/16 */;
-    li {
-      width: 8.3125rem /* 133/16 */;
-      height: 7.0625rem /* 113/16 */;
-      
-    }
-  }
+  // ul {
+  //   display: flex;
+  //   justify-content: center;
+  //   margin: 0 0.375rem /* 6/16 */;
+  //   li {
+  //     width: 8.3125rem /* 133/16 */;
+  //     height: 7.0625rem /* 113/16 */;
+  //   }
+  // }
   .footer {
     box-sizing: border-box;
     margin-top: 2.5rem /* 40/16 */;
     margin-bottom: 3.0625rem /* 49/16 */;
-    padding: 1.25rem /* 20/16 */2rem /* 35/16 */;
+    padding: 1.25rem /* 20/16 */ 2rem /* 35/16 */;
     box-sizing: content-box;
-     background: #484646;
-  color: #fff;
-  font-size: .875rem /* 14/16 */;
-  line-height: 2;
-  // text-align: center;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  div {
-    text-align: center;
-  }
-  a {
+    background: #484646;
     color: #fff;
-    &:hover {
-      text-decoration: underline;
+    font-size: 0.875rem /* 14/16 */;
+    line-height: 2;
+    // text-align: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    div {
+      text-align: center;
+    }
+    a {
+      color: #fff;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
-  }
 }
+.el-carousel {
+  width: 40%;
+  position: absolute;
+  left: 45vw;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/deep/ .el-carousel .el-carousel__item {
+    width: 18.8rem /* 133/16 */;
+    // height: 12rem /* 113/16 */;
+  }
+  /deep/ .el-carousel {
+    ul {
+      display: none;
+    }
+    .el-carousel__mask {
+      display: none;
+    }
+  }
 </style>

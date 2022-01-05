@@ -7,7 +7,9 @@ import {
   // Footer,
   // Col,
   // Row,
-  Pagination
+  Pagination,
+  Carousel,
+  CarouselItem
 } from 'element-ui'
 
 // Vue.use(Container)
@@ -17,3 +19,5 @@ import {
 // Vue.use(Col)
 // Vue.use(Row)
 Vue.use(Pagination)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
