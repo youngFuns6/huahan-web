@@ -133,7 +133,8 @@ export default {
   margin: 2.5rem /* 40/16 */ 0;
   box-sizing: border-box;
   .wrop-right {
-    width: 50.1875rem /* 225/16 */;
+    // width: 50% /* 225/16 */;
+    flex: 1;
     padding: 0.625rem /* 10/16 */;
     background-color: #333;
     box-sizing: border-box;
@@ -147,7 +148,8 @@ export default {
       p {
         font-size: 1.125rem /* 18/16 */;
         color: #fff;
-        margin-bottom: 0.375rem /* 6/16 */;
+        margin: .45rem /* 1/16 */ 0;
+        // margin-bottom: 0.375rem /* 6/16 */;
       }
     }
     .desc {
@@ -175,6 +177,7 @@ export default {
     }
   }
   .wrop-left {
+    flex: 1;
     img {
       object-fit: cover;
     }

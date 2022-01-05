@@ -2,8 +2,8 @@
   <div>
     <div v-if="!isMobile">
       <div class="bgc" v-if="isShow">
-        <img src="../assets/img/map.png" alt="" />
-        <div class="box">
+        <img src="../assets/img/map_footer.png" alt="" />
+        <!-- <div class="box">
           <p>
             <i>
               <img src="../assets/img/电话.png" alt="" />
@@ -25,7 +25,7 @@
           <div class="qr">
             <img :src="$store.state.contactInfo.qrCode" alt="" />
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="footer">
         Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有
@@ -132,42 +132,44 @@ export default {
 <style lang='less' scoped>
 .bgc {
   position: relative;
-  // height: 516px;
+  height: 280px;
   // object-fit: cover !important;
   img {
     vertical-align: middle;
+    // object-fit: none;
+    // object-fit: cover;
   }
 }
-.box {
-  position: absolute;
-  top: 0;
-  right: 250px;
-  width: 306px;
-  // height: 434px;
-  padding-bottom: 20px;
-  background: #133b80;
-  p {
-    margin: 30px 0;
-    margin-left: 36px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    i {
-      display: block;
-      width: 28px;
-      height: 28px;
-      margin-right: 12px;
-    }
-    span {
-      font-size: 18px;
-    }
-  }
-  .qr {
-    margin: 0 auto;
-    width: 179px;
-    height: 179px;
-  }
-}
+// .box {
+//   position: absolute;
+//   top: 0;
+//   right: 250px;
+//   width: 306px;
+//   // height: 434px;
+//   padding-bottom: 20px;
+//   background: #133b80;
+//   p {
+//     margin: 30px 0;
+//     margin-left: 36px;
+//     color: #fff;
+//     display: flex;
+//     align-items: center;
+//     i {
+//       display: block;
+//       width: 28px;
+//       height: 28px;
+//       margin-right: 12px;
+//     }
+//     span {
+//       font-size: 18px;
+//     }
+//   }
+//   .qr {
+//     margin: 0 auto;
+//     width: 179px;
+//     height: 179px;
+//   }
+// }
 
 .footer {
   height: 150px;

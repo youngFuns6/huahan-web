@@ -26,10 +26,7 @@ export default {
     //   type: 'text/javascript',
     //   charset: 'utf-8'
     // },
-    {src: '//unpkg.com/@triggerjs/trigger',
-    type: 'text/javascript',
-        charset: 'utf-8'
-      },
+   
      
   ]
   },
@@ -37,13 +34,13 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     // 'assets/css/reset.css',
-    'element-ui/lib/theme-chalk/index.css',
-    'element-ui/lib/theme-chalk/display.css',
+    // 'element-ui/lib/theme-chalk/index.css',
+    // 'element-ui/lib/theme-chalk/display.css',
     'assets/css/style.css',
     'aos/dist/aos.css',
     // 'vant/lib/pagination/style',
-    'vant/lib/icon/style',
-    'vant/lib/dialog/style',
+    // 'vant/lib/icon/style',
+    // 'vant/lib/dialog/style',
     'vant/lib/dropdown-item/style',
     'vant/lib/dropdown-menu/style',
     'vant/lib/dialog/style',
@@ -56,11 +53,11 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     // {src: '~plugins/lib-flexible.js', ssr: false},
-    {src: '~/plugins/vant.js', ssr: true},
+    {src: '~/plugins/vant.js', ssr: false},
     {src: '~/plugins/aos.js', ssr: false},
     {src: '~/plugins/router.js', ssr: true},
     {src: '~/plugins/axios.js', ssr: true},
-    {src: '~/plugins/element-ui', ssr: true},
+    {src: '~/plugins/element-ui', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

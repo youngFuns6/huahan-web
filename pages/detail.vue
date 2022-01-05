@@ -35,8 +35,9 @@ export default {
 // }
 .content {
     padding: 20px;
-    margin-bottom: 50px;
+    margin:0 auto 50px auto;
     line-height: 1.5;
+    max-width: 1450px;
 }
 
 .mobile {

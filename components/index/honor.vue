@@ -35,9 +35,15 @@
     </ul>
      <div class="footer">
         Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有
-        &nbsp;&nbsp; 电话：{{ $store.state.contactInfo.phone }} &nbsp;&nbsp; 传真：{{
+        <div>
+          电话：{{ $store.state.contactInfo.phone }}
+        </div>
+        <div>
+          传真：{{
           $store.state.contactInfo.fax
         }}
+        </div>
+        
        <div>Email：{{ $store.state.contactInfo.email }}</div>
        <div>
           <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"
@@ -121,7 +127,7 @@ export default {
     text-align: center;
     p {
       font-size: 1.125rem /* 18/16 */;
-      margin-bottom: 12px;
+      margin-bottom: .75rem /* 12/16 */;
     }
     p:first-child {
       font-weight: 600;
@@ -145,6 +151,7 @@ export default {
   .footer {
     box-sizing: border-box;
     margin-top: 2.5rem /* 40/16 */;
+    margin-bottom: 3.0625rem /* 49/16 */;
     padding: 1.25rem /* 20/16 */2rem /* 35/16 */;
     box-sizing: content-box;
      background: #484646;

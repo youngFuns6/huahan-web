@@ -202,6 +202,9 @@ export default {
         height: 296px;
         box-shadow: 2px 2px 10px #333;
         margin-left: 88px;
+        img {
+          object-fit: cover;
+        }
       }
     }
   }

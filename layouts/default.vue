@@ -26,7 +26,7 @@ export default {
       title: this.$store.state.contactInfo.webTitle,
       description: this.$store.state.contactInfo.webDesc,
       keywords: this.$store.state.contactInfo.webKeyWords,
-      isMobile: false
+      isMobile: this.$store.state.isMobile
     };
   },
 
@@ -49,9 +49,9 @@ export default {
   },
 
 
-    mounted() {
-    this.isMobile = useMobile();
-  },
+  //   beforeMount() {
+  //   this.isMobile = useMobile();
+  // },
   
 };
 </script>

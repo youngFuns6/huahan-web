@@ -206,23 +206,26 @@ export default {
 
 .mask {
   position: absolute;
-  left: -120%;
+  right: 0;
+  // transform: translateX(300px);
+  opacity: 0;
   top: 3.4375rem /* 55/16 */;
   z-index: 9999;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  width: 50%;
+  display: none;
+  // height: 100%;
+  // background-color: rgba(0, 0, 0, 0.3);
   transition: 0.3s;
   // overflow: hidden;
   ul {
-    width: 100vw;
-    box-shadow: 0 .625rem /* 10/16 */ 1.6875rem /* 27/16 */ rgba(0, 0, 0, 0.05);
+    width: 100%;
+    // box-shadow: 0 .625rem /* 10/16 */ 1.6875rem /* 27/16 */ rgba(0, 0, 0, 0.05);
     border-radius: .625rem /* 10/16 */;
     text-align: center;
     flex-direction: column;
     background-color: #fff;
     box-shadow: 0px 10px 20px 0px rgba(167, 167, 167, 0.5);
-    overflow: hidden;
+    // overflow: hidden;
   }
   .nav-item {
     width: 100%;
@@ -231,7 +234,7 @@ export default {
   }
   .nav-link {
     display: block;
-    padding: 2.5rem 0;
+    padding: 1.5rem 0;
     color: #333;
   }
 }
@@ -260,7 +263,9 @@ export default {
   transform: translateY(-.5rem /* 8/16 */) rotate(-45deg);
 }
 .mask.active {
-  left: 0;
+  // right: 0;
+  opacity: 1;
+  display: block;
 }
 
 .m-active {

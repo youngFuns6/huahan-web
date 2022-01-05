@@ -1,3 +1,5 @@
+// import createPersistedState from "vuex-persistedstate";
+
 export const state = () => ({
   contactInfo: '',
   isMobile: false
@@ -10,9 +12,15 @@ export const mutations = {
   }
 }
 
-// export const actions = {
-//   GET_CONTACT_INFO(s){
-//     console.log(s)
-//     // commit('M_GET_CONTACT_INFO')
-//   }
-// }
+
+// export const plugins = [
+//   createPersistedState({
+//     // 存储方式：localStorage、sessionStorage、cookies
+//     storage: window.localStorage,
+//     // 存储的 key 的key值
+//     key: "store",
+//     render(state) {
+//       return { ...state };
+//     }
+//   })
+// ]
