@@ -53,11 +53,11 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     // {src: '~plugins/lib-flexible.js', ssr: false},
-    {src: '~/plugins/vant.js', ssr: false},
+    {src: '~/plugins/vant.js', ssr: true},
     {src: '~/plugins/aos.js', ssr: false},
     {src: '~/plugins/router.js', ssr: true},
     {src: '~/plugins/axios.js', ssr: true},
-    {src: '~/plugins/element-ui', ssr: false},
+    {src: '~/plugins/element-ui', ssr: true},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

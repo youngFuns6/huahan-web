@@ -3,7 +3,8 @@
     <div class="img" v-if="isMobile">
       <img src="../assets/img/mobile_banner.png" alt="">
     </div>
-    <Product :cateList="cateList" :goodsList="goodsList" :totalO="total">
+  
+      <Product :cateList="cateList" :goodsList="goodsList" :totalO="total">
       <template #moreBtn>
         <div class="more">
           <div @click="$router.push('/prodShow')">更多产品</div>
@@ -13,6 +14,7 @@
          <a href="/prodShow" class="btn">更多产品</a>
       </template>
     </Product>
+ 
     <Indroduce></Indroduce>
     <Condition :condition="condition"></Condition>
     <Honor></Honor>

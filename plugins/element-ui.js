@@ -9,7 +9,8 @@ import {
   // Row,
   Pagination,
   Carousel,
-  CarouselItem
+  CarouselItem,
+  Image
 } from 'element-ui'
 
 // Vue.use(Container)
@@ -21,3 +22,4 @@ import {
 Vue.use(Pagination)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
+Vue.use(Image)

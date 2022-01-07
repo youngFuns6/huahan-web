@@ -7,9 +7,9 @@
     <div class="wrop-content">
       <div class="wrop-left">
         <h3>
-          <i class="icon">
+          <span class="icon">
             <img src="../../assets/img/cate_icon.png" alt="" />
-          </i>
+          </span>
           <span>产品分类</span>
         </h3>
         <ul>
@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div class="mobile" v-else>
+  <!-- <div class="mobile" v-else>
     <van-dropdown-menu v-if="$route.path === '/' ? false : true">
       <van-dropdown-item
         @change="change(value)"
@@ -101,7 +101,7 @@
       </van-cell>
     </van-list>
     <slot name="btn"> </slot>
-  </div>
+  </div> -->
 </template>
 
 <script>

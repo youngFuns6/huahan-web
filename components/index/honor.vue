@@ -20,11 +20,15 @@
       </li>
     </ul> -->
 
-    <el-carousel :autoplay='false' type="card" height="12rem">
+    <el-carousel :autoplay="false" type="card" height="12rem" @change='change'>
       <el-carousel-item v-for="item in 6" :key="item">
-      
-          <img src="../../assets/img/honor-1.png" alt="" />
-       
+        <el-image
+          style="width: 100%; height: 100%"
+          :src="img"
+          :preview-src-list="srcList"
+        >
+        </el-image>
+        <!-- <img src="../../assets/img/honor-1.png" alt="" /> -->
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -57,14 +61,22 @@
 </template>
     
 <script>
+import img from "../../assets/img/honor-1.png";
+
 export default {
   name: "honor",
   data() {
     return {
       isMobile: this.$store.state.isMobile,
+      img,
+      srcList: [img],
     };
   },
-  methods: {},
+  methods: {
+    change(index){
+      console.log(index)
+    }
+  },
 };
 </script>
     
@@ -183,15 +195,15 @@ export default {
 }
 
 /deep/ .el-carousel .el-carousel__item {
-    width: 18.8rem /* 133/16 */;
-    // height: 12rem /* 113/16 */;
+  width: 18.8rem /* 133/16 */;
+  // height: 12rem /* 113/16 */;
+}
+/deep/ .el-carousel {
+  ul {
+    display: none;
   }
-  /deep/ .el-carousel {
-    ul {
-      display: none;
-    }
-    .el-carousel__mask {
-      display: none;
-    }
+  .el-carousel__mask {
+    display: none;
   }
+}
 </style>
