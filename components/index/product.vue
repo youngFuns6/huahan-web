@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <!-- <div class="mobile" v-else>
+  <div class="mobile" v-else>
     <van-dropdown-menu v-if="$route.path === '/' ? false : true">
       <van-dropdown-item
         @change="change(value)"
@@ -101,7 +101,7 @@
       </van-cell>
     </van-list>
     <slot name="btn"> </slot>
-  </div> -->
+  </div>
 </template>
 
 <script>

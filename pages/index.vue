@@ -57,7 +57,7 @@ export default {
       params: { page: 1, pageSize: 7 },
     });
     let cateList = cate.data.data;
-    cateList.reverse();
+    // cateList.reverse();
     cateList.unshift(
       {cateName:'全部商品', type: null}
     )

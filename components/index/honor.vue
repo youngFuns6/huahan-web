@@ -11,24 +11,14 @@
         <p>荣誉资质</p>
       </h3>
     </div>
-    <!-- <ul>
-      <li data-aos="fade-left" data-aos-duration="2000">
-        <img src="../../assets/img/honor-1.png" alt="" />
-      </li>
-      <li data-aos="fade-left" data-aos-duration="3000">
-        <img src="../../assets/img/honor-2.png" alt="" />
-      </li>
-    </ul> -->
-
     <el-carousel :autoplay="false" type="card" height="12rem" @change='change'>
-      <el-carousel-item v-for="item in 6" :key="item">
+      <el-carousel-item v-for="(item,index) in img" :key="index">
         <el-image
           style="width: 100%; height: 100%"
-          :src="img"
+          :src="item"
           :preview-src-list="srcList"
         >
         </el-image>
-        <!-- <img src="../../assets/img/honor-1.png" alt="" /> -->
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -38,11 +28,8 @@
       <p>荣誉资质</p>
     </h3>
     <ul>
-      <li>
-        <img src="../../assets/img/honor-1.png" alt="" />
-      </li>
-      <li>
-        <img src="../../assets/img/honor-2.png" alt="" />
+      <li v-for="(item,index) in img" :key="index">
+        <img :src="item" alt="" />
       </li>
     </ul>
     <div class="footer">
@@ -68,13 +55,14 @@ export default {
   data() {
     return {
       isMobile: this.$store.state.isMobile,
-      img,
-      srcList: [img],
+      img: this.$store.state.contactInfo.honorImgs.split(','),
+      srcList: [],
     };
   },
   methods: {
     change(index){
-      console.log(index)
+      this.srcList = []
+      this.srcList.push(this.img[index])
     }
   },
 };
@@ -152,15 +140,20 @@ export default {
       color: #333;
     }
   }
-  // ul {
-  //   display: flex;
-  //   justify-content: center;
-  //   margin: 0 0.375rem /* 6/16 */;
-  //   li {
-  //     width: 8.3125rem /* 133/16 */;
-  //     height: 7.0625rem /* 113/16 */;
-  //   }
-  // }
+  ul {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 0.375rem /* 6/16 */;
+    height: 8rem;
+    overflow: scroll;
+    li {
+      width: 8.3125rem /* 133/16 */;
+      height: 7.0625rem /* 113/16 */;
+      margin: 0 .3125rem /* 5/16 */;
+    }
+  }
   .footer {
     box-sizing: border-box;
     margin-top: 2.5rem /* 40/16 */;

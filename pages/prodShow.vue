@@ -44,11 +44,10 @@ export default {
     redirect,
     error,
   }) {
-    const cate = await $axios.get(`${Config.BASE_URL}/goods/cate`, {
-      params: { page: 1, pageSize: 7 },
-    });
+    const cate = await $axios.get(`${Config.BASE_URL}/goods/cate`
+    );
     let cateList = cate.data.data;
-    cateList.reverse();
+    // cateList.reverse();
     cateList.unshift(
       {cateName:'全部商品', type: null}
     )

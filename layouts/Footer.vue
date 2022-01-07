@@ -29,7 +29,7 @@
       </div>
       <div class="footer">
         Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有
-        &nbsp;&nbsp; 电话：{{ info.phone }} &nbsp;&nbsp; 传真：{{
+        &nbsp;&nbsp; 电话：{{ info.phone.split(',')[0] }} &nbsp;&nbsp; 传真：{{
           info.fax
         }}
         &nbsp;&nbsp; Email：{{ info.email }} &nbsp;&nbsp;
@@ -48,18 +48,18 @@
           </a>
         </li>
         <li>
-          <a :href="'tel:' + $store.state.contactInfo.phone">
+          <a :href="'tel:' + $store.state.contactInfo.phone.split(',')[0]">
             <i class="iconfont icon-dianhuatianchong"></i>
             <span>电话</span>
           </a>
         </li>
-        <li>
-          <a :href="'sms:' + $store.state.contactInfo.message">
+        <li @click="navQrCode">
+          <a>
             <i class="iconfont icon-message_full"></i>
-            <span>短信</span>
+            <span>微信</span>
           </a>
         </li>
-        <li @click="nav">
+        <li @click="nav($store.state.contactInfo.address)">
           <a>
             <i class="iconfont icon-dizhi"></i>
             <span>导航</span>
@@ -67,6 +67,10 @@
         </li>
       </ul>
     </div>
+
+    <van-dialog v-model="showVX" title="标题" show-cancel-button>
+      <img :src="$store.state.contactInfo.qrCode" />
+    </van-dialog>
   </div>
 </template>
 
@@ -89,13 +93,7 @@ export default {
       isMobile: this.$store.state.isMobile,
       info: {},
       isShow: true,
-
-      // nav: [
-      //   {icon: '', name: '首页', path: '/'},
-      //   {icon: '', name: '首页', path: '/'},
-      //   {icon: '', name: '首页', path: '/'},
-      //   {icon: '', name: '首页', path: '/'},
-      // ]
+      showVX: false
     };
   },
   watch: {
@@ -104,8 +102,8 @@ export default {
       handler(val) {
         if (val.path === "/detail" || val.path === "/contact") {
           this.isShow = false;
-        }else {
-          this.isShow = true
+        } else {
+          this.isShow = true;
         }
       },
     },
@@ -117,14 +115,18 @@ export default {
     // }
   },
   methods: {
-    nav() {
-      this.$dia.alert({
-        
-        message: this.$store.state.contactInfo.address,
-      }).then(() => {
-        // on close
-      });
+    nav(data) {
+      this.$dia
+        .alert({
+          message: data,
+        })
+        .then(() => {
+          // on close
+        });
     },
+    navQrCode(){
+      this.showVX = true
+    }
   },
 };
 </script>

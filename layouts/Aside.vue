@@ -110,6 +110,7 @@ export default {
     font-size: 14px;
   }
   .qq {
+    width: 90%;
     color: #fff;
     text-align: center;
     line-height: 1.5;
@@ -124,6 +125,7 @@ export default {
     p {
       margin: 0;
     }
+    
     p,
     i {
       color: #ffff00;

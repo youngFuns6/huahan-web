@@ -1,3 +1,5 @@
+const path = require('path')
+
 const productPlugins = []
 if (process.env.NODE_ENV === 'production') {
   productPlugins.push('transform-remove-console')
@@ -141,8 +143,28 @@ export default {
             'styleLibraryName': 'theme-chalk'
           }
         ],
+        // ['import', {
+        //   libraryName: 'vant',
+        //   "style": (name) => {
+        //     return `${name}/style/less.js`
+        //   }
+        // }, 'vant'],
         ...productPlugins
-      ]
+      ],
+      // loaders: {
+      //   less: {
+      //     javascriptEnabled: true,
+      //     modifyVars: {
+      //       // 单个变量
+      //       "blue": "1989fa",
+      //       // 引入less文件
+      //       hack: `true; @import "${path.join(
+      //         __dirname,
+      //         "./assets/styles/vant.var.less"
+      //       )}";`
+      //     }
+      //   }
+      // }
     }
   }
 }

@@ -8,7 +8,13 @@
       <div class="content">
         <div class="left">
           <p>公司地址：{{ $store.state.contactInfo.address }}</p>
-          <p>联系方式：{{ $store.state.contactInfo.phone }}</p>
+         <p class="message">
+            <span>
+            联系方式：
+          </span><span>
+              {{ $store.state.contactInfo.message }}
+            </span>
+         </p>
           <p>电子邮箱：{{ $store.state.contactInfo.email }}</p>
           <p>传真：{{ $store.state.contactInfo.fax }}</p>
           <p>邮编：{{ $store.state.contactInfo.emailNum }}</p>
@@ -192,9 +198,22 @@ export default {
       align-items: center;
       margin-top: 64px;
       .left {
+        width: 50%;
         p {
           font-size: 18px;
           margin: 15px 0;
+          span {
+            line-height: 1.5;
+          }
+        }
+        .message {
+          display: flex;
+          span:nth-child(1){
+            width: 100px;
+          }
+           span:nth-child(2){
+            width: 200px;
+          }
         }
       }
       .right {
@@ -337,7 +356,7 @@ export default {
         font-size: 18px;
         color: #a7a7a7;
         line-height: 64px;
-        font-size: .875rem /* 14/16 */;
+        font-size: 0.875rem /* 14/16 */;
       }
       .form-bottom {
         .label {

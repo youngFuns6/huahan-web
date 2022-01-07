@@ -31,14 +31,21 @@
         <h3>HONORARY QUALIFICATION</h3>
         <p>荣誉资质</p>
       </div>
-      <ul data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-        <li>
-          <img src="../assets/img/honor-1.png" alt="" />
-        </li>
-        <li>
-          <img src="../assets/img/honor-2.png" alt="" />
-        </li>
-      </ul>
+      <el-carousel
+        :autoplay="false"
+        type="card"
+        height="296px"
+        @change="change"
+      >
+        <el-carousel-item v-for="(item, index) in img" :key="index">
+          <el-image
+            style="width: 100%; height: 100%"
+            :src="item"
+            :preview-src-list="srcList"
+          >
+          </el-image>
+        </el-carousel-item>
+      </el-carousel>
     </div>
   </div>
 
@@ -75,11 +82,8 @@
         <p>荣誉资质</p>
       </div>
       <ul>
-        <li>
-          <img src="../assets/img/honor-1.png" alt="" />
-        </li>
-        <li>
-          <img src="../assets/img/honor-2.png" alt="" />
+        <li v-for="(item, index) in img" :key="index">
+          <img :src="item" alt="" />
         </li>
       </ul>
     </div>
@@ -89,9 +93,18 @@
 <script>
 export default {
   data() {
-    return { isMobile: this.$store.state.isMobile };
+    return {
+      isMobile: this.$store.state.isMobile,
+      img: this.$store.state.contactInfo.honorImgs.split(","),
+      srcList: [],
+    };
   },
-  methods: {},
+  methods: {
+    change(index) {
+      this.srcList = [];
+      this.srcList.push(this.img[index]);
+    },
+  },
 };
 </script>
     
@@ -128,26 +141,24 @@ export default {
   .title {
     margin-bottom: 56px;
   }
-  ul {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    li {
-      width: 393px;
-      height: 296px;
-      margin: 10px;
-      background: #ffffff;
-      border: 1px solid #133b80;
-    }
-  }
+  // ul {
+  //   display: flex;
+  //   justify-content: center;
+  //   flex-wrap: wrap;
+  //   li {
+  //     width: 393px;
+  //     height: 296px;
+  //     margin: 10px;
+  //     background: #ffffff;
+  //     border: 1px solid #133b80;
+  //   }
+  // }
 }
-
 
 // 手机端
 .mobile {
-  padding: 0 .625rem /* 10/16 */;
+  padding: 0 0.625rem /* 10/16 */;
   .title {
-   
     h3 {
       margin-bottom: 0;
       font-size: 1.25rem /* 20/16 */;
@@ -160,7 +171,7 @@ export default {
   .content {
     margin-top: 0;
     p {
-      font-size: .875rem /* 14/16 */;
+      font-size: 0.875rem /* 14/16 */;
       line-height: 1.5;
     }
     .banner {
@@ -174,8 +185,13 @@ export default {
     }
     ul {
       display: flex;
-      li{
-        flex: 1;
+      flex-direction: column;
+      flex-wrap: wrap;
+      height: 15rem;
+      overflow: scroll;
+      li {
+        height: 15rem;
+        margin: 0 .3125rem /* 5/16 */;
       }
       margin-bottom: 5rem /* 80/16 */ /* 50/16 */;
     }
