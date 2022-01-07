@@ -134,12 +134,11 @@ export default {
 <style lang='less' scoped>
 .bgc {
   position: relative;
-  height: 280px;
-  // object-fit: cover !important;
+  height: 450px;
   img {
     vertical-align: middle;
     // object-fit: none;
-    // object-fit: cover;
+    object-fit: cover;
   }
 }
 // .box {

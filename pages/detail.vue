@@ -38,6 +38,7 @@ export default {
     margin:0 auto 50px auto;
     line-height: 1.5;
     max-width: 1450px;
+    min-height: 80vh;
 }
 
 .mobile {
