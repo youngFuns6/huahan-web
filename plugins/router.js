@@ -5,6 +5,9 @@ export default function ({ $axios, store, app }) {
     // to and from are both route objects. must call `next`.
     $axios.get(Config.BASE_URL + '/info').then(res => {
       // console.log(res.data.data)
+      if (res.data.data.honorImgs) {
+        res.data.data.honorImgs = ''
+      }
       store.commit('M_GET_CONTACT_INFO', res.data.data)
       next()
     })

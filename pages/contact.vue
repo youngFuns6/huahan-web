@@ -82,7 +82,7 @@
       <div class="content">
         <div class="left">
           <p>公司地址：{{ $store.state.contactInfo.address }}</p>
-          <p>联系方式：{{ $store.state.contactInfo.phone }}</p>
+          <p>联系方式：{{ $store.state.contactInfo.message }}</p>
           <p>电子邮箱：{{ $store.state.contactInfo.email }}</p>
           <p>传真：{{ $store.state.contactInfo.fax }}</p>
           <p>邮编：{{ $store.state.contactInfo.emailNum }}</p>
@@ -217,8 +217,8 @@ export default {
         }
       }
       .right {
-        width: 520px;
-        height: 296px;
+        width: 600px;
+        height: 330px;
         box-shadow: 2px 2px 10px #333;
         margin-left: 88px;
         img {
@@ -315,6 +315,7 @@ export default {
     p {
       font-size: 1.125rem /* 18/16 */;
       margin-bottom: 1.25rem /* 20/16 */;
+      line-height: 1.5;
     }
   }
   .contact-1 {

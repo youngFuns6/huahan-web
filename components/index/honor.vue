@@ -48,14 +48,14 @@
 </template>
     
 <script>
-import img from "../../assets/img/honor-1.png";
+// import img from "../../assets/img/honor-1.png";
 
 export default {
   name: "honor",
   data() {
     return {
       isMobile: this.$store.state.isMobile,
-      img: this.$store.state.contactInfo.honorImgs.split(','),
+      img: this.$store.state.contactInfo.honorImgs ? this.$store.state.contactInfo.honorImgs.split(',') : [],
       srcList: [],
     };
   },

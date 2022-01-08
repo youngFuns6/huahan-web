@@ -95,7 +95,7 @@ export default {
   data() {
     return {
       isMobile: this.$store.state.isMobile,
-      img: this.$store.state.contactInfo.honorImgs.split(","),
+      img: this.$store.state.contactInfo.honorImgs ? this.$store.state.contactInfo.honorImgs.split(",") : [],
       srcList: [],
     };
   },

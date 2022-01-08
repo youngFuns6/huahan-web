@@ -48,7 +48,7 @@
           </a>
         </li>
         <li>
-          <a :href="'tel:' + $store.state.contactInfo.phone.split(',')[0]">
+          <a :href="'tel:' + $store.state.contactInfo.phone.split('/')[0]">
             <i class="iconfont icon-dianhuatianchong"></i>
             <span>电话</span>
           </a>
@@ -68,7 +68,7 @@
       </ul>
     </div>
 
-    <van-dialog v-model="showVX" title="标题" show-cancel-button>
+    <van-dialog v-model="showVX" title="扫描二维码添加微信" show-cancel-button>
       <img :src="$store.state.contactInfo.qrCode" />
     </van-dialog>
   </div>
@@ -134,7 +134,7 @@ export default {
 <style lang='less' scoped>
 .bgc {
   position: relative;
-  height: 450px;
+  height: 470px;
   img {
     vertical-align: middle;
     // object-fit: none;

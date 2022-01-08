@@ -150,8 +150,8 @@ export default {
   },
 
   created() {
-    if(this.$route.path === '/'){
-      this.mobileGoods = this.goodsList
+    if (this.$route.path === "/") {
+      this.mobileGoods = this.goodsList;
     }
     this.cateListM = this.cate.map((item) => {
       return { text: item.cateName, value: item.type };
@@ -187,25 +187,24 @@ export default {
     // },
 
     async change(value) {
-      
       this.queryInfo.type = value;
       this.queryInfo.page = 1;
-       this.loading = true;
-        this.finished = false
+      this.loading = true;
+      this.finished = false;
       this.mobileGoods = [];
       this.onLoad();
     },
 
     // 上滑加载事件
     onLoad() {
-      console.log('999')
+      console.log("999");
       if (this.$route.path === "/prodShow") {
         axios
           .get(`${Config.BASE_URL}/goods`, {
             params: this.queryInfo,
           })
           .then((res) => {
-            this.total = res.data.total
+            this.total = res.data.total;
             this.mobileGoods.push(...res.data.data);
             this.queryInfo.page++;
             this.loading = false;
@@ -414,6 +413,29 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     bottom: -2.5rem /* 40/16 */ /* 30/16 */ /* 10/16 */ /* 20/16 */;
+  }
+}
+
+/deep/ .van-dropdown-menu {
+  .van-dropdown-menu__title::after {
+    border: 5px solid;
+    border-color: transparent transparent #333 #333;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: 50%;
+    margin-top: -3px;
+    transform: translateY(-50%) rotate(-45deg);
+    -webkit-transform: translateY(-50%) rotate(-45deg);
+  }
+  .van-dropdown-menu__title--active::after {
+    border: 5px solid;
+    border-color: transparent transparent #ee0a24 #ee0a24;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    top: 50%;
+    margin-top: 3px;
+    transform: translateY(-50%) rotate(135deg);
+    -webkit-transform: translateY(-50%) rotate(135deg);
   }
 }
 </style>
