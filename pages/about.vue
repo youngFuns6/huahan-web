@@ -188,7 +188,7 @@ export default {
       flex-direction: column;
       flex-wrap: wrap;
       height: 15rem;
-      overflow: scroll;
+      overflow-x: scroll;
       li {
         height: 15rem;
         margin: 0 .3125rem /* 5/16 */;

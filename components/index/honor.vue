@@ -59,6 +59,10 @@ export default {
       srcList: [],
     };
   },
+  created(){
+    console.log(this.$store.state.contactInfo.honorImgs)
+    console.log(666)
+  },
   methods: {
     change(index){
       this.srcList = []
