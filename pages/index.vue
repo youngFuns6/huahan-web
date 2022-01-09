@@ -65,8 +65,8 @@ export default {
     if (cateList.length) {
       const goods = await $axios.get(`${Config.BASE_URL}/goods`, {
         params: {
-          type: null, // query.type === undefined ? cateList[0].type : query.type,
-          page: 1, // query.page === undefined ? 1 : query.page,
+          type: query.type === undefined  ? null : parseInt(query.type),
+          page: query.page === undefined ? 1 : query.page,
           pageSize: 6,
         },
       });

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Product
+      <Product
       :cateList="cateList"
       :goodsList="goodsList"
       :totalO="total"
@@ -61,11 +61,11 @@ export default {
       // }else {
       //   type = 1
       // }
-      
+      // console.log(query)
       const goods = await $axios.get(`${Config.BASE_URL}/goods`, {
         params: {
-          type: null,
-          page: 1,
+          type: query.type === undefined  ? null : parseInt(query.type),
+          page: query.page === undefined ? 1 : query.page,
           pageSize: 12,
         },
       });
@@ -79,7 +79,6 @@ export default {
       goodsData = goods.data;
       // goodsMData = goodsM.data
     }
-    console.log(cateList)
     return {
       cateList,
       goodsList: goodsData.data,
@@ -87,24 +86,7 @@ export default {
       
       // goodsM: goodsMData.data
     };
-  },
-//  created() {
-//     this.getGoods(); 
-//     console.log(this)
-//   },
-//   methods: {
-//     async getGoods() {
-//       const res = await axios.get(Config.BASE_URL + "/goods", {
-//         params: this.queryInfo,
-//       });
-//       this.goods = res.data.data;
-//     },
-
-//     change(value) {
-//       this.queryInfo.type = value;
-//       this.getGoods();
-//     },
-//   },
+  }
 };
 </script>
     

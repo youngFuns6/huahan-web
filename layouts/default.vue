@@ -1,8 +1,10 @@
 <template>
-  <div  :class="isMobile ? '' : 'size'">
+  <div :class="isMobile ? '' : 'size'">
     <Header></Header>
 
-    <Nuxt />
+    <keep-alive>
+      <Nuxt />
+    </keep-alive>
 
     <Aside v-if="isMobile ? false : true"></Aside>
     <Footer></Footer>
@@ -12,21 +14,21 @@
 <script>
 import Header from "./Header.vue";
 import Footer from "./Footer.vue";
-import Aside from "./Aside.vue"
+import Aside from "./Aside.vue";
 import useMobile from "../assets/js/useMobile";
 export default {
   name: "default",
   components: {
     Header,
     Footer,
-    Aside
+    Aside,
   },
   data() {
     return {
       title: this.$store.state.contactInfo.webTitle,
       description: this.$store.state.contactInfo.webDesc,
       keywords: this.$store.state.contactInfo.webKeyWords,
-      isMobile: this.$store.state.isMobile
+      isMobile: this.$store.state.isMobile,
     };
   },
 
@@ -48,16 +50,14 @@ export default {
     };
   },
 
-
   //   beforeMount() {
   //   this.isMobile = useMobile();
   // },
-  
 };
 </script>
 
 <style lang='less' scoped>
-  .size {
+.size {
   min-width: 1420px;
 }
 </style>
