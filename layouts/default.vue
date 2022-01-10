@@ -2,9 +2,9 @@
   <div :class="isMobile ? '' : 'size'">
     <Header></Header>
 
-    <keep-alive>
-      <Nuxt />
-    </keep-alive>
+    
+      <Nuxt  keep-alive :keep-alive-props="{ include:['ProdShow', 'Home'] }" />
+   
 
     <Aside v-if="isMobile ? false : true"></Aside>
     <Footer></Footer>

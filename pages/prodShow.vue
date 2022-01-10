@@ -15,6 +15,7 @@ import Config from "../assets/js/settings";
 // import axios from "axios";
 
 export default {
+  name: 'ProdShow',
   data() {
     return {
       isMobile: this.$store.state.isMobile,
