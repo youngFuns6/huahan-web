@@ -9,11 +9,11 @@
         <div class="left">
           <p>公司地址：{{ $store.state.contactInfo.address }}</p>
          <p class="message">
-            <span>
+         
             联系方式：
-          </span><span>
+          
               {{ $store.state.contactInfo.message }}
-            </span>
+         
          </p>
           <p>电子邮箱：{{ $store.state.contactInfo.email }}</p>
           <p>传真：{{ $store.state.contactInfo.fax }}</p>
@@ -177,7 +177,7 @@ export default {
     
 <style lang='less' scoped>
 .wrop {
-  margin: 64px 20vw;
+  margin: 64px 15vw;
   .title {
     text-align: center;
     font-weight: 500;
@@ -208,17 +208,11 @@ export default {
         }
         .message {
           display: flex;
-          span:nth-child(1){
-            width: 100px;
-          }
-           span:nth-child(2){
-            width: 200px;
-          }
         }
       }
       .right {
-        width: 600px;
-        height: 330px;
+        width: 800px;
+        height: 400px;
         box-shadow: 2px 2px 10px #333;
         margin-left: 88px;
         img {
