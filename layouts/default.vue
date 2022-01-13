@@ -1,11 +1,7 @@
 <template>
   <div :class="isMobile ? '' : 'size'">
     <Header></Header>
-
-    
-      <Nuxt  keep-alive :keep-alive-props="{ include:['ProdShow', 'Home'] }" />
-   
-
+      <Nuxt  keep-alive :keep-alive-props="{ include:['ProdShow', 'Home', 'News','Condition'] }" />
     <Aside v-if="isMobile ? false : true"></Aside>
     <Footer></Footer>
   </div>
@@ -15,7 +11,7 @@
 import Header from "./Header.vue";
 import Footer from "./Footer.vue";
 import Aside from "./Aside.vue";
-import useMobile from "../assets/js/useMobile";
+// import useMobile from "../assets/js/useMobile";
 export default {
   name: "default",
   components: {

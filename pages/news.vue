@@ -44,7 +44,7 @@
         background
         layout="prev, pager, next"
         :total="total"
-        :current-change="changePage"
+        @current-change="changePage"
       >
       </el-pagination>
     </div>
@@ -102,6 +102,7 @@ import Config from "../assets/js/settings";
 import toText from "../assets/js/toText";
 
 export default {
+  name: 'News',
   data() {
     return {
       isMobile: this.$store.state.isMobile,
@@ -158,6 +159,7 @@ export default {
       this.total = res.data.total;
     },
     changePage(page) {
+      console.log(page)
       this.queryInfo.page = page;
       this.getCondition();
     },
