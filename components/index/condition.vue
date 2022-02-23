@@ -11,8 +11,8 @@
           :key="index"
           @click="
             $router.push({
-              path: '/detail',
-              query: { type: 'condition', id: item.id },
+              path: `/news/content/${item.id}.html`,
+              query: { type: 'condition' },
             })
           "
         >
@@ -39,8 +39,8 @@
           :key="index"
           @click="
             $router.push({
-              path: '/detail',
-              query: { type: 'condition', id: item.id },
+              path: `/news/content/${item.id}.html`,
+              query: { type: 'condition' },
             })
           "
         >

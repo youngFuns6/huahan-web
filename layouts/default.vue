@@ -42,6 +42,10 @@ export default {
           name: "keywords",
           content: this.keywords,
         },
+        {
+          name: "baidu-site-verification",
+          content: "code-nEjTMglEme"
+        },
       ],
     };
   },

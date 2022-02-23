@@ -29,6 +29,11 @@ export default {
       // cateListM: []
     };
   },
+  head() {
+    return {
+      title: '资讯-华翰产品展示-泵阀-专业泵阀厂家',
+    };
+  },
   components: {
     Product,
   },
@@ -48,6 +53,7 @@ export default {
     const cate = await $axios.get(`${Config.BASE_URL}/goods/cate`
     );
     let cateList = cate.data.data;
+    console.log(cateList)
     // cateList.reverse();
     cateList.unshift(
       {cateName:'全部商品', type: null}

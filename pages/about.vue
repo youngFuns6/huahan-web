@@ -99,6 +99,11 @@ export default {
       srcList: [],
     };
   },
+  head() {
+    return {
+      title: '华翰泵阀-专业泵阀厂家',
+    };
+  },
   methods: {
     change(index) {
       this.srcList = [];

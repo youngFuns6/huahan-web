@@ -157,6 +157,11 @@ export default {
       form: {},
     };
   },
+  head() {
+    return {
+      title: '联系我们-华翰泵阀有限公司',
+    };
+  },
   methods: {
     sendFeedback() {
       if (this.form.phone !== undefined && this.form.service !== undefined) {

@@ -98,24 +98,18 @@ export default {
   // 自定义路由
   router: {
     middleware: 'middl',
-    extendRoutes(routes, resolve){
-      routes.push(
-      //   {
-      //   path: '/index/inner',
-      //   name: 'inner',
-      //   component: resolve(__dirname, 'pages/index/inner.vue')
-      // },
-      // {
-      //   path: '/index.html',
-      //   // name: 'inner',
-      //   component: resolve(__dirname, 'pages/index.vue')
-      // }
-      )
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '/news/content/:id.html',
+        // name: 'inner',
+        component: resolve(__dirname, 'pages/detail.vue')
+      })
     }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extractCSS: { allChunks: true },
     // transpile: [/^element-ui/],
     // postcss: [
     //   require('postcss-px2rem')({

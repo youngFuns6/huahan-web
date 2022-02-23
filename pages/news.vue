@@ -18,8 +18,8 @@
         <li
           @click="
             $router.push({
-              path: '/detail',
-              query: { type: 'condition', id: item.id },
+              path: `/news/content/${item.id}.html`,
+              query: { type: 'condition', },
             })
           "
           v-for="(item, index) in condition"
@@ -78,8 +78,8 @@
           data-aos="fade-up"
           @click="
             $router.push({
-              path: '/detail',
-              query: { type: 'condition', id: item.id },
+              path: `/news/content/${item.id}.html`,
+              query: { type: 'condition' },
             })
           "
         >
@@ -129,6 +129,11 @@ export default {
     filterContent(val) {
       return toText(val);
     },
+  },
+  head() {
+    return {
+      title: '资讯-华翰新闻资讯-公司资讯-行业资讯-泵阀',
+    };
   },
 
   created() {

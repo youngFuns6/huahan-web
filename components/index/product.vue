@@ -32,8 +32,8 @@
           <li
             @click="
               $router.push({
-                path: '/detail',
-                query: { type: 'goods', id: item.id },
+                path: `/news/content/${item.id}.html`,
+                query: { type: 'goods' },
               })
             "
             v-for="(item, index) in goods"
@@ -88,8 +88,8 @@
         class="l-li"
         @click="
           $router.push({
-            path: '/detail',
-            query: { type: 'goods', id: item.id },
+            path: `/news/content/${item.id}.html`,
+            query: { type: 'goods' },
           })
         "
         v-for="(item, index) in goods"
