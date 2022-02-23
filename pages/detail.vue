@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isMobile" class="content" v-html="news.content"></div>
-  <div class="mobile" v-html="content" v-else></div>
+  <div class="mobile" v-html="news.content" v-else></div>
 </template>
     
 <script>
