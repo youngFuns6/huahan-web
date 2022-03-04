@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export default {
-  telemetry:false,
+  telemetry: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'qunkong.com',
@@ -23,14 +23,14 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-    //   {
-    //   src: '/flexible.js',
-    //   type: 'text/javascript',
-    //   charset: 'utf-8'
-    // },
-   
-     
-  ]
+      //   {
+      //   src: '/flexible.js',
+      //   type: 'text/javascript',
+      //   charset: 'utf-8'
+      // },
+
+
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -55,11 +55,11 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     // {src: '~plugins/lib-flexible.js', ssr: false},
-    {src: '~/plugins/vant.js', ssr: true},
-    {src: '~/plugins/aos.js', ssr: false},
-    {src: '~/plugins/router.js', ssr: true},
-    {src: '~/plugins/axios.js', ssr: true},
-    {src: '~/plugins/element-ui', ssr: true},
+    { src: '~/plugins/vant.js', ssr: true },
+    { src: '~/plugins/aos.js', ssr: false },
+    { src: '~/plugins/router.js', ssr: true },
+    { src: '~/plugins/axios.js', ssr: true },
+    { src: '~/plugins/element-ui', ssr: true },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -100,10 +100,21 @@ export default {
     middleware: 'middl',
     extendRoutes(routes, resolve) {
       routes.push({
-        path: '/news/content/:id.html',
+        path: '/news/content/:type/:id.html',
         // name: 'inner',
         component: resolve(__dirname, 'pages/detail.vue')
-      })
+      },
+        {
+          path: '/prodShow/:page/:type?',
+          // name: 'inner',
+          component: resolve(__dirname, 'pages/prodShow.vue')
+        },
+        {
+          path: '/news/:type/:page',
+          // name: 'inner',
+          component: resolve(__dirname, 'pages/news.vue')
+        }
+      )
     }
   },
 

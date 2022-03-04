@@ -27,7 +27,7 @@ export default {
     error,
   }) {
     console.log(query.type);
-    const detail = await $axios.get(`${Config.BASE_URL}/${query.type}`, {
+    const detail = await $axios.get(`${Config.BASE_URL}/${params.type}`, {
       params: { id: params.id },
     });
     return {

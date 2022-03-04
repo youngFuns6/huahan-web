@@ -71,8 +71,8 @@ export default {
       // console.log(query)
       const goods = await $axios.get(`${Config.BASE_URL}/goods`, {
         params: {
-          type: query.type === undefined  ? null : parseInt(query.type),
-          page: query.page === undefined ? 1 : query.page,
+          type: params.type === undefined  ? null : parseInt(params.type),
+          page: params.page === undefined ? 1 : params.page,
           pageSize: 12,
         },
       });
@@ -93,7 +93,8 @@ export default {
       
       // goodsM: goodsMData.data
     };
-  }
+  },
+  watchQuery: ['type', 'page']
 };
 </script>
     

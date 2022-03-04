@@ -12,14 +12,15 @@
           </span>
           <span>产品分类</span>
         </h3>
-        <ul>
-          <li
-            :class="active === index ? 'active' : ''"
-            v-for="(item, index) in cateList"
-            :key="item.id"
-            @click="toggleCate(index, item.type)"
-          >
-            <span>{{ item.cateName }}</span>
+        <ul class="ul-wrop">
+          <li v-for="(item, index) in cateList" :key="item.id">
+            <span>
+              <router-link
+                :to="index == 0 ? '/prodShow/1' : `/prodShow/1/${item.type}`"
+                :class="active === index ? 'active' : ''"
+                >{{ item.cateName }}</router-link
+              >
+            </span>
           </li>
           <slot name="moreBtn"></slot>
         </ul>
@@ -29,33 +30,50 @@
         :class="$route.path === '/' ? 'active-i' : 'active-p'"
       >
         <ul>
-          <li
-            @click="
-              $router.push({
-                path: `/news/content/${item.id}.html`,
-                query: { type: 'goods' },
-              })
-            "
-            v-for="(item, index) in goods"
-            :key="index"
-          >
-            <div class="img">
-              <img :src="item.banner" alt="" />
-            </div>
-            <div class="title">{{ item.title }}</div>
+          <li v-for="(item, index) in goods" :key="index">
+            <router-link :to="`/news/content/goods/${item.id}.html`">
+              <div class="img">
+                <img :src="item.banner" alt="" />
+              </div>
+              <div class="title">{{ item.title }}</div>
+            </router-link>
           </li>
         </ul>
         <div class="page">
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="total"
-            @current-change="changePage"
-            :current-page="
-              $route.query.page === undefined ? 1 : parseInt($route.query.page)
-            "
-          >
-          </el-pagination>
+          <div class="main">
+            <router-link
+              :to="`/prodShow/${$route.params.page - 1}/${
+                $route.params.type === undefined ? '' : $route.params.type
+              }`"
+              class="prev"
+              v-if="+$route.params.page != 1"
+              >上一页</router-link
+            >
+            <ul>
+              <li
+                v-for="item in Math.ceil(total / 10) <= 8
+                  ? Math.ceil(total / 10)
+                  : 8"
+                :key="item"
+              >
+                <router-link
+                  :class="$route.params.page == item ? 'active-page' : ''"
+                  :to="`/prodShow/${item}/${
+                    $route.params.type === undefined ? '' : $route.params.type
+                  }`"
+                  >{{ item }}</router-link
+                >
+              </li>
+            </ul>
+            <router-link
+              :to="`/prodShow/${+$route.params.page + 1}/${
+                $route.params.type === undefined ? '' : $route.params.type
+              }`"
+              class="last"
+              v-if="Math.ceil(total / 10) != $route.params.page"
+              >下一页</router-link
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -159,7 +177,7 @@ export default {
         let flag = true;
         if (flag) {
           this.cateList.forEach((item, i) => {
-            if (newValue.query.type == item.type) {
+            if (newValue.params.type == item.type) {
               this.active = i;
               this.value = item.type;
             } else {
@@ -178,32 +196,14 @@ export default {
     this.cateListM = this.cate.map((item) => {
       return { text: item.cateName, value: item.type };
     });
-    if(this.$route.path === '/prodShow'){
+    if (this.$route.path === "/prodShow") {
       this.total > this.queryInfo.pageSize
-      ? (this.finished = false)
-      : (this.finished = true);
+        ? (this.finished = false)
+        : (this.finished = true);
     }
   },
 
   methods: {
-    async toggleCate(index, type) {
-      this.queryInfo.type = type;
-      this.queryInfo.page = 1;
-      this.active = index;
-      if (index == 0) {
-        this.$router.push({
-          path: this.$route.path,
-          query: { page: this.queryInfo.page },
-        });
-      } else {
-        this.$router.push({
-          path: this.$route.path,
-          query: this.queryInfo,
-        });
-      }
-      this.getGoods();
-    },
-
     changePage(page) {
       // console.log(JSON.stringify(this.queryInfo.type) == "null")
       this.queryInfo.page = page;
@@ -254,7 +254,7 @@ export default {
       }
       this.getGoods().then((total) => {
         // console.log(total);
-        this.queryInfo.page = 2
+        this.queryInfo.page = 2;
         total > this.queryInfo.pageSize
           ? (this.finished = false)
           : (this.finished = true);
@@ -348,13 +348,16 @@ export default {
           font-weight: 600;
         }
         span {
-          .line-text;
           display: block;
-          margin: 0 36px;
-          padding: 22px 0;
-          font-size: 14px;
-          color: #133b80;
-          border-bottom: 1px solid #ededed;
+          a {
+            display: block;
+            padding: 20px;
+            color: #133b80;
+            .line-text;
+
+            font-size: 14px;
+            border-bottom: 1px solid #ededed;
+          }
         }
       }
       .more {
@@ -381,8 +384,12 @@ export default {
       flex-wrap: wrap;
       li {
         margin: 26px 13px;
-        background: #f6f6f6;
-        cursor: pointer;
+        a {
+          display: block;
+          background: #f6f6f6;
+          cursor: pointer;
+          color: #333;
+        }
         .img {
           width: 236px;
           height: 174px;
@@ -400,8 +407,66 @@ export default {
       }
     }
     .page {
-      text-align: center;
+      display: flex;
+      justify-content: center;
       margin: 20px 0;
+      .main {
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        // margin-left: 60px;
+        align-items: center;
+        a {
+          color: #a7a7a7;
+        }
+        input {
+          outline: none;
+          padding: 0;
+          margin: 0;
+          border: 0;
+          width: 40px;
+          text-align: center;
+          padding: 6px 10px;
+          margin-left: 10px;
+          border: 1px solid #b4b4b4;
+        }
+        .first,
+        .main .prev,
+        .main .next,
+        .main .last {
+          padding: 5px 10px;
+          border: 1px solid #b4b4b4;
+          margin: 0 5px;
+          background-color: #ffffff;
+        }
+        ul {
+          width: auto !important;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          li {
+            width: 35px;
+            height: 20px;
+            list-style: none;
+            border: 1px solid #b4b4b4;
+            margin: 0 5px;
+            margin: 0 5px;
+            a {
+              width: 100%;
+              height: 100%;
+              text-align: center;
+              display: block !important;
+            }
+          }
+        }
+      }
+      .active-page {
+        background: linear-gradient(125deg, #060145 0%, #133b80 100%);
+        color: #ffffff;
+        a {
+          color: #ffffff;
+        }
+      }
     }
   }
 }

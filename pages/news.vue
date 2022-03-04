@@ -7,46 +7,81 @@
     <div class="content">
       <div class="toggle">
         <span
-          @click="toToggle(index, item.type)"
           :class="active === index ? 'active' : ''"
           v-for="(item, index) in toggle"
           :key="item.type"
-          >{{ item.name }}</span
         >
+          <!-- {{ item.name }} -->
+          <router-link :to="`/news/${item.type}/1`">{{
+            item.name
+          }}</router-link>
+        </span>
       </div>
       <ul>
         <li
-          @click="
-            $router.push({
-              path: `/news/content/${item.id}.html`,
-              query: { type: 'condition', },
-            })
-          "
           v-for="(item, index) in condition"
           :key="item.id"
           data-aos="fade-up"
           data-aos-anchor-placement="center-bottom"
           :data-aos-duration="300 * index"
         >
-          <div class="left">
-            <img :src="item.banner" alt="" />
-          </div>
-          <div class="right">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.content | filterContent }}</p>
-            <span>{{ item.created }}</span>
-          </div>
+          <router-link
+            :to="`/news/content/condition/${item.id}.html`"
+          >
+            <div class="left">
+              <img :src="item.banner" alt="" />
+            </div>
+            <div class="right">
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.content | filterContent }}</p>
+              <span>{{ item.created }}</span>
+            </div>
+          </router-link>
         </li>
       </ul>
     </div>
     <div class="page">
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="total"
-        @current-change="changePage"
-      >
-      </el-pagination>
+      <div class="main">
+        <div>共{{ total }}条</div>
+        <router-link
+          :to="`/news/${$route.params.type}/1`"
+          class="first"
+          v-if="$route.params.page != 1"
+        >
+          首页
+        </router-link>
+        <router-link
+          :to="`/news/${$route.params.type}/${$route.params.page - 1}`"
+          class="prev"
+          v-if="+$route.params.page != 1"
+          >上一页</router-link
+        >
+        <ul>
+          <li
+            v-for="item in Math.ceil(total / 10) <= 8
+              ? Math.ceil(total / 10)
+              : 8"
+            :key="item"
+            :class="$route.params.page == item ? 'active-page' : ''"
+          >
+            <router-link :to="`/news/${$route.params.type}/${item}`">{{ item }}</router-link>
+          </li>
+        </ul>
+        <router-link
+          :to="`/news/${$route.params.type}/${Math.ceil(total / 10)}`"
+          v-if="Math.ceil(total / 10) != $route.params.page"
+          class="next"
+          >尾页</router-link
+        >
+        <router-link
+          :to="`/news/${$route.params.type}/${+$route.params.page + 1}`"
+          class="last"
+          v-if="Math.ceil(total / 10) != $route.params.page"
+          >下一页</router-link
+        >
+        <input v-model="page" />
+        <router-link :to="`/news/${$route.params.type}/${page}`">跳转</router-link>
+      </div>
     </div>
   </div>
 
@@ -102,7 +137,7 @@ import Config from "../assets/js/settings";
 import toText from "../assets/js/toText";
 
 export default {
-  name: 'News',
+  name: "News",
   data() {
     return {
       isMobile: this.$store.state.isMobile,
@@ -111,13 +146,12 @@ export default {
         { type: 2, name: "新闻资讯" },
       ],
       active: 0,
+      page: this.$route.params.page,
       queryInfo: {
         type: 1,
         page: 1,
         pageSize: this.$store.state.isMobile ? 12 : 5,
       },
-      total: null,
-      condition: [],
       error: false,
       loading: false,
       error: false,
@@ -132,41 +166,59 @@ export default {
   },
   head() {
     return {
-      title: '资讯-华翰新闻资讯-公司资讯-行业资讯-泵阀',
+      title: "资讯-华翰新闻资讯-公司资讯-行业资讯-泵阀",
     };
   },
 
-  created() {
-    if(!this.isMobile){
-      this.getCondition();
-    }
+  async asyncData({
+    isDev,
+    route,
+    store,
+    env,
+    params,
+    query,
+    req,
+    res,
+    redirect,
+    error,
+    $axios,
+  }) {
+    const news = await $axios.get(`${Config.BASE_URL}/condition`, {
+      params: {
+        type: params.type,
+        page: params.page,
+        pageSize: store.state.isMobile ? 12 : 5,
+      },
+    });
+    let condition = news.data.data;
+    let total = news.data.total;
+    return {
+      condition,
+      total,
+    };
+  },
+  watchQuery: ["page", "type"],
+
+  watch: {
+    $route: {
+      deep: true,
+      immediate: true,
+      handler(newVal) {
+        this.toggle.forEach((item, index) => {
+          if (item.type == newVal.params.type) {
+            this.active = index;
+          }
+        });
+      },
+    },
   },
 
   methods: {
-    toToggle(i, type) {
-      this.active = i;
-      this.queryInfo.type = type;
-      this.queryInfo.page = 1
-      if(!this.isMobile){
-        this.getCondition();
-      }else {
-        this.mobileCondition = []
-        this.loading = true;
-        this.finished = false
-        this.onLoad()
-      }
-    },
-    async getCondition() {
-      const res = await axios.get(`${Config.BASE_URL}/condition`, {
-        params: this.queryInfo,
-      });
-      this.condition = res.data.data;
-      this.total = res.data.total;
-    },
-    changePage(page) {
-      console.log(page)
-      this.queryInfo.page = page;
-      this.getCondition();
+    toToggle() {
+      this.mobileCondition = [];
+      this.loading = true;
+      this.finished = false;
+      this.onLoad();
     },
 
     onLoad() {
@@ -176,7 +228,7 @@ export default {
         })
         .then((res) => {
           this.mobileCondition.push(...res.data.data);
-           this.mobileCondition.forEach((item) => {
+          this.mobileCondition.forEach((item) => {
             if (item.created !== undefined) {
               item.created =
                 item.created
@@ -190,8 +242,8 @@ export default {
           if (this.mobileCondition.length >= res.data.total) {
             this.finished = true;
           }
-        }).catch(() => (this.error = true));
-      
+        })
+        .catch(() => (this.error = true));
 
       // console.log(this.queryInfo.page);
       // console.log(this.goods.length, this.total);
@@ -203,7 +255,7 @@ export default {
       //     })
       //     .then((res) => {
       //       // console.log(res.data.data);
-            
+
       //       this.total = res.data.total;
       //       this.loading = false;
       //     })
@@ -217,6 +269,9 @@ export default {
 </script>
     
 <style lang='less' scoped>
+a {
+  color: #333;
+}
 .active {
   border-bottom: 4px solid #133b80;
   color: #133b80;
@@ -253,13 +308,19 @@ export default {
 
 ul {
   li {
-    display: flex;
-    align-items: center;
     margin: 16px 0;
     cursor: pointer;
-    &:hover {
-      .right h3 {
-        color: #133b80;
+    a {
+      display: flex;
+      align-items: center;
+      h3,
+      p {
+        color: #333;
+      }
+      &:hover {
+        .right h3 {
+          color: #133b80;
+        }
       }
     }
   }
@@ -286,8 +347,59 @@ ul {
   }
 }
 .page {
-  text-align: center;
-  margin-top: 20px;
+  .main {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    // margin-left: 60px;
+    align-items: center;
+    input {
+      outline: none;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      width: 40px;
+      text-align: center;
+      padding: 6px 10px;
+      margin-left: 10px;
+      border: 1px solid #b4b4b4;
+    }
+    .first,
+    .main .prev,
+    .main .next,
+    .main .last {
+      padding: 5px 10px;
+      border: 1px solid #b4b4b4;
+      margin: 0 5px;
+      background-color: #ffffff;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      li {
+        width: 35px;
+        height: 20px;
+        list-style: none;
+        border: 1px solid #b4b4b4;
+        margin: 0 5px;
+        margin: 0 5px;
+        a {
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          display: block !important;
+        }
+      }
+    }
+  }
+  .active-page {
+    background: linear-gradient(125deg, #060145 0%, #133b80 100%);
+    color: #ffffff;
+    a {
+      color: #ffffff;
+    }
+  }
 }
 
 // 手机端
