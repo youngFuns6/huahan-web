@@ -89,11 +89,15 @@
     <div class="content">
       <div class="toggle">
         <span
-          @click="toToggle(index, item.type)"
           :class="active === index ? 'active' : ''"
           v-for="(item, index) in toggle"
           :key="item.type"
-          >{{ item.name }}</span
+          @click="toToggle(item.type)"
+          >
+          <router-link :to="`/news/${item.type}/1`">{{
+            item.name
+          }}</router-link>
+          </span
         >
       </div>
       <van-list
@@ -103,7 +107,7 @@
         :finished="finished"
         finished-text="没有更多了"
         error-text="请求失败，点击重新加载"
-        @load="onLoad"
+        @load="onLoad()"
         :offset="0"
       >
         <van-cell
@@ -183,6 +187,7 @@ export default {
     error,
     $axios,
   }) {
+    if(store.state.isMobile) return
     const news = await $axios.get(`${Config.BASE_URL}/condition`, {
       params: {
         type: params.type,
@@ -215,6 +220,8 @@ export default {
 
   methods: {
     toToggle() {
+      console.log()
+      this.queryInfo.page = 1
       this.mobileCondition = [];
       this.loading = true;
       this.finished = false;
@@ -224,7 +231,7 @@ export default {
     onLoad() {
       axios
         .get(`${Config.BASE_URL}/condition`, {
-          params: this.queryInfo,
+          params: {type: this.$route.params.type, page: this.queryInfo.page, pageSize: this.queryInfo.pageSize},
         })
         .then((res) => {
           this.mobileCondition.push(...res.data.data);
@@ -244,25 +251,6 @@ export default {
           }
         })
         .catch(() => (this.error = true));
-
-      // console.log(this.queryInfo.page);
-      // console.log(this.goods.length, this.total);
-      // if (this.condition.length < this.total) {
-      //   this.queryInfo.page += 1;
-      //   axios
-      //     .get(Config.BASE_URL + `/condition`, {
-      //       params: this.queryInfo,
-      //     })
-      //     .then((res) => {
-      //       // console.log(res.data.data);
-
-      //       this.total = res.data.total;
-      //       this.loading = false;
-      //     })
-      //     .catch(() => (this.error = true));
-      // } else {
-      //   this.finished = true;
-      // }
     },
   },
 };
