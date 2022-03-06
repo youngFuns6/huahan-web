@@ -1,6 +1,22 @@
 <template>
-  <div v-if="!isMobile" class="content" v-html="news.content"></div>
-  <div class="mobile" v-html="news.content" v-else></div>
+  <div v-if="!isMobile" class="content">
+    <div  v-html="news.res.content"></div>
+    <div class="btn">
+      <button :disabled="!news.behindId">
+        <router-link
+          :class="news.behindId ? '' : 'disabled'"
+          :to="news.behindId ? `/news/content/${$route.params.type}/${news.behindId}.html` : ''"
+          >上一篇</router-link
+        >
+      </button>
+      <button :disabled="!news.front">
+        <router-link :class="news.frontId ? '' : 'disabled'" :to="news.frontId ? `/news/content/${$route.params.type}/${news.frontId}.html` : ''"
+          >下一篇</router-link
+        >
+      </button>
+    </div>
+  </div>
+  <div class="mobile" v-html="news.res.content" v-else></div>
 </template>
     
 <script>
@@ -26,7 +42,7 @@ export default {
     redirect,
     error,
   }) {
-    console.log(query.type);
+    console.log(params.type);
     const detail = await $axios.get(`${Config.BASE_URL}/${params.type}`, {
       params: { id: params.id },
     });
@@ -36,7 +52,7 @@ export default {
   },
   head() {
     return {
-      title: this.news.title,
+      title: this.news.res.title,
     };
   },
 };
@@ -52,8 +68,18 @@ export default {
   padding: 20px;
   margin: 0 auto 50px auto;
   line-height: 1.5;
-  max-width: 1450px;
+  max-width: 1200px;
   min-height: 80vh;
+   .btn {
+    text-align: center;
+    margin: 50px;
+    .disabled {
+      color: #a7a7a7;
+    }
+    a {
+      color: #333;
+    }
+  }
 }
 
 .mobile {

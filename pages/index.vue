@@ -76,12 +76,12 @@ export default {
       params: { page: 1, pageSize: 4 },
     });
 
-    // console.log(goodsList);
+    console.log(goodsData);
     return {
       cateList,
-      goodsList: goodsData.data,
-      total: goodsData.total,
-      condition: condition.data.data,
+      goodsList: goodsData.data.res,
+      total: goodsData.data.total,
+      condition: condition.data.data.res,
     };
   },
   // watchQuery: ["type"],

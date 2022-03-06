@@ -58,8 +58,8 @@
         >
         <ul>
           <li
-            v-for="item in Math.ceil(total / 10) <= 8
-              ? Math.ceil(total / 10)
+            v-for="item in Math.ceil(total / 12) <= 8
+              ? Math.ceil(total / 12)
               : 8"
             :key="item"
             :class="$route.params.page == item ? 'active-page' : ''"
@@ -68,15 +68,15 @@
           </li>
         </ul>
         <router-link
-          :to="`/news/${$route.params.type}/${Math.ceil(total / 10)}`"
-          v-if="Math.ceil(total / 10) != $route.params.page"
+          :to="`/news/${$route.params.type}/${Math.ceil(total / 12)}`"
+          v-if="Math.ceil(total / 12) != $route.params.page"
           class="next"
           >尾页</router-link
         >
         <router-link
           :to="`/news/${$route.params.type}/${+$route.params.page + 1}`"
           class="last"
-          v-if="Math.ceil(total / 10) != $route.params.page"
+          v-if="Math.ceil(total / 12) != $route.params.page"
           >下一页</router-link
         >
         <input v-model="page" />
@@ -117,8 +117,7 @@
           data-aos="fade-up"
           @click="
             $router.push({
-              path: `/news/content/${item.id}.html`,
-              query: { type: 'condition' },
+              path: `/news/content/condition/${item.id}.html`,
             })
           "
         >
@@ -154,7 +153,7 @@ export default {
       queryInfo: {
         type: 1,
         page: 1,
-        pageSize: this.$store.state.isMobile ? 12 : 5,
+        pageSize: 12,
       },
       error: false,
       loading: false,
@@ -188,6 +187,7 @@ export default {
     $axios,
   }) {
     if(store.state.isMobile) return
+    console.log('7878')
     const news = await $axios.get(`${Config.BASE_URL}/condition`, {
       params: {
         type: params.type,
@@ -195,7 +195,7 @@ export default {
         pageSize: store.state.isMobile ? 12 : 5,
       },
     });
-    let condition = news.data.data;
+    let condition = news.data.data.res;
     let total = news.data.total;
     return {
       condition,
@@ -219,9 +219,9 @@ export default {
   },
 
   methods: {
-    toToggle() {
-      console.log()
+    toToggle(type) {
       this.queryInfo.page = 1
+      this.queryInfo.type = type
       this.mobileCondition = [];
       this.loading = true;
       this.finished = false;
@@ -233,8 +233,8 @@ export default {
         .get(`${Config.BASE_URL}/condition`, {
           params: {type: this.$route.params.type, page: this.queryInfo.page, pageSize: this.queryInfo.pageSize},
         })
-        .then((res) => {
-          this.mobileCondition.push(...res.data.data);
+        .then((ret) => {
+          this.mobileCondition.push(...ret.data.data.res);
           this.mobileCondition.forEach((item) => {
             if (item.created !== undefined) {
               item.created =
@@ -246,11 +246,11 @@ export default {
           });
           this.queryInfo.page++;
           this.loading = false;
-          if (this.mobileCondition.length >= res.data.total) {
+          if (this.mobileCondition.length >= ret.data.data.total) {
             this.finished = true;
           }
         })
-        .catch(() => (this.error = true));
+        .catch((err) => (this.error = true));
     },
   },
 };
@@ -413,16 +413,17 @@ ul {
         align-items: center;
         flex-wrap: nowrap;
         .left {
-          width: 6.203125rem /* 99.25/16 */;
+          width: 30% /* 99.25/16 */;
           height: 4.0625rem /* 65/16 */;
         }
         .right {
+          width: 70%;
           margin-left: 1rem /* 30/16 */;
           h3 {
             .line-text;
+            width: 100% !important;
             font-size: 1rem /* 16/16 */;
             font-weight: normal;
-            width: 16.25rem /* 260/16 */;
           }
           span {
             color: #a7a7a7;

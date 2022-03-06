@@ -39,7 +39,7 @@
             </router-link>
           </li>
         </ul>
-        <div class="page">
+        <div class="page" v-if="$route.path != '/'">
           <div class="main">
             <router-link
               :to="`/prodShow/${$route.params.page - 1}/${
@@ -51,8 +51,8 @@
             >
             <ul>
               <li
-                v-for="item in Math.ceil(total / 10) <= 8
-                  ? Math.ceil(total / 10)
+                v-for="item in Math.ceil(total / queryInfo.pageSize) <= 8
+                  ? Math.ceil(total / queryInfo.pageSize)
                   : 8"
                 :key="item"
               >
@@ -70,7 +70,7 @@
                 $route.params.type === undefined ? '' : $route.params.type
               }`"
               class="last"
-              v-if="Math.ceil(total / 10) != $route.params.page"
+              v-if="Math.ceil(total / queryInfo.pageSize) != $route.params.page"
               >下一页</router-link
             >
           </div>
@@ -106,8 +106,7 @@
         class="l-li"
         @click="
           $router.push({
-            path: `/news/content/${item.id}.html`,
-            query: { type: 'goods' },
+            path: `/news/content/goods/${item.id}.html`,
           })
         "
         v-for="(item, index) in goods"
@@ -158,13 +157,13 @@ export default {
       goods: this.goodsList,
       queryInfo: {
         type: null,
-        page: 2,
+        page: 1,
         pageSize: this.$route.path === "/" ? 6 : 12,
       },
       total: this.totalO,
       cateListM: [],
       loading: false,
-      finished: true,
+      finished: false,
       error: false,
     };
   },
@@ -174,61 +173,46 @@ export default {
       immediate: true,
       deep: true,
       handler(newValue) {
-        let flag = true;
-        if (flag) {
           this.cateList.forEach((item, i) => {
             if (newValue.params.type == item.type) {
               this.active = i;
-              this.value = item.type;
-            } else {
-              flag = false;
-            }
+              // this.value = item.type
+            } 
           });
-        }
+        
       },
     },
   },
 
   created() {
+    console.log(this.total)
+    console.log(this.$route)
     if (this.$route.path === "/") {
+      this.finished = true
       this.goods = this.goodsList;
     }
     this.cateListM = this.cate.map((item) => {
       return { text: item.cateName, value: item.type };
     });
-    if (this.$route.path === "/prodShow") {
-      this.total > this.queryInfo.pageSize
-        ? (this.finished = false)
-        : (this.finished = true);
+    if (this.$route.path.match("/prodShow")) {
+      console.log('777')
+      // this.getGoods()
+      // this.total > this.queryInfo.pageSize
+      //   ? (this.finished = false)
+      //   : (this.finished = true);
     }
+    console.log(this.finished)
   },
 
   methods: {
-    changePage(page) {
-      // console.log(JSON.stringify(this.queryInfo.type) == "null")
-      this.queryInfo.page = page;
-      if (JSON.stringify(this.queryInfo.type) == "null") {
-        this.$router.push({
-          path: this.$route.path,
-          query: { page },
-        });
-      } else {
-        this.$router.push({
-          path: this.$route.path,
-          query: this.queryInfo,
-        });
-      }
-      this.getGoods();
-    },
-
     getGoods() {
       return new Promise(async (resolve) => {
-        let res = await axios.get(Config.BASE_URL + `/goods`, {
+        let ret = await axios.get(Config.BASE_URL + `/goods`, {
           params: this.queryInfo,
         });
-        this.goods = res.data.data;
-        this.total = res.data.total;
-        resolve(res.data.total);
+        this.goods = ret.data.data.res;
+        this.total = ret.data.total;
+        resolve(ret.data.total);
       });
     },
 
@@ -236,22 +220,16 @@ export default {
       this.value = value;
       this.queryInfo.type = value;
       this.queryInfo.page = 1;
-      // this.loading = true;
-      // this.finished = false;
-      // this.mobileGoods = [];
-      // this.onLoad();
-      // this.goods = []
-      if (value) {
-        // console.log('0000')
-        this.$router.push({
-          path: this.$route.path,
-          query: this.queryInfo,
-        });
-      } else {
-        this.$router.push({
-          path: this.$route.path,
-        });
-      }
+      // if (value) {
+      //   // console.log('0000')
+      //   this.$router.push({
+      //     path: `/prodShow/${value}/1`,
+      //   });
+      // } else {
+      //   this.$router.push({
+      //     path: '/prodShow/1',
+      //   });
+      // }
       this.getGoods().then((total) => {
         // console.log(total);
         this.queryInfo.page = 2;
@@ -263,14 +241,15 @@ export default {
 
     // 上滑加载事件
     onLoad() {
-      if (this.$route.path === "/prodShow") {
+      console.log('999')
+      // if (this.$route.path === "/prodShow") {
         axios
           .get(`${Config.BASE_URL}/goods`, {
             params: this.queryInfo,
           })
           .then((res) => {
             this.total = res.data.total;
-            this.goods.push(...res.data.data);
+            this.goods.push(...res.data.data.res);
             this.queryInfo.page++;
             this.loading = false;
             if (this.goods.length >= res.data.total) {
@@ -279,7 +258,7 @@ export default {
           })
           .catch(() => (this.error = true));
       }
-    },
+    // },
   },
   computed: {},
 };

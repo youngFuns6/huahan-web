@@ -88,8 +88,8 @@ export default {
     }
     return {
       cateList,
-      goodsList: goodsData.data,
-      total: goodsData.total,
+      goodsList: goodsData.data.res,
+      total: goodsData.data.total,
       
       // goodsM: goodsMData.data
     };
