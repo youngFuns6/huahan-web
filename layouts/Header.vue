@@ -109,7 +109,7 @@ export default {
         let flag = true;
         this.page.forEach((item, index) => {
           if (flag) {
-            if (newValue.path == item.path) {
+            if (item.path.match(newValue.path)) {
               // console.log(index);
               this.active = index;
               flag = false;
