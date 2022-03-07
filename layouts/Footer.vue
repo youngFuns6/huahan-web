@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!isMobile">
-      <div class="bgc" v-if="isShow && (!$route.path.match('/news/content') || !$route.path.match('/product/content'))">
+      <div class="bgc" v-if="isShow && (!$route.path.match('/news/content') && !$route.path.match('/product/content'))">
         <img src="../assets/img/map_footer.png" alt="" />
         <!-- <div class="box">
           <p>
