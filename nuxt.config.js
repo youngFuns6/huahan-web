@@ -105,6 +105,11 @@ export default {
         component: resolve(__dirname, 'pages/detail.vue')
       },
         {
+          path: '/product/content/:type/:id.html',
+          // name: 'inner',
+          component: resolve(__dirname, 'pages/detail.vue')
+        },
+        {
           path: '/prodShow/:page/:type?',
           // name: 'inner',
           component: resolve(__dirname, 'pages/prodShow.vue')

@@ -27,7 +27,10 @@
           }}</i>
         </li>
       </ul>
-      <div class="banner" v-if="$route.path === '/detail' ? false : true">
+      <div
+        class="banner"
+        v-if="$route.path.match('/news/content') ? false : true"
+      >
         <img src="../assets/img/banner.png" alt="" />
       </div>
     </div>
@@ -102,14 +105,14 @@ export default {
     $route: {
       immediate: true,
       handler(newValue, oldValue) {
-        if (newValue.path === "/detail") {
+        if (newValue.path.match("/new/content")) {
           this.isShow = false;
         }
         // console.log(newValue);
         let flag = true;
         this.page.forEach((item, index) => {
           if (flag) {
-            if (item.path.match(newValue.path)) {
+            if (item.path.match(newValue.path.slice(0,5))) {
               // console.log(index);
               this.active = index;
               flag = false;

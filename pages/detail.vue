@@ -1,5 +1,9 @@
 <template>
   <div v-if="!isMobile" class="content">
+    <div class="flag">
+      <span class="created">时间：<i>{{news.res.created.replace('T', ' ')}}</i></span>
+      <span class="source">来源：<i>华翰泵阀</i></span>
+    </div>
     <div  v-html="news.res.content"></div>
     <div class="btn">
       <button :disabled="!news.behindId">
@@ -16,7 +20,13 @@
       </button>
     </div>
   </div>
-  <div class="mobile" v-html="news.res.content" v-else></div>
+  <div class="mobile" v-else>
+    <div class="flag">
+      <span class="created">时间：<i>{{news.res.created.replace('T', ' ')}}</i></span>
+      <span class="source">来源：<i>华翰泵阀</i></span>
+    </div>
+    <div v-html="news.res.content"></div>
+  </div>
 </template>
     
 <script>
@@ -59,11 +69,13 @@ export default {
 </script>
     
 <style lang='less' scoped>
-// /deep/ .content {
-//   img {
-//     width: 100%;
-//   }
-// }
+.flag {
+  margin: 30px 0;
+  text-align: center;
+  span {
+    margin: 0 30px;
+  }
+}
 .content {
   padding: 20px;
   margin: 0 auto 50px auto;
