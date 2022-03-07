@@ -9,12 +9,12 @@
       <button :disabled="!news.behindId">
         <router-link
           :class="news.behindId ? '' : 'disabled'"
-          :to="news.behindId ? `/news/content/${$route.params.type}/${news.behindId}.html` : ''"
+          :to="news.behindId ? `/${$route.params.type == 'goods' ? 'product' : 'news'}/content/${$route.params.type}/${news.behindId}.html` : ''"
           >上一篇</router-link
         >
       </button>
       <button :disabled="!news.front">
-        <router-link :class="news.frontId ? '' : 'disabled'" :to="news.frontId ? `/news/content/${$route.params.type}/${news.frontId}.html` : ''"
+        <router-link :class="news.frontId ? '' : 'disabled'" :to="news.frontId ? `/${$route.params.type == 'goods' ? 'product' : 'news'}/content/${$route.params.type}/${news.frontId}.html` : ''"
           >下一篇</router-link
         >
       </button>
