@@ -33,6 +33,16 @@
       </li>
     </ul>
     <div class="footer">
+       <div v-if="$store.state.contactInfo.link" style="margin-bottom:20px">
+            友情链接：
+            <a
+              style="color: #fff"
+              v-for="(item, index) in $store.state.contactInfo.link.split('\n')"
+              :key="index"
+              :href="item.split(',')[0]"
+              >{{ item.split(',')[1] }}</a
+            >
+          </div>
       Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有
       <div>电话：{{ $store.state.contactInfo.phone }}</div>
       <div>传真：{{ $store.state.contactInfo.fax }}</div>

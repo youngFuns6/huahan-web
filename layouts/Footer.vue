@@ -1,7 +1,14 @@
 <template>
   <div>
     <div v-if="!isMobile">
-      <div class="bgc" v-if="isShow && (!$route.path.match('/news/content') && !$route.path.match('/product/content'))">
+      <div
+        class="bgc"
+        v-if="
+          isShow &&
+          !$route.path.match('/news/content') &&
+          !$route.path.match('/product/content')
+        "
+      >
         <img src="../assets/img/map_footer.png" alt="" />
         <!-- <div class="box">
           <p>
@@ -28,14 +35,27 @@
         </div> -->
       </div>
       <div class="footer">
-        Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有
-        &nbsp;&nbsp; 电话：{{ info.phone.split(',')[0] }} &nbsp;&nbsp; 传真：{{
-          info.fax
-        }}
-        &nbsp;&nbsp; Email：{{ info.email }} &nbsp;&nbsp;
-        <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"
-          >苏ICP备13011262号-1</a
-        >
+        <div>
+          <div v-if="info.link" style="margin-bottom:20px">
+            友情链接：
+            <a
+              style="color: #fff"
+              v-for="(item, index) in info.link.split('\n')"
+              :key="index"
+              :href="item.split(',')[0]"
+              >{{ item.split(',')[1] }}</a
+            >
+          </div>
+          Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有
+          &nbsp;&nbsp; 电话：{{ info.phone.split(",")[0] }} &nbsp;&nbsp;
+          传真：{{ info.fax }} &nbsp;&nbsp; Email：{{ info.email }} &nbsp;&nbsp;
+          <a
+            rel="nofollow"
+            href="https://beian.miit.gov.cn/#/Integrated/index"
+            target="_blank"
+            >苏ICP备13011262号-1</a
+          >
+        </div>
       </div>
     </div>
 
@@ -93,7 +113,7 @@ export default {
       isMobile: this.$store.state.isMobile,
       info: {},
       isShow: true,
-      showVX: false
+      showVX: false,
     };
   },
   watch: {
@@ -124,9 +144,9 @@ export default {
           // on close
         });
     },
-    navQrCode(){
-      this.showVX = true
-    }
+    navQrCode() {
+      this.showVX = true;
+    },
   },
 };
 </script>
