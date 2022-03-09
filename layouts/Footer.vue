@@ -40,6 +40,7 @@
             友情链接：
             <a
               style="color: #fff"
+              target="_blank"
               v-for="(item, index) in info.link.split('\n')"
               :key="index"
               :href="item.split(',')[0]"

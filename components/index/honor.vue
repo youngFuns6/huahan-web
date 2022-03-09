@@ -36,6 +36,7 @@
        <div v-if="$store.state.contactInfo.link" style="margin-bottom:20px">
             友情链接：
             <a
+            target="_blank"
               style="color: #fff"
               v-for="(item, index) in $store.state.contactInfo.link.split('\n')"
               :key="index"
