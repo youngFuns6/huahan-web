@@ -39,6 +39,23 @@ export default {
       isMobile: this.$store.state.isMobile,
     };
   },
+  head() {
+    return {
+      title: this.news.res.seoTitle ? this.news.res.seoTitle : this.news.res.title,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.news.res.seoDesc ? this.news.res.seoDesc : this.$store.state.contactInfo.webDesc,
+        },
+        {
+          hid: "keywords",
+          name: "keywords",
+          content: this.news.res.seoKeywords ? this.news.res.seoKeywords : this.$store.state.contactInfo.webKeyWords,
+        }
+      ],
+    };
+  },
 
   async asyncData({
     $axios,
@@ -58,11 +75,6 @@ export default {
     });
     return {
       news: detail.data.data,
-    };
-  },
-  head() {
-    return {
-      title: this.news.res.title,
     };
   },
 };

@@ -29,7 +29,7 @@
             :to="`/news/content/condition/${item.id}.html`"
           >
             <div class="left">
-              <img :src="item.banner" alt="" />
+              <img :src="item.banner" :alt="item.imgDesc" />
             </div>
             <div class="right">
               <h3>{{ item.title }}</h3>
@@ -122,7 +122,7 @@
           "
         >
           <div class="left">
-            <img :src="item.banner" alt="" />
+            <img :src="item.banner" :alt="item.imgDesc" />
           </div>
           <div class="right">
             <h3>{{ item.title }}</h3>

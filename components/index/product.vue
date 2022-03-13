@@ -33,7 +33,7 @@
           <li v-for="(item, index) in goods" :key="index">
             <router-link :to="`/product/content/goods/${item.id}.html`">
               <div class="img">
-                <img :src="item.banner" alt="" />
+                <img :src="item.banner" :alt="item.imgDesc" />
               </div>
               <div class="title">{{ item.title }}</div>
             </router-link>
@@ -114,7 +114,7 @@
       >
         <div class="bgc">
           <div class="img">
-            <img :src="item.banner" alt="" />
+            <img :src="item.banner" :alt="item.imgDesc" />
           </div>
           <div class="title">{{ item.title }}</div>
         </div>
