@@ -7,11 +7,11 @@
       <Product :cateList="cateList" :goodsList="goodsList" :totalO="total">
       <template #moreBtn>
         <div class="more">
-          <div @click="$router.push('/prodShow')">更多产品</div>
+          <div @click="$router.push('/prodShow/1')">更多产品</div>
         </div>
       </template>
       <template #btn>
-         <a href="/prodShow" class="btn">更多产品</a>
+         <a href="/prodShow/1" class="btn">更多产品</a>
       </template>
     </Product>
  

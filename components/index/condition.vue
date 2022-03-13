@@ -19,7 +19,7 @@
           <p class="created">{{ item.created }}</p>
         </li>
       </ul>
-      <div class="btn" @click="$router.push('/news')">更多动态</div>
+      <div class="btn" @click="$router.push('/news/1/1')">更多动态</div>
     </div>
     <div class="wrop-right" data-aos="zoom-in-left">
       <img src="../../assets/img/1.png" alt="" />
@@ -47,7 +47,7 @@
           <p class="created">{{ item.created }}</p>
         </li>
       </ul>
-      <div class="btn" @click="$router.push('/news')">更多动态</div>
+      <div class="btn" @click="$router.push('/news/1/1')">更多动态</div>
     </div>
   </div>
 </template>
