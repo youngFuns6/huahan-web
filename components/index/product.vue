@@ -31,7 +31,7 @@
       >
         <ul>
           <li v-for="(item, index) in goods" :key="index">
-            <router-link :to="`/product/content/goods/${item.id}.html`">
+            <router-link :to="`/product/goods/${item.id}.html`">
               <div class="img">
                 <img :src="item.banner" :alt="item.imgDesc" />
               </div>
@@ -106,7 +106,7 @@
         class="l-li"
         @click="
           $router.push({
-            path: `/product/content/goods/${item.id}.html`,
+            path: `/product/goods/${item.id}.html`,
           })
         "
         v-for="(item, index) in goods"

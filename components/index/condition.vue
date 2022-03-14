@@ -11,7 +11,7 @@
           :key="index"
           @click="
             $router.push({
-              path: `/news/content/condition/${item.id}.html`,
+              path: `/news/condition/${item.id}.html`,
             })
           "
         >
@@ -38,7 +38,7 @@
           :key="index"
           @click="
             $router.push({
-              path: `/news/content/${item.id}.html`,
+              path: `/news/${item.id}.html`,
               query: { type: 'condition' },
             })
           "

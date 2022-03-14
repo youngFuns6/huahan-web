@@ -29,7 +29,7 @@
       </ul>
       <div
         class="banner"
-        v-if="($route.path.match('/news/content') || $route.path.match('/product/content')) ? false : true"
+        v-if="($route.path.match('/news') || $route.path.match('/product')) ? false : true"
       >
         <img src="../assets/img/banner.png" alt="" />
       </div>

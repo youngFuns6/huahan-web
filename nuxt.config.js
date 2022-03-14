@@ -100,12 +100,12 @@ export default {
     middleware: 'middl',
     extendRoutes(routes, resolve) {
       routes.push({
-        path: '/news/content/:type/:id.html',
+        path: '/news/:type/:id.html',
         // name: 'inner',
         component: resolve(__dirname, 'pages/detail.vue')
       },
         {
-          path: '/product/content/:type/:id.html',
+          path: '/product/:type/:id.html',
           // name: 'inner',
           component: resolve(__dirname, 'pages/detail.vue')
         },
@@ -116,6 +116,11 @@ export default {
         },
         {
           path: '/news/:type/:page',
+          // name: 'inner',
+          component: resolve(__dirname, 'pages/news.vue')
+        },
+        {
+          path: '*',
           // name: 'inner',
           component: resolve(__dirname, 'pages/news.vue')
         }

@@ -26,7 +26,7 @@
           :data-aos-duration="300 * index"
         >
           <router-link
-            :to="`/news/content/condition/${item.id}.html`"
+            :to="`/news/condition/${item.id}.html`"
           >
             <div class="left">
               <img :src="item.banner" :alt="item.imgDesc" />
@@ -117,7 +117,7 @@
           data-aos="fade-up"
           @click="
             $router.push({
-              path: `/news/content/condition/${item.id}.html`,
+              path: `/news/condition/${item.id}.html`,
             })
           "
         >
