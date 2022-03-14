@@ -101,27 +101,22 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push({
         path: '/news/:type/:id.html',
-        // name: 'inner',
         component: resolve(__dirname, 'pages/detail.vue')
       },
         {
           path: '/product/:type/:id.html',
-          // name: 'inner',
           component: resolve(__dirname, 'pages/detail.vue')
         },
         {
           path: '/prodShow/:page/:type?',
-          // name: 'inner',
           component: resolve(__dirname, 'pages/prodShow.vue')
         },
         {
           path: '/news/:type/:page',
-          // name: 'inner',
           component: resolve(__dirname, 'pages/news.vue')
         },
         {
           path: '*',
-          // name: 'inner',
           component: resolve(__dirname, 'pages/404.vue')
         }
       )

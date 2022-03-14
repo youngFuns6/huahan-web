@@ -1,5 +1,5 @@
 <template>
-  <div id="warning_back" :style="{ background: 'linear-gradient(125deg, #060145 0%, #ca0086 100%)' }">
+  <div id="warning_back" :style="{ background: '#eee' }">
     <div id="from_back">
       <div id="from" align="center">
         <i class="el-icon-warning" id="warning_icon"></i>
