@@ -122,7 +122,7 @@ export default {
         {
           path: '*',
           // name: 'inner',
-          component: resolve(__dirname, 'pages/news.vue')
+          component: resolve(__dirname, 'pages/404.vue')
         }
       )
     }
