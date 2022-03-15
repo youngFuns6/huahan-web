@@ -5,8 +5,8 @@
         class="bgc"
         v-if="
           isShow &&
-          !$route.path.match('/news/content') &&
-          !$route.path.match('/product/content')
+          !$route.path.match('/news') &&
+          !$route.path.match('/product')
         "
       >
         <img src="../assets/img/map_footer.png" alt="" />
