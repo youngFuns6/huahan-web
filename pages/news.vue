@@ -58,8 +58,8 @@
         >
         <ul>
           <li
-            v-for="item in Math.ceil(total / 12) <= 8
-              ? Math.ceil(total / 12)
+            v-for="item in Math.ceil(total / 5) <= 8
+              ? Math.ceil(total / 5)
               : 8"
             :key="item"
             :class="$route.params.page == item ? 'active-page' : ''"
@@ -68,7 +68,7 @@
           </li>
         </ul>
         <router-link
-          :to="`/news/${$route.params.type}/${Math.ceil(total / 12)}`"
+          :to="`/news/${$route.params.type}/${Math.ceil(total / 5)}`"
           v-if="Math.ceil(total / 12) != $route.params.page"
           class="next"
           >尾页</router-link
@@ -76,7 +76,7 @@
         <router-link
           :to="`/news/${$route.params.type}/${+$route.params.page + 1}`"
           class="last"
-          v-if="Math.ceil(total / 12) != $route.params.page"
+          v-if="Math.ceil(total / 5) != $route.params.page"
           >下一页</router-link
         >
         <input v-model="page" />
