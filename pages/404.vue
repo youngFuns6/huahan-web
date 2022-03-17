@@ -17,8 +17,9 @@ export default {
       background_image: 'https://images.pexels.com/photos/785418/pexels-photo-785418.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     };
   },
-  methods: {
-  }
+  asyncData({res}) {
+    res.statusCode = 404
+  },
 };
 </script>
 <style scoped>
