@@ -1,5 +1,6 @@
 <template>
   <div v-if="!isMobile" class="content">
+    <h1>{{news.res.title}}</h1>
     <div class="flag">
       <span class="created">时间：<i>{{news.res.created.replace('T', ' ')}}</i></span>
       <span class="source">来源：<i>华翰泵阀</i></span>
@@ -21,6 +22,7 @@
     </div>
   </div>
   <div class="mobile" v-else>
+    <h1>{{news.res.title}}</h1>
     <div class="flag">
       <span class="created">时间：<i>{{news.res.created.replace('T', ' ')}}</i></span>
       <span class="source">来源：<i>华翰泵阀</i></span>
@@ -88,12 +90,18 @@ export default {
     margin: 0 30px;
   }
 }
+h1 {
+  text-align: center;
+}
 .content {
   padding: 20px;
   margin: 0 auto 50px auto;
   line-height: 1.5;
   max-width: 1200px;
   min-height: 80vh;
+  h1 {
+    font-size: 28px;
+  }
    .btn {
     text-align: center;
     margin: 50px;
@@ -110,5 +118,8 @@ export default {
   padding: 0.625rem /* 10/16 */ /* 20/16 */ /* 10/16 */;
   margin-bottom: 3.125rem /* 50/16 */;
   line-height: 1.5;
+  h1 {
+    font-size: 1.75rem /* 12/16 */;
+  }
 }
 </style>

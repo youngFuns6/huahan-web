@@ -36,17 +36,6 @@
       </div>
       <div class="footer">
         <div>
-          <div v-if="info.link" style="margin-bottom:20px">
-            友情链接：
-            <a
-              style="color: #fff"
-              target="_blank"
-              v-for="(item, index) in info.link.split('\n')"
-              :key="index"
-              :href="item.split(',')[0]"
-              >{{ item.split(',')[1] }}</a
-            >
-          </div>
           Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有
           &nbsp;&nbsp; 电话：{{ info.phone.split(",")[0] }} &nbsp;&nbsp;
           传真：{{ info.fax }} &nbsp;&nbsp; Email：{{ info.email }} &nbsp;&nbsp;
@@ -55,6 +44,20 @@
             href="https://beian.miit.gov.cn/#/Integrated/index"
             target="_blank"
             >苏ICP备13011262号-1</a
+          >
+        </div>
+        <div
+          v-if="info.link && $route.path === '/'"
+          style="margin: 20px 0; font-size: 15px"
+        >
+          友情链接：
+          <a
+            style="color: #fff"
+            target="_blank"
+            v-for="(item, index) in info.link.split('\n')"
+            :key="index"
+            :href="item.split(',')[0]"
+            >{{ item.split(",")[1] }}</a
           >
         </div>
       </div>
@@ -200,6 +203,7 @@ export default {
   font-size: 18px;
   text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   a {

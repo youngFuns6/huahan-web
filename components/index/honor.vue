@@ -11,8 +11,8 @@
         <p>荣誉资质</p>
       </h3>
     </div>
-    <el-carousel :autoplay="false" type="card" height="12rem" @change='change'>
-      <el-carousel-item v-for="(item,index) in img" :key="index">
+    <el-carousel :autoplay="false" type="card" height="12rem" @change="change">
+      <el-carousel-item v-for="(item, index) in img" :key="index">
         <el-image
           style="width: 100%; height: 100%"
           :src="item"
@@ -28,22 +28,12 @@
       <p>荣誉资质</p>
     </h3>
     <ul>
-      <li v-for="(item,index) in img" :key="index">
+      <li v-for="(item, index) in img" :key="index">
         <img :src="item" alt="" />
       </li>
     </ul>
     <div class="footer">
-       <div v-if="$store.state.contactInfo.link" style="margin-bottom:20px">
-            友情链接：
-            <a
-            target="_blank"
-              style="color: #fff"
-              v-for="(item, index) in $store.state.contactInfo.link.split('\n')"
-              :key="index"
-              :href="item.split(',')[0]"
-              >{{ item.split(',')[1] }}</a
-            >
-          </div>
+     
       Copyright2012 江苏华翰环保科技有限公司 &nbsp;&nbsp; 版权所有
       <div>电话：{{ $store.state.contactInfo.phone }}</div>
       <div>传真：{{ $store.state.contactInfo.fax }}</div>
@@ -52,6 +42,20 @@
       <div>
         <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"
           >苏ICP备13011262号-1</a
+        >
+      </div>
+       <div
+        v-if="$store.state.contactInfo.link && $route.path === '/'"
+        style="margin-bottom: 20px; font-size: 8px"
+      >
+        友情链接：
+        <a
+          target="_blank"
+          style="color: #fff"
+          v-for="(item, index) in $store.state.contactInfo.link.split('\n')"
+          :key="index"
+          :href="item.split(',')[0]"
+          >{{ item.split(",")[1] }}</a
         >
       </div>
     </div>
@@ -66,19 +70,21 @@ export default {
   data() {
     return {
       isMobile: this.$store.state.isMobile,
-      img: this.$store.state.contactInfo.honorImgs ? this.$store.state.contactInfo.honorImgs.split(',') : [],
+      img: this.$store.state.contactInfo.honorImgs
+        ? this.$store.state.contactInfo.honorImgs.split(",")
+        : [],
       srcList: [],
     };
   },
-  created(){
-    console.log(this.$store.state.contactInfo.honorImgs)
-    console.log(666)
+  created() {
+    console.log(this.$store.state.contactInfo.honorImgs);
+    console.log(666);
   },
   methods: {
-    change(index){
-      this.srcList = []
-      this.srcList.push(this.img[index])
-    }
+    change(index) {
+      this.srcList = [];
+      this.srcList.push(this.img[index]);
+    },
   },
 };
 </script>
@@ -166,7 +172,7 @@ export default {
     li {
       width: 8.3125rem /* 133/16 */;
       height: 7.0625rem /* 113/16 */;
-      margin: 0 .3125rem /* 5/16 */;
+      margin: 0 0.3125rem /* 5/16 */;
     }
   }
   .footer {
