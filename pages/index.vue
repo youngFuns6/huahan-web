@@ -18,6 +18,7 @@
     <Indroduce></Indroduce>
     <Condition :condition="condition"></Condition>
     <Honor></Honor>
+    <FloatWindows />
   </div>
 </template>
 
@@ -26,6 +27,7 @@ import Product from "../components/index/product.vue";
 import Indroduce from "../components/index/indroduce.vue";
 import Condition from "../components/index/condition.vue";
 import Honor from "../components/index/honor.vue";
+import FloatWindows from "../components/index/floatWindows.vue";
 
 import Config from "../assets/js/settings";
 
@@ -36,6 +38,7 @@ export default {
     Indroduce,
     Condition,
     Honor,
+    FloatWindows
   },
   data() {
     return {isMobile: this.$store.state.isMobile,};
