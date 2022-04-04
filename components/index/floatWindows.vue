@@ -16,6 +16,7 @@
           <el-input
             :autosize="{ minRows: 5, maxRows: 8}"
             type="textarea"
+            resize="none"
             v-model="form.service"
             placeholder="请在此输入留言内容，我们将尽快与您联系。（必填）"
           ></el-input>
