@@ -118,7 +118,7 @@ export default {
 .float-window {
   position: fixed;
   left: 10px;
-  bottom: 20%;
+  bottom: 15%;
   z-index: 9999;
   width: 300px;
   box-shadow: 0 0 10px #333;
