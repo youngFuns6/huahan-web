@@ -1,5 +1,5 @@
 <template>
-  <div ref="floatRef" class="float-window" v-if="isShow">
+  <div ref="floatRef" class="float-window" v-if="isShow && !isMobile">
     <h2>
       <i>留言板</i>
       <i class="el-icon-close" @click="isShow = false"></i>
@@ -11,6 +11,7 @@
         :rules="rules"
         ref="ruleForm"
         class="demo-ruleForm"
+        :show-message="false"
       >
         <el-form-item prop="service">
           <el-input
@@ -50,7 +51,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">发送</el-button>
+          <el-button size="mini" type="primary" @click="onSubmit">发送</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -68,6 +69,7 @@ export default {
   data() {
     return {
       isShow: true,
+      isMobile: this.$store.state.isMobile,
       form: {},
       rules: {
         service: [
@@ -120,16 +122,17 @@ export default {
   left: 10px;
   bottom: 15%;
   z-index: 9999;
-  width: 300px;
+  width: 250px;
   box-shadow: 0 0 10px #333;
   background-color: #fff;
   transform: translateX(-320px);
   transition: all linear 1.5s;
   h2 {
-    height: 50px;
+    height: 30px;
     padding: 0 10px;
     margin: 0;
     display: flex;
+    font-size: 16px;
     justify-content: space-between;
     align-items: center;
     background-color: rgb(54, 107, 253);
@@ -143,18 +146,23 @@ export default {
   }
   .content {
     padding: 10px;
+    font-size: 13px;
     .el-button {
       width: 100%;
     }
   }
 }
+.el-form-item {
+  margin-bottom: 5px;
+}
 .slider {
   position: fixed;
-  left: 10px;
+  left: 0;
   bottom: 50%;
   z-index: 9999;
   padding: 5px;
   font-size: 20px;
+  writing-mode: vertical-lr;
   color: #fff;
   box-shadow: 0 0 10px #333;
   background: linear-gradient(to bottom right, #00b4db, #0083b0);
