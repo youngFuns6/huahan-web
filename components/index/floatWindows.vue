@@ -1,5 +1,6 @@
 <template>
-  <div ref="floatRef" class="float-window" v-if="isShow && !isMobile">
+  <div>
+    <div ref="floatRef" class="float-window" v-if="isShow && !isMobile">
     <h2>
       <i>留言板</i>
       <i class="el-icon-close" @click="isShow = false"></i>
@@ -56,8 +57,9 @@
       </el-form>
     </div>
   </div>
-  <div v-else class="slider" @click="isShow = true">
+  <div v-if="!isShow && !isMobile" class="slider" @click="isShow = true">
     <i class="el-icon-message"></i> 留言
+  </div>
   </div>
 </template>
   
@@ -94,7 +96,9 @@ export default {
     };
   },
   mounted() {
-    this.$refs.floatRef.style.transform = "translateX(0)";
+    if(this.$refs.floatRef){
+      this.$refs.floatRef.style.transform = "translateX(0)";
+    }
   },
   methods: {
     onSubmit() {
