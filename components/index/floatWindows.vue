@@ -1,65 +1,71 @@
 <template>
   <div>
     <div ref="floatRef" class="float-window" v-if="isShow && !isMobile">
-    <h2>
-      <i>留言板</i>
-      <i class="el-icon-close" @click="isShow = false"></i>
-    </h2>
-    <div class="content">
-      <h3>江苏华翰环保科技有限公司</h3>
-      <el-form
-        :model="form"
-        :rules="rules"
-        ref="ruleForm"
-        class="demo-ruleForm"
-        :show-message="false"
-      >
-        <el-form-item prop="service">
-          <el-input
-            :autosize="{ minRows: 5, maxRows: 8}"
-            type="textarea"
-            resize="none"
-            v-model="form.service"
-            placeholder="请在此输入留言内容，我们将尽快与您联系。（必填）"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input
-            prefix-icon="el-icon-s-custom"
-            v-model="form.name"
-            placeholder="姓名"
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="phone">
-          <el-input
-            prefix-icon="el-icon-phone"
-            v-model="form.phone"
-            placeholder="电话（必填）"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input
-            prefix-icon="el-icon-message"
-            v-model="form.email"
-            placeholder="邮箱"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input
-            prefix-icon="el-icon-office-building"
-            v-model="form.address"
-            placeholder="地址"
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button size="mini" type="primary" @click="onSubmit">发送</el-button>
-        </el-form-item>
-      </el-form>
+      <h2>
+        <i>留言板</i>
+        <i class="el-icon-close" @click="isShow = false"></i>
+      </h2>
+      <div class="content">
+        <h3>江苏华翰环保科技有限公司</h3>
+        <el-form
+          :model="form"
+          :rules="rules"
+          ref="ruleForm"
+          class="demo-ruleForm"
+          :show-message="false"
+        >
+          <el-form-item prop="service">
+            <el-input
+              :autosize="{ minRows: 3, maxRows: 5 }"
+              type="textarea"
+              resize="none"
+              v-model="form.service"
+              placeholder="请在此输入留言内容，我们将尽快与您联系。（必填）"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input
+              size="mini"
+              prefix-icon="el-icon-s-custom"
+              v-model="form.name"
+              placeholder="姓名"
+            ></el-input>
+          </el-form-item>
+          <el-form-item prop="phone">
+            <el-input
+              size="mini"
+              prefix-icon="el-icon-phone"
+              v-model="form.phone"
+              placeholder="电话（必填）"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input
+              size="mini"
+              prefix-icon="el-icon-message"
+              v-model="form.email"
+              placeholder="邮箱"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input
+              size="mini"
+              prefix-icon="el-icon-office-building"
+              v-model="form.address"
+              placeholder="地址"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button size="mini" type="primary" @click="onSubmit"
+              >发送</el-button
+            >
+          </el-form-item>
+        </el-form>
+      </div>
     </div>
-  </div>
-  <div v-if="!isShow && !isMobile" class="slider" @click="isShow = true">
-    <i class="el-icon-message"></i> 留言
-  </div>
+    <div v-if="!isShow && !isMobile" class="slider" @click="isShow = true">
+      <i class="el-icon-message"></i> 留言
+    </div>
   </div>
 </template>
   
@@ -96,7 +102,7 @@ export default {
     };
   },
   mounted() {
-    if(this.$refs.floatRef){
+    if (this.$refs.floatRef) {
       this.$refs.floatRef.style.transform = "translateX(0)";
     }
   },
@@ -108,11 +114,11 @@ export default {
           .post(Config.BASE_URL + "/feedback", this.form)
           .then((res) => {
             alert("提交成功！");
-            this.form = {}
+            this.form = {};
           })
           .catch((err) => {
             console.log(err.response);
-            alert('提交失败');
+            alert("提交失败");
           });
       });
     },
@@ -124,7 +130,7 @@ export default {
 .float-window {
   position: fixed;
   left: 10px;
-  bottom: 15%;
+  bottom: 10%;
   z-index: 9999;
   width: 250px;
   box-shadow: 0 0 10px #333;
@@ -157,7 +163,7 @@ export default {
   }
 }
 .el-form-item {
-  margin-bottom: 5px;
+  margin-bottom: 0;
 }
 .slider {
   position: fixed;
