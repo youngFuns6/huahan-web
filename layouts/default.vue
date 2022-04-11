@@ -1,7 +1,7 @@
 <template>
   <div :class="isMobile ? '' : 'size'">
     <Header></Header>
-      <Nuxt  keep-alive :keep-alive-props="{ include:['ProdShow', 'Home', 'News','Condition'] }" />
+      <Nuxt  keep-alive :keep-alive-props="{ include:['ProdShow', 'Home', 'News','Condition', 'About', 'Contact'] }" />
     <Aside v-if="isMobile ? false : true"></Aside>
     <Footer></Footer>
   </div>

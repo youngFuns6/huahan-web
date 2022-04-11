@@ -83,6 +83,7 @@
         <router-link :to="`/news/${$route.params.type}/${page}`">跳转</router-link>
       </div>
     </div>
+    <FloatWindows />
   </div>
 
   <div class="mobile" v-else>
@@ -138,9 +139,13 @@
 import axios from "axios";
 import Config from "../assets/js/settings";
 import toText from "../assets/js/toText";
+import FloatWindows from "../components/index/floatWindows.vue";
 
 export default {
   name: "News",
+  components: {
+    FloatWindows
+  },
   data() {
     return {
       isMobile: this.$store.state.isMobile,

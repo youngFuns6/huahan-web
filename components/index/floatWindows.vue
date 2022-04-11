@@ -6,7 +6,8 @@
         <i class="el-icon-close" @click="isShow = false"></i>
       </h2>
       <div class="content">
-        <h3>江苏华翰环保科技有限公司</h3>
+        <h3>一手厂家批发 超高返点</h3>
+        <h3>欢迎采购批发 代理商加盟</h3>
         <el-form
           :model="form"
           :rules="rules"

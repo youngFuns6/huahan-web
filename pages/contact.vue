@@ -71,6 +71,7 @@
         </form>
       </div>
     </div>
+     <FloatWindows />
   </div>
 
   <div class="mobile" v-else>
@@ -149,8 +150,12 @@
 <script>
 import Config from "../assets/js/settings";
 import axios from "axios";
+import FloatWindows from "../components/index/floatWindows.vue";
 
 export default {
+  components: {
+    FloatWindows
+  },
   data() {
     return {
       isMobile: this.$store.state.isMobile,

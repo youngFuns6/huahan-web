@@ -47,6 +47,7 @@
         </el-carousel-item>
       </el-carousel>
     </div>
+     <FloatWindows />
   </div>
 
   <div class="mobile" v-else>
@@ -91,7 +92,12 @@
 </template>
     
 <script>
+import FloatWindows from "../components/index/floatWindows.vue";
+
 export default {
+  components: {
+    FloatWindows
+  },
   data() {
     return {
       isMobile: this.$store.state.isMobile,

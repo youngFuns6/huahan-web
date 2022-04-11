@@ -5,6 +5,7 @@
       :goodsList="goodsList"
       :totalO="total"
     ></Product>
+    <FloatWindows />
   </div>
  
 </template>
@@ -12,6 +13,7 @@
 <script>
 import Product from "../components/index/product.vue";
 import Config from "../assets/js/settings";
+import FloatWindows from "../components/index/floatWindows.vue";
 // import axios from "axios";
 
 export default {
@@ -36,6 +38,7 @@ export default {
   },
   components: {
     Product,
+    FloatWindows
   },
   async asyncData({
     $axios,
